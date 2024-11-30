@@ -1,0 +1,88 @@
+{
+  "HALProvider": {
+    "Other Devices": {
+      "window": {
+        "visible": false
+      }
+    }
+  },
+  "NTProvider": {
+    "types": {
+      "/FMSInfo": "FMSInfo",
+      "/Shuffleboard/SmartDashboard/Auto Selector": "String Chooser",
+      "/Shuffleboard/SmartDashboard/Custom Field": "Mechanism2d",
+      "/Shuffleboard/SmartDashboard/Field View": "Field2d",
+      "/Shuffleboard/SmartDashboard/Subsystems": "Mechanism2d",
+      "/Shuffleboard/SmartDashboard/Swerve": "Mechanism2d",
+      "/Shuffleboard/SmartDashboard/Trajectory State": "Field2d"
+    },
+    "windows": {
+      "/FMSInfo": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/Shuffleboard/SmartDashboard/Auto Selector": {
+        "window": {
+          "visible": true
+        }
+      },
+      "/Shuffleboard/SmartDashboard/Field View": {
+        "bottom": 1476,
+        "height": 8.210550308227539,
+        "left": 150,
+        "right": 2961,
+        "top": 79,
+        "width": 16.541748046875,
+        "window": {
+          "visible": true
+        }
+      }
+    }
+  },
+  "NetworkTables": {
+    "transitory": {
+      "Shuffleboard": {
+        "Move PID": {
+          "open": true
+        },
+        "Positions": {
+          "open": true
+        },
+        "Rot PID": {
+          "open": true
+        },
+        "open": true
+      }
+    }
+  },
+  "NetworkTables Info": {
+    "Connections": {
+      "open": true
+    },
+    "Server": {
+      "Subscribers": {
+        "open": true
+      }
+    },
+    "visible": true
+  },
+  "Plot": {
+    "Plot <0>": {
+      "plots": [
+        {
+          "backgroundColor": [
+            0.0,
+            0.0,
+            0.0,
+            0.8500000238418579
+          ],
+          "height": 326
+        }
+      ],
+      "window": {
+        "visible": false
+      }
+    }
+  }
+}
