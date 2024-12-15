@@ -56,13 +56,13 @@ public class ChickenPlannerLib {
     for (int i = 0; i < trajectories.size(); i++) {
         // Add the trajectory-following command
         RamseteCommand afsa = new RamseteCommand(null, null, null, null, null, null);
-        
+    
 
         // Add the action command at this stop point
         if (i < actionPointCommands.length) {
             commandGroup.addCommands(actionPointCommands[i]);
         } else {
-          throw new IllegalArgumentException("Not all stop points have a command while parsing "+trajectoryPath);
+          throw new IllegalArgumentException("Not all stop points have a command for trajectory "+trajectoryPath);
         }
     }
 

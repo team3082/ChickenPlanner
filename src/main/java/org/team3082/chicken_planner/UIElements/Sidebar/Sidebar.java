@@ -1,4 +1,4 @@
-package org.team3082.chicken_planner.UIElements;
+package org.team3082.chicken_planner.UIElements.Sidebar;
 
 import org.team3082.chicken_planner.ChickenPlannerApplication;
 import org.team3082.chicken_planner.Constants;
