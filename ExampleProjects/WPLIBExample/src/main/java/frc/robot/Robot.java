@@ -15,9 +15,14 @@ import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.PIDCommand;
+import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
+import frc.robot.MathUtils.ChickenParser;
 import frc.robot.MathUtils.CubicBezierCurve;
 import frc.robot.MathUtils.Vector2;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Robot extends TimedRobot {
@@ -35,12 +40,12 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    m_trajectory = new CubicBezierCurve(
-      new Vector2(0, 0), 
-      new Vector2(2, 4), 
-      new Vector2(4, 3), 
-      new Vector2(6, 4)  
-    ).getTrajectory(200);
+    try {
+      m_trajectory = new ChickenParser("src/main/deploy/ChickenPlanner/null.json").loadTrajectory();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
             
   }
 
@@ -60,6 +65,7 @@ public class Robot extends TimedRobot {
     double elapsed = m_timer.get();
     Trajectory.State reference = m_trajectory.sample(elapsed);
     ChassisSpeeds speeds = m_ramsete.calculate(m_drive.getPose(), reference);
+  
     m_drive.drive(speeds.vxMetersPerSecond, speeds.omegaRadiansPerSecond);
   }
 

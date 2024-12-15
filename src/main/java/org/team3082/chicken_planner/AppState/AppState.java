@@ -1,5 +1,7 @@
 package org.team3082.chicken_planner.AppState;
 
+import java.util.ArrayList;
+
 import org.team3082.chicken_planner.AutoPlanning.AutoRoutine.AutoRoutine;
 
 /**
@@ -11,6 +13,16 @@ public class AppState {
     private DrawingState drawingState; // The current drawing state
 
     private AutoRoutine currentRoutine; //The current routine
+    private ArrayList<AutoRoutine> loadedRoutines;
+    private boolean routineSaved;
+
+    public boolean getRoutineSaved(){
+        return routineSaved;
+    }
+
+    public void setRoutineSaved(boolean saved){
+        routineSaved = saved;
+    }
 
     /**
      * Enum to represent the current drawing mode.
@@ -27,6 +39,7 @@ public class AppState {
     public AppState() {
         this.drawingState = DrawingState.CONTROL_POINT;
         this.currentRoutine = new AutoRoutine();
+        routineSaved = true;
     }
 
     /**
@@ -79,6 +92,10 @@ public class AppState {
      */
     public void setDrawingState(DrawingState drawingState) {
         this.drawingState = drawingState;
+    }
+
+    public void setLoadedRoutines(ArrayList<AutoRoutine> autoRoutines) {
+        loadedRoutines = autoRoutines;
     }
 }
 

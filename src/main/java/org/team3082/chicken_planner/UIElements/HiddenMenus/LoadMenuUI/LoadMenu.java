@@ -124,15 +124,22 @@ public class LoadMenu extends HiddenMenu {
         // Create and display RoutinePreview elements for each AutoRoutine
         for (AutoRoutine autoRoutine : autoRoutines) {
             RoutinePreview routinePreview = new RoutinePreview(autoRoutine, 400, 0);
-            routinePreview.setOnMouseClicked(e -> {
+            routinePreview.setOnClick(e -> {
                 // Set the active routine and update the UI
-                application.getRoot().setCenter(application.getField().getRoot());
-                application.getAppState().setCurrentAutoRoutine(autoRoutine);
-                application.getTrajectoryManager().getSplineDrawingManager().resetAndPopulateCanvas();
-                application.getStage().setTitle("ChickenPlanner 2024 - " +
-                        new File(application.getAppState().getProjectPath()).getName() +
-                        " - " + autoRoutine.getRoutineName());
-                menuStage.close();
+                if(!application.getAppState().getRoutineSaved()){
+                    application.getMenubar().getSaveMenu().openWindow();
+                    application.getAppState().setRoutineSaved(true);
+                } else {
+                    application.getRoot().setCenter(application.getField().getRoot());
+                    application.getAppState().setCurrentAutoRoutine(autoRoutine);
+                    application.getTrajectoryManager().getSplineDrawingManager().resetAndPopulateCanvas();
+                    application.getStage().setTitle("ChickenPlanner 2024 - " +
+                            new File(application.getAppState().getProjectPath()).getName() +
+                            " - " + autoRoutine.getRoutineName());
+                    menuStage.close();
+                    application.getAppState().setRoutineSaved(false);
+                }
+                
             });
             content.getChildren().add(routinePreview);
         }

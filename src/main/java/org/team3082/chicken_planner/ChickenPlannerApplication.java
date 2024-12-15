@@ -109,10 +109,21 @@ public class ChickenPlannerApplication extends Application {
         // Add a label and load menu button
         Label label = new Label("Load a WPLIB Project");
         content.getChildren().add(label);
+        label.setStyle("-fx-font-weight: bold;"+
+                       "-fx-text-fill: #32337c;"+
+                       "-fx-font-size: 18;"+
+                       "-fx-text-alignment: center;"
+                    );
 
         Button menuButton = new Button("Load Menu");
         menuButton.setOnAction(e -> menubar.getLoadMenu().openWindow());
         content.getChildren().add(menuButton);
+        menuButton.getStyleClass().add("menuButtons");
+        menuButton.setStyle("-fx-background-color: #32337c;"+
+                            "-fx-font-size: 14;"+
+                            "-fx-font-weight: bold;"+
+                            "-fx-text-fill: #cfcfff;"
+                            );
 
         root.setCenter(content);
     }

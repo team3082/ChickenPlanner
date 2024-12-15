@@ -38,9 +38,12 @@ public class ActionPointManager {
                 if(pointIndex != -1) return;
 
                 double t = currentRoutine.getSpline().findNearestT(mousePosition.pixelToField(canvas));
-                currentRoutine.getActionPoints().add(new ActionPoint(t));
-                splineDrawingManager.resetAndPopulateCanvas();
-                actionPointSelected = currentRoutine.getActionPoints().size()-1;
+                if(currentRoutine.getSpline().getPoint(t).fieldToPixel(canvas).distance(mousePosition)<canvas.getHeight()*0.01){
+                    currentRoutine.getActionPoints().add(new ActionPoint(t));
+                    splineDrawingManager.resetAndPopulateCanvas();
+                    actionPointSelected = currentRoutine.getActionPoints().size()-1;
+                }
+                
                 break;
             case MIDDLE:
                 actionPointSelected =  getActionPointIndex(mousePosition);

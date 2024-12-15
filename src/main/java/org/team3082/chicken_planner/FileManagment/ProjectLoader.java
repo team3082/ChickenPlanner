@@ -69,6 +69,7 @@ public class ProjectLoader {
                 }
 
                 application.getMenubar().getLoadMenu().showRoutines(autoRoutines);
+                application.getAppState().setLoadedRoutines(autoRoutines);
             } else {
                 application.getMenubar().getLoadMenu().showRoutines(new ArrayList<>());
             }
@@ -88,7 +89,7 @@ public class ProjectLoader {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         AppState appState = application.getAppState();
-        String routinePath = appState.getProjectPath() + "/" + appState.getCurrentAutoRoutine().getRoutineName() + ".json";
+        String routinePath = appState.getProjectPath() + "/src/main/deploy/ChickenPlanner/"+appState.getCurrentAutoRoutine().getRoutineName() + ".json";
 
         try (FileWriter writer = new FileWriter(routinePath)) {
             gson.toJson(autoRoutineJSON, writer);

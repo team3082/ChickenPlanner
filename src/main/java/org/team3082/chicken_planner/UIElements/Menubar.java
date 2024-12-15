@@ -8,6 +8,7 @@ import org.team3082.chicken_planner.ChickenPlannerApplication;
 import org.team3082.chicken_planner.Constants;
 import org.team3082.chicken_planner.AutoPlanning.AutoRoutine.AutoRoutine;
 import org.team3082.chicken_planner.FileManagment.AutoRoutineJSON;
+import org.team3082.chicken_planner.UIElements.HiddenMenus.HiddenMenu;
 import org.team3082.chicken_planner.UIElements.HiddenMenus.SaveMenu;
 import org.team3082.chicken_planner.UIElements.HiddenMenus.SettingsMenu;
 import org.team3082.chicken_planner.UIElements.HiddenMenus.LoadMenuUI.LoadMenu;
@@ -103,5 +104,9 @@ public class Menubar {
 
     public HBox getRoot() {
         return root;
+    }
+
+    public SaveMenu getSaveMenu() {
+        return saveMenu;
     }
 }

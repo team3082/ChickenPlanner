@@ -10,26 +10,36 @@ import org.team3082.chicken_planner.MathUtils.CubicBezierCurve;
 import org.team3082.chicken_planner.MathUtils.CurvePoint;
 import org.team3082.chicken_planner.MathUtils.Vector2;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.StageStyle;
 
 public class RoutinePreview extends VBox {
-
-    private final Label label;
-    private final Button trashButton;
-    private final ImageView imageView;
-    private final Canvas canvas;
+    
+    // UI Components
+    protected final Label label;
+    protected final Button trashButton;
+    protected final StackPane centerPane;
+    protected final Canvas canvas;
+    protected final HBox topBar;
 
     /**
      * Constructs a RoutinePreview UI element that displays a preview of the given AutoRoutine.
@@ -40,95 +50,123 @@ public class RoutinePreview extends VBox {
      */
     public RoutinePreview(AutoRoutine autoRoutine, double width, double height) {
         super();
-        // Initialize label and delete button
-        if(autoRoutine.getRoutineName() == null){
-            label = new Label("New Routine");
-        } else {
-            label = new Label(autoRoutine.getRoutineName());
-        }
-        label.setStyle("-fx-font-weight: bold;" + 
-                        "-fx-text-fill: #cfcfff;"+
-                        "-fx-font-size: 14;");
-        HBox.setMargin(label, new Insets(0, 0, 0, 6));
-        HBox topBar = new HBox(10, label);
-        topBar.setAlignment(Pos.CENTER_LEFT);
-        topBar.setStyle("-fx-background-color: #40407a;");
-        trashButton = new Button("X");
-        trashButton.setStyle("-fx-background-color: #474787; -fx-text-fill: #cfcfff; -fx-font-size: 7.7; -fx-font-weight: bold;");
-
-        double size = 16;
-        trashButton.setMinSize(size, size);
-        trashButton.setMaxSize(size, size);
-        if(autoRoutine.getRoutineName() != null) topBar.getChildren().add(trashButton);
-    
-    
-        // Load and configure the background image
-        imageView = new ImageView();
-        Image image = new Image(RoutinePreview.class.getResource("/crescendo-field-space.jpg").toExternalForm());
-        imageView.setImage(image);
-        imageView.setPreserveRatio(true);
-        imageView.setFitWidth(width);
-
-        // Maintain aspect ratio for the image
-        imageView.fitHeightProperty().bind(imageView.fitWidthProperty().divide(image.getWidth() / image.getHeight()));
         
-        // Create and configure a canvas for drawing
+        // Initialize label and trash button
+        label = createLabel(autoRoutine);
+        topBar = createTopBar();
+        trashButton = createTrashButton(autoRoutine);
+        if(autoRoutine.getRoutineName() != null){
+            Region spacer = new Region();
+            HBox.setHgrow(spacer, Priority.ALWAYS);
+            topBar.getChildren().addAll(spacer, trashButton);
+        }
+        
+        // Load and configure the background image
+        ImageView imageView = createImageView(width);
+        
+        // Create and configure the canvas for drawing
         canvas = new Canvas();
-        canvas.widthProperty().bind(imageView.fitWidthProperty());
-        canvas.heightProperty().bind(imageView.fitHeightProperty());
-        topBar.setMaxWidth(canvas.getWidth());
-        setMaxWidth(canvas.getWidth());
-    
+        setupCanvas(canvas, imageView);
+
+        // Drawing the spline and action points on canvas
         drawSpline(autoRoutine.getSpline(), canvas);
         drawActionPoints(autoRoutine.getSpline(), autoRoutine.getActionPoints());
-         
-        // Combine image and canvas in a StackPane
-        StackPane centerPane = new StackPane(imageView, canvas);
+        
+        // Set the image and canvas in a StackPanet
+        centerPane = new StackPane(imageView, canvas);
 
+        // Add components to the VBox
         getChildren().addAll(topBar, centerPane);
     }
 
+    // Private helper methods to improve readability
+
     /**
-     * Gets the label displaying the routine name.
-     * 
-     * @return The routine label.
+     * Creates a label for the routine's name, or defaults to "New Routine" if none exists.
      */
-    public Label getLabel() {
+    private Label createLabel(AutoRoutine autoRoutine) {
+        String routineName = autoRoutine.getRoutineName() != null ? autoRoutine.getRoutineName() : "New Routine";
+        Label label = new Label(routineName);
+        label.setStyle("-fx-font-weight: bold;" +
+                        "-fx-text-fill: #cfcfff;" +
+                        "-fx-font-size: 14;");
         return label;
     }
 
     /**
-     * Gets the button used to delete the routine.
-     * 
-     * @return The delete button.
+     * Creates a top bar containing the routine label and trash button.
      */
-    public Button getTrashButton() {
+    private HBox createTopBar() {
+        HBox topBar = new HBox(10, label); // 10 is the spacing between label and trash button
+        topBar.setAlignment(Pos.CENTER_LEFT);
+        topBar.setStyle("-fx-background-color: #40407a;");
+        HBox.setMargin(label, new Insets(0, 10, 0, 10)); // Add a margin around the label
+        return topBar;
+    }
+    
+
+    /**
+     * Creates a trash button with an event handler to show a confirmation dialog when clicked.
+     */
+    private Button createTrashButton(AutoRoutine autoRoutine) {
+        Button trashButton = new Button("X");
+        trashButton.setStyle("-fx-background-color: #474787; -fx-text-fill: #cfcfff; -fx-font-size: 10; -fx-font-weight: bold;");
+        trashButton.setOnAction(e -> showDeleteConfirmationDialog(autoRoutine));
+        trashButton.setMinSize(20, 20);
+        trashButton.setMaxSize(20, 20);
+        HBox.setMargin(trashButton, new Insets(0, 5, 2, 0)); 
         return trashButton;
     }
 
     /**
-     * Gets the ImageView used to display the background image.
-     * 
-     * @return The ImageView.
+     * Shows a confirmation dialog to ask the user if they want to delete the routine.
      */
-    public ImageView getImageView() {
+    private void showDeleteConfirmationDialog(AutoRoutine autoRoutine) {
+        Dialog<String> dialog = new Dialog<>();
+        dialog.setTitle("Warning");
+
+        dialog.getDialogPane().setStyle("-fx-background-color: #706fd3; -fx-border-color: #474787; -fx-border-width: 2px;");
+        Label contentText = new Label("Do you wish to delete " + autoRoutine.getRoutineName() + "?");
+        contentText.setStyle("-fx-text-fill: #474787; -fx-font-size: 14; -fx-font-weight: bold;");
+        dialog.getDialogPane().setContent(contentText);
+
+        ButtonType yes = new ButtonType("Yes", ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("No", ButtonData.NO);
+        dialog.getDialogPane().getButtonTypes().addAll(yes, no);
+
+        dialog.getDialogPane().lookupButton(yes).setStyle("-fx-background-color: #474787; -fx-text-fill: #cfcfff;");
+        dialog.getDialogPane().lookupButton(no).setStyle("-fx-background-color: #474787; -fx-text-fill: #cfcfff;");
+
+        dialog.initStyle(StageStyle.UNDECORATED);
+        dialog.showAndWait();
+    }
+
+    /**
+     * Creates an ImageView to display the background image for the routine preview.
+     */
+    private ImageView createImageView(double width) {
+        ImageView imageView = new ImageView();
+        Image image = new Image(RoutinePreview.class.getResource("/crescendo-field-space.jpg").toExternalForm());
+        imageView.setImage(image);
+        imageView.setPreserveRatio(true);
+        imageView.setFitWidth(width);
+        imageView.fitHeightProperty().bind(imageView.fitWidthProperty().divide(image.getWidth() / image.getHeight()));
         return imageView;
     }
 
     /**
-     * Gets the Canvas used for drawing the spline and action points.
-     * 
-     * @return The Canvas.
+     * Sets up the canvas to match the dimensions of the background image.
      */
-    public Canvas getCanvas() {
-        return canvas;
+    private void setupCanvas(Canvas canvas, ImageView imageView) {
+        canvas.widthProperty().bind(imageView.fitWidthProperty());
+        canvas.heightProperty().bind(imageView.fitHeightProperty());
+        topBar.setMaxWidth(canvas.getWidth());
+        topBar.setMinHeight(30);
+        setMaxWidth(canvas.getWidth());
     }
 
     /**
-     * Draws the spline on the canvas.
-     *
-     * @param spline The BezierSpline to be drawn.
-     * @param canvas The canvas to draw on.
+     * Draws the Bezier spline on the canvas.
      */
     private void drawSpline(BezierSpline spline, Canvas canvas) {
         double canvasWidth = canvas.getWidth();
@@ -140,31 +178,11 @@ public class RoutinePreview extends VBox {
         gc.setStroke(Constants.LINE_COLOR);
         gc.beginPath();
 
-        boolean isOutsideBounds = false;
-
-        // Iterate through each curve in the spline
         for (int index = 0; index < spline.getCurveCount(); index++) {
             CubicBezierCurve curve = spline.getCurveAt(index);
 
-            // Iterate through each point in the curve
             for (CurvePoint point : curve.getPoints()) {
                 Vector2 movePoint = point.getPosition().fieldToPixel(canvasWidth, canvasHeight);
-                boolean outsideBounds = point.getPosition().clamp(16.542, 8.211).equals(point.getPosition());
-
-                // Handle transitions between in-bounds and out-of-bounds
-                if (!outsideBounds && !isOutsideBounds) {
-                    gc.lineTo(movePoint.getX(), movePoint.getY());
-                    gc.stroke();
-                    gc.setStroke(Color.CRIMSON);
-                    isOutsideBounds = true;
-                } else if (outsideBounds && isOutsideBounds) {
-                    gc.lineTo(movePoint.getX(), movePoint.getY());
-                    gc.stroke();
-                    gc.setStroke(Constants.LINE_COLOR);
-                    isOutsideBounds = false;
-                }
-
-                // Draw line segment
                 gc.lineTo(movePoint.getX(), movePoint.getY());
                 gc.moveTo(movePoint.getX(), movePoint.getY());
             }
@@ -174,10 +192,7 @@ public class RoutinePreview extends VBox {
     }
 
     /**
-     * Draws action points on the canvas.
-     *
-     * @param spline       The spline associated with the action points.
-     * @param actionPoints The list of action points to draw.
+     * Draws action points on the canvas at specified locations.
      */
     private void drawActionPoints(BezierSpline spline, ArrayList<ActionPoint> actionPoints) {
         for (ActionPoint actionPoint : actionPoints) {
@@ -187,16 +202,37 @@ public class RoutinePreview extends VBox {
     }
 
     /**
-     * Draws a circle at a specified location on the canvas.
-     *
-     * @param sizeFactor  The scale factor to determine the circle size.
-     * @param pixelCoords The coordinates to center the circle at.
-     * @param color       The color to fill the circle with.
+     * Draws a circle at the specified pixel coordinates on the canvas.
      */
     private void drawCircle(double sizeFactor, Vector2 pixelCoords, Color color) {
         double radius = canvas.getHeight() * sizeFactor;
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setFill(color);
         gc.fillOval(pixelCoords.getX() - radius, pixelCoords.getY() - radius, radius * 2, radius * 2);
+    }
+
+    // Getter methods for the UI elements
+
+    public Label getLabel() {
+        return label;
+    }
+
+    public Button getTrashButton() {
+        return trashButton;
+    }
+
+    public StackPane getCenterPane() {
+        return centerPane;
+    }
+
+    public Canvas getCanvas() {
+        return canvas;
+    }
+
+    /**
+     * Sets a custom click event handler for the RoutinePreview.
+     */
+    public void setOnClick(EventHandler<? super MouseEvent> action) {
+        centerPane.setOnMouseClicked(action);
     }
 }
