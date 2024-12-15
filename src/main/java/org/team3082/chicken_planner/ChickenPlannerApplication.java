@@ -60,8 +60,7 @@ public class ChickenPlannerApplication extends Application {
         // Initialize main UI components
         menubar = new Menubar(this);
         field = new Field(this);
-        sidebar = new Sidebar(this);
-     
+        
         // Set up the main stage
         stage.setScene(scene);
         stage.setTitle("Chicken Planner 2024");
@@ -70,6 +69,8 @@ public class ChickenPlannerApplication extends Application {
         // Initialize supporting components
         trajectoryControlManager = new TrajectoryManager(this);
         projectLoader = new ProjectLoader(this);
+
+        sidebar = new Sidebar(this);
 
         // Display the splash screen
         setUpSplashScreen();

@@ -8,6 +8,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
+import frc.robot.ChickenPlannerLib.Vector2;
 import edu.wpi.first.math.trajectory.Trajectory.State;
 
 /**
@@ -17,7 +18,6 @@ import edu.wpi.first.math.trajectory.Trajectory.State;
  * the curve, the curve length, and other properties.
  */
 public class CubicBezierCurve {
-
     private Vector2 controlPointOne;
     private Vector2 controlPointTwo; // Relative to controlPointOne
     private Vector2 controlPointThree; // Relative to controlPointFour
@@ -96,7 +96,7 @@ public class CubicBezierCurve {
         Vector2 acceleration = getAccelerationAtT(t);
 
         double crossProduct = velocity.getX() * acceleration.getY() - velocity.getY() * acceleration.getX();
-        double velocityMagnitude = velocity.magnitude();
+        double velocityMagnitude = Math.sqrt(Math.pow(velocity.getX(), 2)+Math.pow(velocity.getY(), 2));
         return Math.abs(crossProduct) / Math.pow(velocityMagnitude, 3);
     }
 

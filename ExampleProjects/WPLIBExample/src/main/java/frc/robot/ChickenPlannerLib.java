@@ -8,14 +8,21 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.function.Supplier;
 
 import javax.swing.Action;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.RamseteController;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
@@ -26,48 +33,74 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 public class ChickenPlannerLib {
   private static final int POINTS_PER_TRAJECTORY = 30;
 
-  public static SequentialCommandGroup getFollowChickenPathCommand(String trajectoryPath, TrajectoryConfig trajectoryConfig, Command... actionPointCommands) {
-    List<CubicBezierCurve> bezierCurves;
-    List<Double> actionPointsT;
+    public static SequentialCommandGroup getFollowChickenPathCommand(
+        String trajectoryPath, 
+        TrajectoryConfig trajectoryConfig,
+        Supplier<Pose2d> poseSupplier, 
+        RamseteController controller, 
+        SimpleMotorFeedforward feedforward, 
+        DifferentialDriveKinematics kinematics, 
+        Supplier<DifferentialDriveWheelSpeeds> wheelSpeeds, 
+        PIDController leftController, 
+        PIDController rightController, 
+        BiConsumer<Double, Double> outputVolts,
+        Command... actionPointCommands) {
 
-    try {
-        bezierCurves = getBezierCurves(trajectoryPath);
-        actionPointsT = getStopPoints(trajectoryPath);
-    } catch (IOException e) {
-        e.printStackTrace();
-        System.out.println("Trajectory Path: " + trajectoryPath + " does not exist");
-        return null;
-    }
+        List<CubicBezierCurve> bezierCurves;
+        List<Double> actionPointsT;
 
-    List<Trajectory> trajectories = new ArrayList<>();
-    if (actionPointsT.size() == 0) {
-        trajectories.add(getTrajectoryInRange(bezierCurves, trajectoryConfig, 0, bezierCurves.size()));
-    } else {
-        for (int index = 0; index <= actionPointsT.size(); index++) {
-            double startT = (index == 0) ? 0 : actionPointsT.get(index - 1);
-            double endT = (index == actionPointsT.size()) ? bezierCurves.size() : actionPointsT.get(index);
-
-            trajectories.add(getTrajectoryInRange(bezierCurves, trajectoryConfig, startT, endT));
+        try {
+            bezierCurves = getBezierCurves(trajectoryPath); // Parse the Bezier curves from the path
+            actionPointsT = getStopPoints(trajectoryPath); // Get the action point times from the path
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Trajectory Path: " + trajectoryPath + " does not exist");
+            return null;
         }
-    }
 
-    // Create the command group with trajectories and corresponding action point commands
-    SequentialCommandGroup commandGroup = new SequentialCommandGroup();
-    for (int i = 0; i < trajectories.size(); i++) {
-        // Add the trajectory-following command
-        RamseteCommand afsa = new RamseteCommand(null, null, null, null, null, null);
-    
-
-        // Add the action command at this stop point
-        if (i < actionPointCommands.length) {
-            commandGroup.addCommands(actionPointCommands[i]);
+        // Prepare the list of trajectories by segmenting the Bezier curves based on the action points
+        List<Trajectory> trajectories = new ArrayList<>();
+        if (actionPointsT.isEmpty()) {
+            // If no action points, just create a single trajectory covering all curves
+            trajectories.add(getTrajectoryInRange(bezierCurves, trajectoryConfig, 0, bezierCurves.size()));
         } else {
-          throw new IllegalArgumentException("Not all stop points have a command for trajectory "+trajectoryPath);
-        }
-    }
+            // Create trajectories for each segment between action points
+            for (int index = 0; index <= actionPointsT.size(); index++) {
+                double startT = (index == 0) ? 0 : actionPointsT.get(index - 1);
+                double endT = (index == actionPointsT.size()) ? bezierCurves.size() : actionPointsT.get(index);
 
-    return commandGroup;
-  }
+                trajectories.add(getTrajectoryInRange(bezierCurves, trajectoryConfig, startT, endT));
+            }
+        }
+
+        // Create a SequentialCommandGroup to hold all the commands
+        SequentialCommandGroup commandGroup = new SequentialCommandGroup();
+
+        // Loop through the created trajectories and add RamseteCommand along with any action commands
+        for (int i = 0; i < trajectories.size(); i++) {
+            // Create the RamseteCommand for this trajectory segment using the full constructor
+            RamseteCommand ramseteCommand = new RamseteCommand(
+                trajectories.get(i), 
+                poseSupplier, 
+                controller, 
+                feedforward, // Use the provided feedforward
+                kinematics, 
+                wheelSpeeds, 
+                leftController, 
+                rightController, 
+                outputVolts
+            );
+
+            // Add the corresponding actionPointCommand if available
+            if (i < actionPointCommands.length) {
+                commandGroup.addCommands(ramseteCommand, actionPointCommands[i]); // Add the RamseteCommand and corresponding action point command
+            } else {
+                commandGroup.addCommands(ramseteCommand); // Just add the RamseteCommand if no action point command is available
+            }
+        }
+
+        return commandGroup; // Return the created command group
+    }
 
 
   private static Trajectory getTrajectoryInRange(List<CubicBezierCurve> bezierCurves, TrajectoryConfig config, double minT, double maxT){

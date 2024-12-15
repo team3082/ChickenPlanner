@@ -4,26 +4,33 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.RamseteController;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import frc.robot.MathUtils.ChickenParser;
 import frc.robot.MathUtils.CubicBezierCurve;
-import frc.robot.MathUtils.Vector2;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.function.Supplier;
 
 public class Robot extends TimedRobot {
   private final XboxController m_controller = new XboxController(0);
@@ -35,18 +42,11 @@ public class Robot extends TimedRobot {
 
   private final Drivetrain m_drive = new Drivetrain();
   private final RamseteController m_ramsete = new RamseteController();
-  private final Timer m_timer = new Timer();
-  private Trajectory m_trajectory;
+
 
   @Override
   public void robotInit() {
-    try {
-      m_trajectory = new ChickenParser("src/main/deploy/ChickenPlanner/null.json").loadTrajectory();
-    } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-            
+
   }
 
   @Override
@@ -56,29 +56,57 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    m_timer.restart();
-    m_drive.resetOdometry(m_trajectory.getInitialPose());
+    // Create the TrajectoryConfig (you can modify the velocity and acceleration constraints as needed)
+    TrajectoryConfig trajectoryConfig = new TrajectoryConfig(
+        Drivetrain.kMaxSpeed, // Maximum speed
+        Drivetrain.kMaxSpeed // Maximum acceleration (you can adjust this as needed)
+    );
+
+    trajectoryConfig.setKinematics(m_drive.getKinematics());  // Using the getKinematics() from Drivetrain
+
+    // Example parameters for getFollowChickenPathCommand method
+    String trajectoryPath = "/path/to/trajectory.json";  // Path to the trajectory
+    Supplier<Pose2d> poseSupplier = () -> m_drive.getPose();  // Pose supplier, assumes your Drivetrain class has a getPose method
+    RamseteController controller = m_ramsete;  // Using the RamseteController instance already in the Robot class
+    SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(1.0, 3.0, 0.2);  // Example feedforward values
+    DifferentialDriveKinematics kinematics = m_drive.getKinematics();  // Get kinematics from Drivetrain
+    Supplier<DifferentialDriveWheelSpeeds> wheelSpeeds = () -> m_drive.getWheelSpeeds();  // Assume m_drive has a getWheelSpeeds method
+    PIDController leftController = new PIDController(1.0, 0.0, 0.0);  // Example PID values for left side
+    PIDController rightController = new PIDController(1.0, 0.0, 0.0);  // Example PID values for right side
+    BiConsumer<Double, Double> outputVolts = (leftVolts, rightVolts) -> m_drive.setOutput(leftVolts, rightVolts);  // Assuming m_drive has a setOutput method
+    Command[] actionPointCommands = new Command[0];  // No action commands for this example
+
+    // Call the method with the missing TrajectoryConfig parameter
+    SequentialCommandGroup commandGroup = ChickenPlannerLib.getFollowChickenPathCommand(
+        trajectoryPath, 
+        trajectoryConfig, 
+        poseSupplier, 
+        controller, 
+        feedforward, 
+        kinematics, 
+        wheelSpeeds, 
+        leftController, 
+        rightController, 
+        outputVolts, 
+        actionPointCommands
+    );
+
+    // Run the command group (this might be done differently depending on your robot framework)
+    if (commandGroup != null) {
+        commandGroup.schedule();
+    }
   }
+
+
 
   @Override
   public void autonomousPeriodic() {
-    double elapsed = m_timer.get();
-    Trajectory.State reference = m_trajectory.sample(elapsed);
-    ChassisSpeeds speeds = m_ramsete.calculate(m_drive.getPose(), reference);
   
-    m_drive.drive(speeds.vxMetersPerSecond, speeds.omegaRadiansPerSecond);
   }
 
   @Override
   public void teleopPeriodic() {
-    // Get the x speed. We are inverting this because Xbox controllers return
-    // negative values when we push forward.
     double xSpeed = -m_speedLimiter.calculate(m_controller.getLeftY()) * Drivetrain.kMaxSpeed;
-
-    // Get the rate of angular rotation. We are inverting this because we want a
-    // positive value when we pull to the left (remember, CCW is positive in
-    // mathematics). Xbox controllers return positive values when you pull to
-    // the right by default.
     double rot = -m_rotLimiter.calculate(m_controller.getRightX()) * Drivetrain.kMaxAngularSpeed;
     m_drive.drive(xSpeed, rot);
   }

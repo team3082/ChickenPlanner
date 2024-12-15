@@ -1,4 +1,4 @@
-2// Copyright (c) FIRST and other WPILib contributors.
+// Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
@@ -156,4 +156,17 @@ public class Drivetrain {
     updateOdometry();
     m_fieldSim.setRobotPose(m_odometry.getPoseMeters());
   }
+
+  public DifferentialDriveKinematics getKinematics() {
+    return m_kinematics;
+  }
+
+  public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+    return new DifferentialDriveWheelSpeeds(
+        m_leftEncoder.getRate(),  // Left wheel speed (rate from the encoder)
+        m_rightEncoder.getRate()  // Right wheel speed (rate from the encoder)
+    );
+}
+
+
 }

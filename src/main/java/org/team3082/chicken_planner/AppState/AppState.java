@@ -16,6 +16,7 @@ public class AppState {
     private DrawingState drawingState; // The current drawing state
 
     private AutoRoutine currentRoutine; //The current routine
+    public int currentRoutineIndex;
     private ArrayList<AutoRoutine> loadedRoutines;
     private boolean routineSaved;
 
@@ -84,8 +85,9 @@ public class AppState {
     }
 
     
-    public void setCurrentAutoRoutine(AutoRoutine autoRoutine){
-        currentRoutine = autoRoutine;
+    public void setCurrentAutoRoutine(AutoRoutine autoRoutine, int index){
+        currentRoutine = new AutoRoutine(autoRoutine);
+        currentRoutineIndex = index;
     }   
 
 

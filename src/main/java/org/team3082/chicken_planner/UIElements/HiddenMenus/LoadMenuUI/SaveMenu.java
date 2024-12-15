@@ -1,5 +1,7 @@
 package org.team3082.chicken_planner.UIElements.HiddenMenus.LoadMenuUI;
 
+import java.io.File;
+
 import org.team3082.chicken_planner.ChickenPlannerApplication;
 import org.team3082.chicken_planner.AutoPlanning.AutoRoutine.AutoRoutine;
 import org.team3082.chicken_planner.UIElements.Menubar;
@@ -36,7 +38,14 @@ public class SaveMenu extends HiddenMenu{
             AutoRoutine newRoutine = new AutoRoutine(application.getAppState().getCurrentAutoRoutine());
             newRoutine.setRoutineName(routineSaveBox.textBar.getText());
             application.getAppState().getLoadedRoutines().add(newRoutine);
-            application.getAppState().setCurrentAutoRoutine(newRoutine);
+            application.getAppState().setCurrentAutoRoutine(newRoutine, application.getAppState().getLoadedRoutines().size()-1);
+            application.getRoot().setCenter(application.getField().getRoot());
+            application.getTrajectoryManager().getSplineDrawingManager().resetAndPopulateCanvas();
+            application.getStage().setTitle("ChickenPlanner 2024 - " +
+                    new File(application.getAppState().getProjectPath()).getName() +
+                    " - " + newRoutine.getRoutineName());
+            menuStage.close();
+            application.getAppState().setRoutineSaved(true);
             application.getProjectLoader().saveCurrentRoutine();
             application.getMenubar().getLoadMenu().showRoutines(application.getAppState().getLoadedRoutines());
             menuStage.close();
@@ -44,6 +53,8 @@ public class SaveMenu extends HiddenMenu{
         oldSave.setOnAction(e -> {
             application.getProjectLoader().saveCurrentRoutine();
             application.getMenubar().getLoadMenu().showRoutines(application.getAppState().getLoadedRoutines());
+            application.getAppState().setRoutineSaved(true);
+            
             menuStage.close();
         });
         HBox hBox = new HBox(newSave, oldSave);
