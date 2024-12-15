@@ -99,11 +99,6 @@ public class LoadMenu extends HiddenMenu {
         File selectedDirectory = directoryChooser.showDialog(application.getStage());
         if (selectedDirectory != null) {
             boolean success = projectLoader.loadWPLIBFolder(selectedDirectory);
-            if (success) {
-                // Logic for successful load (e.g., update UI or display a message)
-            } else {
-                // Logic for failed load (e.g., show an error dialog)
-            }
         }
     }
 
@@ -119,11 +114,30 @@ public class LoadMenu extends HiddenMenu {
         }
 
         // Add a default AutoRoutine at the start of the list
-        autoRoutines.add(0, new AutoRoutine());
+        AutoRoutine exampleOne = new AutoRoutine();
+        RoutinePreview coutinePreview = new RoutinePreview(exampleOne, 400, 0, application);
+        coutinePreview.setOnClick(e -> {
+            // Set the active routine and update the UI
+            if(!application.getAppState().getRoutineSaved()){
+                application.getMenubar().getSaveMenu().openWindow();
+                application.getAppState().setRoutineSaved(true);
+            } else {
+                application.getRoot().setCenter(application.getField().getRoot());
+                application.getAppState().setCurrentAutoRoutine(exampleOne);
+                application.getTrajectoryManager().getSplineDrawingManager().resetAndPopulateCanvas();
+                application.getStage().setTitle("ChickenPlanner 2024 - " +
+                        new File(application.getAppState().getProjectPath()).getName() +
+                        " - " + exampleOne.getRoutineName());
+                menuStage.close();
+                application.getAppState().setRoutineSaved(false);
+            }
+            
+        });
+        content.getChildren().add(coutinePreview);
 
         // Create and display RoutinePreview elements for each AutoRoutine
         for (AutoRoutine autoRoutine : autoRoutines) {
-            RoutinePreview routinePreview = new RoutinePreview(autoRoutine, 400, 0);
+            RoutinePreview routinePreview = new RoutinePreview(autoRoutine, 400, 0, application);
             routinePreview.setOnClick(e -> {
                 // Set the active routine and update the UI
                 if(!application.getAppState().getRoutineSaved()){

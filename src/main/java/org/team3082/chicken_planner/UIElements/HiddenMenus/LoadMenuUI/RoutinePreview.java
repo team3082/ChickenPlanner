@@ -1,7 +1,9 @@
 package org.team3082.chicken_planner.UIElements.HiddenMenus.LoadMenuUI;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
+import org.team3082.chicken_planner.ChickenPlannerApplication;
 import org.team3082.chicken_planner.Constants;
 import org.team3082.chicken_planner.AutoPlanning.AutoRoutine.ActionPoint;
 import org.team3082.chicken_planner.AutoPlanning.AutoRoutine.AutoRoutine;
@@ -10,6 +12,7 @@ import org.team3082.chicken_planner.MathUtils.CubicBezierCurve;
 import org.team3082.chicken_planner.MathUtils.CurvePoint;
 import org.team3082.chicken_planner.MathUtils.Vector2;
 
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -17,6 +20,7 @@ import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
@@ -40,6 +44,7 @@ public class RoutinePreview extends VBox {
     protected final StackPane centerPane;
     protected final Canvas canvas;
     protected final HBox topBar;
+    private final ChickenPlannerApplication application;
 
     /**
      * Constructs a RoutinePreview UI element that displays a preview of the given AutoRoutine.
@@ -48,8 +53,10 @@ public class RoutinePreview extends VBox {
      * @param width       The desired width of the preview.
      * @param height      The desired height of the preview.
      */
-    public RoutinePreview(AutoRoutine autoRoutine, double width, double height) {
+    public RoutinePreview(AutoRoutine autoRoutine, double width, double height, ChickenPlannerApplication application) {
         super();
+
+        this.application = application;
         
         // Initialize label and trash button
         label = createLabel(autoRoutine);
@@ -90,7 +97,7 @@ public class RoutinePreview extends VBox {
         label.setStyle("-fx-font-weight: bold;" +
                         "-fx-text-fill: #cfcfff;" +
                         "-fx-font-size: 14;");
-        return label;
+        return label; 
     }
 
     /**
@@ -122,23 +129,32 @@ public class RoutinePreview extends VBox {
      * Shows a confirmation dialog to ask the user if they want to delete the routine.
      */
     private void showDeleteConfirmationDialog(AutoRoutine autoRoutine) {
-        Dialog<String> dialog = new Dialog<>();
+        Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setTitle("Warning");
 
         dialog.getDialogPane().setStyle("-fx-background-color: #706fd3; -fx-border-color: #474787; -fx-border-width: 2px;");
         Label contentText = new Label("Do you wish to delete " + autoRoutine.getRoutineName() + "?");
-        contentText.setStyle("-fx-text-fill: #474787; -fx-font-size: 14; -fx-font-weight: bold;");
+        contentText.setStyle("-fx-text-fill:rgb(56, 56, 110); -fx-font-size: 14; -fx-font-weight: bold;");
         dialog.getDialogPane().setContent(contentText);
 
-        ButtonType yes = new ButtonType("Yes", ButtonData.OK_DONE);
-        ButtonType no = new ButtonType("No", ButtonData.NO);
+        ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
         dialog.getDialogPane().getButtonTypes().addAll(yes, no);
 
-        dialog.getDialogPane().lookupButton(yes).setStyle("-fx-background-color: #474787; -fx-text-fill: #cfcfff;");
-        dialog.getDialogPane().lookupButton(no).setStyle("-fx-background-color: #474787; -fx-text-fill: #cfcfff;");
+        dialog.getDialogPane().lookupButton(yes).setStyle("-fx-background-color: #474787; -fx-text-fill: #cfcfff; -fx-font-size: 14; -fx-font-weight: bold;");
+        dialog.getDialogPane().lookupButton(no).setStyle("-fx-background-color: #474787; -fx-text-fill: #cfcfff; -fx-font-size: 14; -fx-font-weight: bold;");
 
         dialog.initStyle(StageStyle.UNDECORATED);
-        dialog.showAndWait();
+
+        dialog.showAndWait().ifPresent(result -> {
+            if (result == yes) {
+                System.out.println(application.getAppState().getLoadedRoutines().size());
+                application.getAppState().getLoadedRoutines().remove(autoRoutine);
+                System.out.println(application.getAppState().getLoadedRoutines().size());
+                application.getProjectLoader().remove(autoRoutine.getRoutineName());
+                application.getMenubar().getLoadMenu().showRoutines(application.getAppState().getLoadedRoutines());
+            }
+        });
     }
 
     /**

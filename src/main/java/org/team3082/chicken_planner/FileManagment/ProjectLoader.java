@@ -122,4 +122,10 @@ public class ProjectLoader {
         if (chickenPlannerFolder.exists()) return;
         chickenPlannerFolder.mkdirs();
     }
+
+    public void remove(String routineName) {
+        String routinePath = application.getAppState().getProjectPath() + "/src/main/deploy/ChickenPlanner/"+routineName + ".json";
+        File routine = new File(routinePath);
+        System.out.println("Delety+:"+routine.delete());
+    }
 }

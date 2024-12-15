@@ -27,6 +27,13 @@ public class ActionPoint {
         this(t, -1, true);
     }
 
+    public ActionPoint(ActionPoint other) {
+        this.t = other.t;
+        this.rotationRadians = other.rotationRadians;
+        this.isStopped = other.isStopped;
+    }
+    
+
     // Getter and Setter Methods
     public double getT() {
         return t;

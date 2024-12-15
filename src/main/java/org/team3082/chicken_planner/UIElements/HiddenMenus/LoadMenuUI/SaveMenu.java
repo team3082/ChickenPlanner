@@ -1,10 +1,9 @@
-package org.team3082.chicken_planner.UIElements.HiddenMenus;
+package org.team3082.chicken_planner.UIElements.HiddenMenus.LoadMenuUI;
 
 import org.team3082.chicken_planner.ChickenPlannerApplication;
 import org.team3082.chicken_planner.AutoPlanning.AutoRoutine.AutoRoutine;
 import org.team3082.chicken_planner.UIElements.Menubar;
-import org.team3082.chicken_planner.UIElements.HiddenMenus.LoadMenuUI.RoutinePreview;
-import org.team3082.chicken_planner.UIElements.HiddenMenus.LoadMenuUI.RoutineSaveBox;
+import org.team3082.chicken_planner.UIElements.HiddenMenus.HiddenMenu;
 
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -19,6 +18,8 @@ import javafx.scene.paint.Color;
 
 public class SaveMenu extends HiddenMenu{
     VBox content;
+    RoutineSaveBox routineSaveBox; 
+
     public SaveMenu(ChickenPlannerApplication application, Menubar menubar) {
         super("Save", application, menubar);
         // Pane emptyPane = new Pane();
@@ -30,12 +31,20 @@ public class SaveMenu extends HiddenMenu{
         TextField autoName = new TextField("Example Routine Name");
         autoName.setMaxWidth(200);
         Button newSave = new Button("New Save");
-        Button oldSave = new Button("Save");
+        Button oldSave = new Button("Overwrite Save");
         newSave.setOnAction(e -> {
+            AutoRoutine newRoutine = new AutoRoutine(application.getAppState().getCurrentAutoRoutine());
+            newRoutine.setRoutineName(routineSaveBox.textBar.getText());
+            application.getAppState().getLoadedRoutines().add(newRoutine);
+            application.getAppState().setCurrentAutoRoutine(newRoutine);
             application.getProjectLoader().saveCurrentRoutine();
+            application.getMenubar().getLoadMenu().showRoutines(application.getAppState().getLoadedRoutines());
+            menuStage.close();
         });
         oldSave.setOnAction(e -> {
             application.getProjectLoader().saveCurrentRoutine();
+            application.getMenubar().getLoadMenu().showRoutines(application.getAppState().getLoadedRoutines());
+            menuStage.close();
         });
         HBox hBox = new HBox(newSave, oldSave);
         hBox.setAlignment(Pos.CENTER);
@@ -47,7 +56,11 @@ public class SaveMenu extends HiddenMenu{
     @Override
     public void openWindow() {
         super.openWindow();
-        content.getChildren().removeLast();
-        content.getChildren().add(new RoutineSaveBox(application.getAppState().getCurrentAutoRoutine(), 400, 0));
+        while (content.getChildren().size() > 1) {
+            content.getChildren().remove(content.getChildren().size() - 1);
+        }
+
+        routineSaveBox = new RoutineSaveBox(application.getAppState().getCurrentAutoRoutine(), 400, 0, application);
+        content.getChildren().add(routineSaveBox);
     }
 }

@@ -45,6 +45,17 @@ public class AutoRoutine {
         }
     }
 
+     // Clone constructor for deep copying the AutoRoutine object
+    public AutoRoutine(AutoRoutine other) {
+        // Perform a deep copy to ensure no shared references
+        this.routineName = other.routineName;
+        this.spline = new BezierSpline(other.getSpline());
+        this.actionPoints = new ArrayList<>(); // Create a new ArrayList
+        for (int i = 0; i < other.actionPoints.size(); i++) {
+            this.actionPoints.add(new ActionPoint(other.getActionPoints().get(i)));
+        }
+    }
+
     // Getter for the BezierSpline object, which represents the trajectory of the routine.
     public BezierSpline getSpline(){
         return spline;
@@ -58,5 +69,9 @@ public class AutoRoutine {
     // Getter for the name of the routine.
     public String getRoutineName(){
         return routineName;
+    }
+
+    public void setRoutineName(String name) {
+        routineName = name;
     }
 }
