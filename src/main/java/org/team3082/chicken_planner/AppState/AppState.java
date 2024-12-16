@@ -85,9 +85,8 @@ public class AppState {
     }
 
     
-    public void setCurrentAutoRoutine(AutoRoutine autoRoutine, int index){
+    public void setCurrentAutoRoutine(AutoRoutine autoRoutine){
         currentRoutine = new AutoRoutine(autoRoutine);
-        currentRoutineIndex = index;
     }   
 
 

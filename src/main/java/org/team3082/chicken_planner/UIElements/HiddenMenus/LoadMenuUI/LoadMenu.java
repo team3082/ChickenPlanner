@@ -74,7 +74,7 @@ public class LoadMenu extends HiddenMenu {
 
     private void loadAction() {
         if (!application.getAppState().getRoutineSaved()) {
-            promptUserToSaveChanges(application.getAppState().getCurrentAutoRoutine(), 0);
+            promptUserToSaveChanges(application.getAppState().getCurrentAutoRoutine());
         }
         loadWPLIBProject();
     }
@@ -102,33 +102,31 @@ public class LoadMenu extends HiddenMenu {
         RoutinePreview routinePreview = new RoutinePreview(newAuto, 400, 0, application);
         routinePreview.setOnClick(e -> {
             if (!application.getAppState().getRoutineSaved()) {
-                promptUserToSaveChanges(newAuto, index);
+                promptUserToSaveChanges(newAuto);
             } else {
-                setCurrentAutoRoutine(newAuto, -1);
+                setCurrentAutoRoutine(newAuto);
             }
             menuStage.close();
         });
         content.getChildren().add(routinePreview);
 
-        int index = 0;
         for (AutoRoutine autoRoutine : autoRoutines) {
             routinePreview = new RoutinePreview(autoRoutine, 400, 0, application);
             routinePreview.setOnClick(e -> {
                 if (!application.getAppState().getRoutineSaved()) {
-                    promptUserToSaveChanges(autoRoutine, index);
+                    promptUserToSaveChanges(autoRoutine);
                 } else {
-                    setCurrentAutoRoutine(autoRoutine, index);
+                    setCurrentAutoRoutine(autoRoutine);
                 }
                 menuStage.close();
             });
             content.getChildren().add(routinePreview);
-            index++;
         }
     }
 
-    private void setCurrentAutoRoutine(AutoRoutine autoRoutine, int index) {
+    private void setCurrentAutoRoutine(AutoRoutine autoRoutine) {
         application.getRoot().setCenter(application.getField().getRoot());
-        application.getAppState().setCurrentAutoRoutine(autoRoutine, index);
+        application.getAppState().setCurrentAutoRoutine(autoRoutine);
         application.getTrajectoryManager().getSplineDrawingManager().resetAndPopulateCanvas();
         application.getStage().setTitle("ChickenPlanner 2024 - " +
                 new File(application.getAppState().getProjectPath()).getName() +
@@ -137,7 +135,7 @@ public class LoadMenu extends HiddenMenu {
         application.getAppState().setRoutineSaved(true);
     }
 
-    private void promptUserToSaveChanges(AutoRoutine autoRoutine, int index) {
+    private void promptUserToSaveChanges(AutoRoutine autoRoutine) {
         if(application.getAppState().getRoutineSaved()) return;
 
         Dialog<ButtonType> dialog = new Dialog<>();
@@ -162,9 +160,9 @@ public class LoadMenu extends HiddenMenu {
             if (result == save) {
                 application.getProjectLoader().saveCurrentRoutine();
                 application.getMenubar().getLoadMenu().showRoutines(application.getAppState().getLoadedRoutines());
-                setCurrentAutoRoutine(autoRoutine, index);
+                setCurrentAutoRoutine(autoRoutine);
             } else if(result == discard){
-                setCurrentAutoRoutine(autoRoutine, index);
+                setCurrentAutoRoutine(autoRoutine);
                 
             } else {
 

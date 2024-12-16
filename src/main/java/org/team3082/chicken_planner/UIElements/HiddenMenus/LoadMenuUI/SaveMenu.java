@@ -7,6 +7,7 @@ import org.team3082.chicken_planner.AutoPlanning.AutoRoutine.AutoRoutine;
 import org.team3082.chicken_planner.UIElements.Menubar;
 import org.team3082.chicken_planner.UIElements.HiddenMenus.HiddenMenu;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -21,6 +22,8 @@ import javafx.scene.paint.Color;
 public class SaveMenu extends HiddenMenu{
     VBox content;
     RoutineSaveBox routineSaveBox; 
+    Button oldSave;
+    HBox hBox;
 
     public SaveMenu(ChickenPlannerApplication application, Menubar menubar) {
         super("Save", application, menubar);
@@ -33,12 +36,23 @@ public class SaveMenu extends HiddenMenu{
         TextField autoName = new TextField("Example Routine Name");
         autoName.setMaxWidth(200);
         Button newSave = new Button("New Save");
-        Button oldSave = new Button("Overwrite Save");
+        oldSave = new Button("Overwrite Save");
+        HBox.setMargin(newSave, new Insets(0, 4, 0, 4));
+        HBox.setMargin(oldSave, new Insets(0, 4, 0, 4));
+        newSave.setStyle("-fx-background-color: #474787;" +
+        "-fx-font-size: 14;" +
+        "-fx-font-weight: bold;" +
+        "-fx-text-fill: #cfcfff;");
+        oldSave.setStyle("-fx-background-color: #474787;" +
+        "-fx-font-size: 14;" +
+        "-fx-font-weight: bold;" +
+        "-fx-text-fill: #cfcfff;");
+
         newSave.setOnAction(e -> {
             AutoRoutine newRoutine = new AutoRoutine(application.getAppState().getCurrentAutoRoutine());
             newRoutine.setRoutineName(routineSaveBox.textBar.getText());
             application.getAppState().getLoadedRoutines().add(newRoutine);
-            application.getAppState().setCurrentAutoRoutine(newRoutine, application.getAppState().getLoadedRoutines().size()-1);
+            application.getAppState().setCurrentAutoRoutine(newRoutine);
             application.getRoot().setCenter(application.getField().getRoot());
             application.getTrajectoryManager().getSplineDrawingManager().resetAndPopulateCanvas();
             application.getStage().setTitle("ChickenPlanner 2024 - " +
@@ -57,8 +71,9 @@ public class SaveMenu extends HiddenMenu{
             
             menuStage.close();
         });
-        HBox hBox = new HBox(newSave, oldSave);
+        hBox = new HBox(newSave, oldSave);
         hBox.setAlignment(Pos.CENTER);
+        VBox.setMargin(hBox,  new Insets(5, 0, 5, 0));
         content.getChildren().addAll(hBox, autoName);
         
         borderPane.setCenter(content);
@@ -70,7 +85,13 @@ public class SaveMenu extends HiddenMenu{
         while (content.getChildren().size() > 1) {
             content.getChildren().remove(content.getChildren().size() - 1);
         }
+        if(hBox.getChildren().size() > 1){
+            hBox.getChildren().removeLast();
+        }
 
+        if(application.getAppState().getCurrentAutoRoutine().getRoutineName() != null){
+            hBox.getChildren().add(oldSave);
+        }
         routineSaveBox = new RoutineSaveBox(application.getAppState().getCurrentAutoRoutine(), 400, 0, application);
         content.getChildren().add(routineSaveBox);
     }

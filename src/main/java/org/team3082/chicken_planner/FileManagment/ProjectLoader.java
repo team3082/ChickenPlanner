@@ -95,7 +95,10 @@ public class ProjectLoader {
             gson.toJson(autoRoutineJSON, writer);
         } catch (IOException e) {
             System.err.println("Error saving routine: " + e.getMessage());
+            return;
         }
+
+        loadWPLIBFolder(new File(appState.getProjectPath()));
     }
 
     /**

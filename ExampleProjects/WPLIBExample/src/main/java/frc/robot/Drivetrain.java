@@ -166,7 +166,5 @@ public class Drivetrain {
         m_leftEncoder.getRate(),  // Left wheel speed (rate from the encoder)
         m_rightEncoder.getRate()  // Right wheel speed (rate from the encoder)
     );
-}
-
-
+  }
 }
