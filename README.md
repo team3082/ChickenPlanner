@@ -69,7 +69,7 @@ For detailed guidelines, check out our [CONTRIBUTING.md](CONTRIBUTING.md).
 ## 🐛 Bug Reporting & Feedback
 
 Encountered a problem? Have a suggestion? Let us know!  
-- Report issues via [GitHub Issues](https://github.com/YourRepo/ChickenPlanner/issues).  
+- Report issues via [GitHub Issues](https://github.com/Team3082/ChickenPlanner/issues).  
 - Join our [Discord Community](https://discord.gg/Gg8XQRPKdx) to chat with the team and other users.
 
 ---
