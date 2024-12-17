@@ -5,7 +5,7 @@ import org.team3082.chicken_planner.AutoPlanning.TrajectoryDrawing.TrajectoryMan
 import org.team3082.chicken_planner.FileManagment.ProjectLoader;
 import org.team3082.chicken_planner.UIElements.Field;
 import org.team3082.chicken_planner.UIElements.Menubar;
-import org.team3082.chicken_planner.UIElements.Sidebar;
+import org.team3082.chicken_planner.UIElements.Sidebar.Sidebar;
 
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -39,6 +39,8 @@ public class ChickenPlannerApplication extends Application {
     // Scene for the main window
     private Scene scene;
 
+    private VBox splashScreen;
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -58,8 +60,7 @@ public class ChickenPlannerApplication extends Application {
         // Initialize main UI components
         menubar = new Menubar(this);
         field = new Field(this);
-        sidebar = new Sidebar(this);
-     
+        
         // Set up the main stage
         stage.setScene(scene);
         stage.setTitle("Chicken Planner 2024");
@@ -68,6 +69,8 @@ public class ChickenPlannerApplication extends Application {
         // Initialize supporting components
         trajectoryControlManager = new TrajectoryManager(this);
         projectLoader = new ProjectLoader(this);
+
+        sidebar = new Sidebar(this);
 
         // Display the splash screen
         setUpSplashScreen();
@@ -97,18 +100,18 @@ public class ChickenPlannerApplication extends Application {
      * Sets up the splash screen displayed at application startup.
      */
     private void setUpSplashScreen() {
-        VBox content = new VBox();
-        content.setAlignment(Pos.CENTER);
+        splashScreen = new VBox();
+        splashScreen.setAlignment(Pos.CENTER);
 
         // Display the application logo
         ImageView imageView = new ImageView(ChickenPlannerApplication.class.getResource("/Logo.PNG").toExternalForm());
         imageView.fitHeightProperty().bind(root.heightProperty().subtract(Constants.TOPBAR_HEIGHT + 125));
         imageView.setPreserveRatio(true);
-        content.getChildren().add(imageView);
+        splashScreen.getChildren().add(imageView);
 
         // Add a label and load menu button
         Label label = new Label("Load a WPLIB Project");
-        content.getChildren().add(label);
+        splashScreen.getChildren().add(label);
         label.setStyle("-fx-font-weight: bold;"+
                        "-fx-text-fill: #32337c;"+
                        "-fx-font-size: 18;"+
@@ -117,7 +120,7 @@ public class ChickenPlannerApplication extends Application {
 
         Button menuButton = new Button("Load Menu");
         menuButton.setOnAction(e -> menubar.getLoadMenu().openWindow());
-        content.getChildren().add(menuButton);
+        splashScreen.getChildren().add(menuButton);
         menuButton.getStyleClass().add("menuButtons");
         menuButton.setStyle("-fx-background-color: #32337c;"+
                             "-fx-font-size: 14;"+
@@ -125,7 +128,11 @@ public class ChickenPlannerApplication extends Application {
                             "-fx-text-fill: #cfcfff;"
                             );
 
-        root.setCenter(content);
+        root.setCenter(splashScreen);
+    }
+
+    public void setSplash(){
+        root.setCenter(splashScreen);
     }
 
     // Getter methods for core components

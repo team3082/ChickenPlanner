@@ -7,88 +7,141 @@ package frc.robot;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import javax.swing.Action;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.RamseteController;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 public class ChickenPlannerLib {
-  private static final int POINTS_PER_TRAJECTORY = 30;
+    private static final int POINTS_PER_TRAJECTORY = 30;
 
-  public static SequentialCommandGroup getFollowChickenPathCommand(String trajectoryPath, TrajectoryConfig trajectoryConfig, Command... actionPointCommands) {
-    List<CubicBezierCurve> bezierCurves;
-    List<Double> actionPointsT;
+    public static SequentialCommandGroup followChickenPathCommand(
+        String trajectoryName,
+        TrajectoryConfig trajectoryConfig,
+        RamseteController controller,
+        Supplier<Pose2d> poseSupplier,
+        Consumer<Pose2d> resetOdometry,
+        BiConsumer<Double, Double> arcadeOutput,
+        Command... actionPointCommands) {
 
-    try {
-        bezierCurves = getBezierCurves(trajectoryPath);
-        actionPointsT = getStopPoints(trajectoryPath);
-    } catch (IOException e) {
-        e.printStackTrace();
-        System.out.println("Trajectory Path: " + trajectoryPath + " does not exist");
-        return null;
-    }
+        String trajectoryPath = Filesystem.getDeployDirectory() + "/ChickenPlanner/" + trajectoryName + ".json";
+        List<CubicBezierCurve> bezierCurves;
+        List<Double> actionPointsT;
 
-    List<Trajectory> trajectories = new ArrayList<>();
-    if (actionPointsT.size() == 0) {
-        trajectories.add(getTrajectoryInRange(bezierCurves, trajectoryConfig, 0, bezierCurves.size()));
-    } else {
-        for (int index = 0; index <= actionPointsT.size(); index++) {
-            double startT = (index == 0) ? 0 : actionPointsT.get(index - 1);
-            double endT = (index == actionPointsT.size()) ? bezierCurves.size() : actionPointsT.get(index);
-
-            trajectories.add(getTrajectoryInRange(bezierCurves, trajectoryConfig, startT, endT));
+        try {
+            // Parse the Bezier curves and action point times from the path
+            bezierCurves = getBezierCurves(trajectoryPath);
+            actionPointsT = getStopPoints(trajectoryPath);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Trajectory Path: " + trajectoryPath + " does not exist");
+            return null;
         }
-    }
 
-    // Create the command group with trajectories and corresponding action point commands
-    SequentialCommandGroup commandGroup = new SequentialCommandGroup();
-    for (int i = 0; i < trajectories.size(); i++) {
-        // Add the trajectory-following command
-        RamseteCommand afsa = new RamseteCommand(null, null, null, null, null, null);
-        
-
-        // Add the action command at this stop point
-        if (i < actionPointCommands.length) {
-            commandGroup.addCommands(actionPointCommands[i]);
+       // Prepare the list of trajectories by segmenting the Bezier curves based on the action points
+        List<Trajectory> trajectories = new ArrayList<>();
+        if (actionPointsT.isEmpty()) {
+            // If no action points, just create a single trajectory covering all curves
+            trajectories.add(getTrajectoryInRange(bezierCurves, trajectoryConfig, 0, bezierCurves.size()));
         } else {
-          throw new IllegalArgumentException("Not all stop points have a command while parsing "+trajectoryPath);
+            // Create trajectories for each segment between action points
+            for (int index = 0; index <= actionPointsT.size(); index++) {
+                double startT = (index == 0) ? 0 : actionPointsT.get(index - 1);
+                double endT = (index == actionPointsT.size()) ? bezierCurves.size() : actionPointsT.get(index);
+
+                // Add the trajectory for this segment
+                trajectories.add(getTrajectoryInRange(bezierCurves, trajectoryConfig, startT, endT));
+            }
         }
+
+        // Create a SequentialCommandGroup to hold all the commands
+        SequentialCommandGroup commandGroup = new SequentialCommandGroup();
+        commandGroup.addCommands(new InstantCommand(()-> resetOdometry.accept(trajectories.get(0).getInitialPose())));
+
+        // Loop through the created trajectories and add RamseteCommand along with any action commands
+        for (int i = 0; i < trajectories.size(); i++) {
+            Trajectory trajectory = trajectories.get(i);
+            System.out.println(trajectory);
+            // Create a RamseteCommand for the current trajectory
+            FollowTrajectoryCommandRamsete ramseteCommand = new FollowTrajectoryCommandRamsete(
+                trajectory,
+                poseSupplier,
+                arcadeOutput,
+                controller,
+                true
+            );
+
+            // Add the RamseteCommand and corresponding action point command (if available)
+            if (i < actionPointCommands.length) {
+                commandGroup.addCommands(ramseteCommand, actionPointCommands[i]);
+            } else {
+                commandGroup.addCommands(ramseteCommand);
+            }
+        }
+
+        return commandGroup; // Return the created command group
     }
 
-    return commandGroup;
-  }
 
-
-  private static Trajectory getTrajectoryInRange(List<CubicBezierCurve> bezierCurves, TrajectoryConfig config, double minT, double maxT){
-    double tChange = (maxT-minT)/(double)POINTS_PER_TRAJECTORY;
-
-    List<Pose2d> poses = new ArrayList<>();
-
-    for(double t = minT; t<=maxT; t += tChange){
-      int curveIndex = (int) t;
-
-      CubicBezierCurve curve = bezierCurves.get(curveIndex);
-      double localT = t - (double)((int)t);
+    private static Trajectory getTrajectoryInRange(List<CubicBezierCurve> bezierCurves, TrajectoryConfig config, double minT, double maxT) {
+        // Validate that minT and maxT are within a valid range
+        if (minT < 0 || maxT > bezierCurves.size() || minT >= maxT) {
+            throw new IllegalArgumentException("Invalid range: minT = " + minT + ", maxT = " + maxT);
+        }
     
-      Vector2 point = curve.getPointAtT(localT);
-      Rotation2d rotation = curve.getRotationAtT(localT);
-
-      poses.add(new Pose2d(point.getX(), point.getY(), rotation));
+        // Calculate tChange (make sure it's positive and valid)
+        double tChange = (maxT - minT) / (double) POINTS_PER_TRAJECTORY;
+        if (tChange <= 0) {
+            throw new IllegalArgumentException("tChange must be positive: " + tChange);
+        }
+    
+        List<Pose2d> poses = new ArrayList<>();
+    
+        // Iterate over the t range, ensuring curveIndex is within bounds
+        for (double t = minT; t <= maxT; t += tChange) {
+            int curveIndex = (int) Math.floor(t); // Ensure we're using the floor value of t
+    
+            if (curveIndex < 0 || curveIndex >= bezierCurves.size()) {
+                throw new IndexOutOfBoundsException("curveIndex out of bounds: " + curveIndex);
+            }
+    
+            CubicBezierCurve curve = bezierCurves.get(curveIndex);
+            double localT = t % 1; // Ensure the local t is within [0, 1]
+    
+            Vector2 point = curve.getPointAtT(localT);
+            Rotation2d rotation = curve.getRotationAtT(localT);
+    
+            poses.add(new Pose2d(point.getX(), point.getY(), rotation));
+        }
+    
+        // Generate and return the trajectory from the collected poses
+        return TrajectoryGenerator.generateTrajectory(poses, config);
     }
-
-    return TrajectoryGenerator.generateTrajectory(poses, config);
-  }
+    
+    
 
   private static List<Double> getStopPoints(String trajectoryPath) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
@@ -100,7 +153,7 @@ public class ChickenPlannerLib {
     for (JsonNode actionPoint : actionPoints) {
       actionPointsT.add(actionPoint.get("t").asDouble());
     }
-
+    Collections.sort(actionPointsT);
     return actionPointsT;
   }
 
@@ -334,4 +387,10 @@ public class ChickenPlannerLib {
           return "(" + x + ", " + y + ")";
       }
   }
+
+public static SequentialCommandGroup getFollowChickenPathCommand(String string, TrajectoryConfig trajectoryConfig,
+        RamseteController m_ramsete, Drivetrain drivetrain, BiConsumer<Double, Double> biConsumer) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'getFollowChickenPathCommand'");
+}
 }

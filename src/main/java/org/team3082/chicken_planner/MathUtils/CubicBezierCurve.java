@@ -36,6 +36,16 @@ public class CubicBezierCurve {
         calculatePointsAndCurveLength(numberOfPoints);
     }
 
+    public CubicBezierCurve(CubicBezierCurve other) {
+        this(
+            new Vector2(other.getControlPointOne()),
+            new Vector2(other.getControlPointTwo()),
+            new Vector2(other.getControlPointThree()),
+            new Vector2(other.getControlPointFour())
+        );
+    }
+    
+
     /**
      * Returns the precomputed length of the Bezier curve.
      *

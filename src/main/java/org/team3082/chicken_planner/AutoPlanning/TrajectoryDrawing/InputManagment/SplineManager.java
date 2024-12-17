@@ -207,6 +207,7 @@ public class SplineManager {
      */
     private void handlePrimaryClick(Vector2 mousePosition) {
         pointSelectedIndex = getCurveIndexInThreshold(mousePosition);
+        if(pointSelectedIndex != -1) application.getAppState().setRoutineSaved(false);
     }
 
     private void handleSecondaryClick(Vector2 mousePosition) {
@@ -238,6 +239,8 @@ public class SplineManager {
         curve.setControlPointFour(mousePosition);
         pointSelectedIndex = currentSpline.getCurveArray().size()*3;
         drawingManager.resetAndPopulateCanvas();
+
+        application.getAppState().setRoutineSaved(false);
     }
 
     public void addCurveAtStart(Vector2 mousePosition){
@@ -277,7 +280,10 @@ public class SplineManager {
         ArrayList<ActionPoint> actionPoints = application.getAppState().getCurrentAutoRoutine().getActionPoints();
         for(int index = 0; index<actionPoints.size(); index++){
             double t = actionPoints.get(index).getT();
-            
+            if(t > curveIndex-1 && t < curveIndex){
+                actionPoints.remove(index);
+                index--;
+            } 
         }
 
         application.getAppState().getCurrentAutoRoutine().getSpline().removeCurve(curveIndex);

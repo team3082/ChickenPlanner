@@ -35,7 +35,7 @@ public class InputManager {
        
         canvas.setOnMousePressed(this::OnMousePressed); // Handle mouse press events
         canvas.setOnMouseDragged(this::OnMouseDragged); // Handle mouse drag events
-        canvas.setOnMouseReleased(this::OnMouseReleased); // Handle mouse release events
+        canvas.setOnMouseReleased(event -> OnMouseReleased()); // Handle mouse release events
     }
 
     /**
@@ -77,7 +77,7 @@ public class InputManager {
      *
      * @param event  The mouse release event
      */
-    public void OnMouseReleased(MouseEvent event){
+    public void OnMouseReleased(){
         splineManager.onMouseReleased(); // Notify spline manager of mouse release
         actionPointManager.onMouseReleased(); // Notify action point manager of mouse release
     }

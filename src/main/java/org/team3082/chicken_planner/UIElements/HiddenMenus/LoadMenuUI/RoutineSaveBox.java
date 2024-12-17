@@ -1,20 +1,20 @@
 package org.team3082.chicken_planner.UIElements.HiddenMenus.LoadMenuUI;
 
+import org.team3082.chicken_planner.ChickenPlannerApplication;
 import org.team3082.chicken_planner.AutoPlanning.AutoRoutine.AutoRoutine;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 
 public class RoutineSaveBox extends RoutinePreview {
-    public RoutineSaveBox(AutoRoutine autoRoutine, double width, double height){
-        super(autoRoutine, width, height);
+    public TextField textBar;
+    public RoutineSaveBox(AutoRoutine autoRoutine, double width, double height, ChickenPlannerApplication application){
+        super(autoRoutine, width, height, application);
 
-        topBar.getChildren().remove(0);
-        topBar.getChildren().remove(0);
-        topBar.getChildren().remove(0);
-
-        TextField textBar = new TextField(autoRoutine.getRoutineName());
+        while (topBar.getChildren().size()>0) topBar.getChildren().remove(0);
+        textBar = new TextField(autoRoutine.getRoutineName());
         HBox.setMargin(textBar, new Insets(0, 0, 0, 10));
         textBar.setMinHeight(25);
         textBar.setMaxHeight(25);

@@ -16,36 +16,30 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.stage.StageStyle;
+import javafx.scene.control.Label;
+import javafx.scene.control.ButtonBar;
 
-/**
- * Represents the "Load" menu in the Chicken Planner application.
- * This menu allows the user to load a WPLIB project.
- */
 public class LoadMenu extends HiddenMenu {
     
     private VBox content;
 
-    /**
-     * Constructs a new LoadMenu instance.
-     *
-     * @param application The main application instance.
-     * @param menubar     The menubar to which this menu belongs.
-     */
     public LoadMenu(ChickenPlannerApplication application, Menubar menubar) {
         super("Load", application, menubar);
         setUpLoadMenu();
     }
 
-    /**
-     * Sets up the content for the "Load" menu.
-     */
     private void setUpLoadMenu() {
         // Initialize the main content container
         content = new VBox();
         content.setSpacing(10);
         content.setPadding(new Insets(10));
-        content.setPrefWidth(450); // Adjusted width for the layout
-        content.setPrefHeight(305); // Adjusted height for the layout
+        content.setPrefWidth(450);
+        content.setPrefHeight(305);
         content.setAlignment(Pos.TOP_CENTER);
         content.setStyle("-fx-background-color: #706fd3;");
 
@@ -63,33 +57,29 @@ public class LoadMenu extends HiddenMenu {
         scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
         scrollPane.setPannable(false);
 
-        // Prevent horizontal scrolling
         scrollPane.addEventFilter(javafx.scene.input.ScrollEvent.SCROLL, event -> {
             if (event.getDeltaX() != 0) {
                 event.consume();
             }
         });
 
-        // Add the ScrollPane to the menu's layout
         borderPane.setCenter(scrollPane);
     }
 
-    /**
-     * Creates the "Load WPLIB Project" button.
-     *
-     * @return The configured Button instance.
-     */
     private Button createLoadButton() {
         Button loadButton = new Button("Load WPLIB Project");
         loadButton.setOnAction(e -> loadAction());
         return loadButton;
     }
 
-    /**
-     * Handles the action of loading a WPLIB project.
-     * Opens a directory chooser and loads the selected directory.
-     */
     private void loadAction() {
+        if (!application.getAppState().getRoutineSaved()) {
+            promptUserToSaveChanges(application.getAppState().getCurrentAutoRoutine());
+        }
+        loadWPLIBProject();
+    }
+
+    private void loadWPLIBProject() {
         ProjectLoader projectLoader = application.getProjectLoader();
 
         DirectoryChooser directoryChooser = new DirectoryChooser();
@@ -99,49 +89,85 @@ public class LoadMenu extends HiddenMenu {
         File selectedDirectory = directoryChooser.showDialog(application.getStage());
         if (selectedDirectory != null) {
             boolean success = projectLoader.loadWPLIBFolder(selectedDirectory);
-            if (success) {
-                // Logic for successful load (e.g., update UI or display a message)
-            } else {
-                // Logic for failed load (e.g., show an error dialog)
-            }
+            if(success) application.setSplash();
         }
     }
 
-    /**
-     * Displays a list of AutoRoutines in the menu.
-     *
-     * @param autoRoutines The list of AutoRoutines to display.
-     */
     public void showRoutines(ArrayList<AutoRoutine> autoRoutines) {
-        // Clear existing routine previews, retaining the load button
         while (content.getChildren().size() > 1) {
             content.getChildren().remove(content.getChildren().size() - 1);
         }
 
-        // Add a default AutoRoutine at the start of the list
-        autoRoutines.add(0, new AutoRoutine());
+        AutoRoutine newAuto = new AutoRoutine();
+        RoutinePreview routinePreview = new RoutinePreview(newAuto, 400, 0, application);
+        routinePreview.setOnClick(e -> {
+            if (!application.getAppState().getRoutineSaved()) {
+                promptUserToSaveChanges(newAuto);
+            } else {
+                setCurrentAutoRoutine(newAuto);
+            }
+            menuStage.close();
+        });
+        content.getChildren().add(routinePreview);
 
-        // Create and display RoutinePreview elements for each AutoRoutine
         for (AutoRoutine autoRoutine : autoRoutines) {
-            RoutinePreview routinePreview = new RoutinePreview(autoRoutine, 400, 0);
+            routinePreview = new RoutinePreview(autoRoutine, 400, 0, application);
             routinePreview.setOnClick(e -> {
-                // Set the active routine and update the UI
-                if(!application.getAppState().getRoutineSaved()){
-                    application.getMenubar().getSaveMenu().openWindow();
-                    application.getAppState().setRoutineSaved(true);
+                if (!application.getAppState().getRoutineSaved()) {
+                    promptUserToSaveChanges(autoRoutine);
                 } else {
-                    application.getRoot().setCenter(application.getField().getRoot());
-                    application.getAppState().setCurrentAutoRoutine(autoRoutine);
-                    application.getTrajectoryManager().getSplineDrawingManager().resetAndPopulateCanvas();
-                    application.getStage().setTitle("ChickenPlanner 2024 - " +
-                            new File(application.getAppState().getProjectPath()).getName() +
-                            " - " + autoRoutine.getRoutineName());
-                    menuStage.close();
-                    application.getAppState().setRoutineSaved(false);
+                    setCurrentAutoRoutine(autoRoutine);
                 }
-                
+                menuStage.close();
             });
             content.getChildren().add(routinePreview);
         }
     }
+
+    private void setCurrentAutoRoutine(AutoRoutine autoRoutine) {
+        application.getRoot().setCenter(application.getField().getRoot());
+        application.getAppState().setCurrentAutoRoutine(autoRoutine);
+        application.getTrajectoryManager().getSplineDrawingManager().resetAndPopulateCanvas();
+        application.getStage().setTitle("ChickenPlanner 2024 - " +
+                new File(application.getAppState().getProjectPath()).getName() +
+                " - " + autoRoutine.getRoutineName());
+        menuStage.close();
+        application.getAppState().setRoutineSaved(true);
+    }
+
+    private void promptUserToSaveChanges(AutoRoutine autoRoutine) {
+        if(application.getAppState().getRoutineSaved()) return;
+
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Warning");
+        dialog.getDialogPane().setStyle("-fx-background-color: #706fd3; -fx-border-color: #474787; -fx-border-width: 2px;");
+
+        Label contentText = new Label("You have unsaved changes. Do you wish to save?");
+        contentText.setStyle("-fx-text-fill:rgb(56, 56, 110); -fx-font-size: 14; -fx-font-weight: bold;");
+        dialog.getDialogPane().setContent(contentText);
+
+        ButtonType save = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+        ButtonType discard = new ButtonType("Discard", ButtonBar.ButtonData.CANCEL_CLOSE);
+        ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.BACK_PREVIOUS);
+        dialog.getDialogPane().getButtonTypes().addAll(save, discard, cancel);
+
+        dialog.getDialogPane().lookupButton(save).setStyle("-fx-background-color: #474787; -fx-text-fill: #cfcfff; -fx-font-size: 14; -fx-font-weight: bold;");
+        dialog.getDialogPane().lookupButton(discard).setStyle("-fx-background-color: #474787; -fx-text-fill: #cfcfff; -fx-font-size: 14; -fx-font-weight: bold;");
+        dialog.getDialogPane().lookupButton(cancel).setStyle("-fx-background-color: #474787; -fx-text-fill: #cfcfff; -fx-font-size: 14; -fx-font-weight: bold;");
+        dialog.initStyle(StageStyle.UNDECORATED);
+
+        dialog.showAndWait().ifPresent(result -> {
+            if (result == save) {
+                application.getProjectLoader().saveCurrentRoutine();
+                application.getMenubar().getLoadMenu().showRoutines(application.getAppState().getLoadedRoutines());
+                setCurrentAutoRoutine(autoRoutine);
+            } else if(result == discard){
+                setCurrentAutoRoutine(autoRoutine);
+                
+            } else {
+
+            }
+        });
+    }
+
 }

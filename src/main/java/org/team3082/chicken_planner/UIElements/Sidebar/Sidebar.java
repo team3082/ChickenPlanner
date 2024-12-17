@@ -1,8 +1,9 @@
-package org.team3082.chicken_planner.UIElements;
+package org.team3082.chicken_planner.UIElements.Sidebar;
 
 import org.team3082.chicken_planner.ChickenPlannerApplication;
 import org.team3082.chicken_planner.Constants;
 import org.team3082.chicken_planner.AppState.AppState;
+import org.w3c.dom.events.MouseEvent;
 
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
@@ -140,5 +141,6 @@ public class Sidebar {
         selectedTool.setFitHeight(60);
         unselectedTool.setFitWidth(50);
         unselectedTool.setFitHeight(50);
+        application.getTrajectoryManager().getInputManager().OnMouseReleased();
     }
 }

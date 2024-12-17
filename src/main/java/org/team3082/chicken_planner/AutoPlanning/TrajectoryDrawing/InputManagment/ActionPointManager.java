@@ -32,6 +32,7 @@ public class ActionPointManager {
         switch (event.getButton()) {
             case PRIMARY:
                 actionPointSelected = getActionPointIndex(mousePosition);
+                if(actionPointSelected != -1) application.getAppState().setRoutineSaved(false);
                 break;
             case SECONDARY:
                 int pointIndex = getActionPointIndex(mousePosition);
@@ -43,7 +44,7 @@ public class ActionPointManager {
                     splineDrawingManager.resetAndPopulateCanvas();
                     actionPointSelected = currentRoutine.getActionPoints().size()-1;
                 }
-                
+                actionPointSelected = getActionPointIndex(mousePosition);
                 break;
             case MIDDLE:
                 actionPointSelected =  getActionPointIndex(mousePosition);
