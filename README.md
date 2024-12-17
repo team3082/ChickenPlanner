@@ -10,21 +10,39 @@
 
 This project is proudly open-source! We welcome contributions from the community to improve ChickenPlanner and help it become the ultimate tool for FRC teams. Found a bug? Got an idea for a feature?  
 
-👉 **[Join our Discord Community!](https://discord.gg/xpWFPUNV)**  
+👉 **[Join our Discord Community!](https://discord.gg/Gg8XQRPKdx)**  
 Help us make ChickenPlanner even better by reporting bugs, discussing new features, or just hanging out with the developers.
 
 ---
 
 ## 📥 Installation
 
-*Coming Soon:* Instructions on how to set up ChickenPlanner for your robot. Stay tuned!
+## Installation
+*Coming Soon:* An app file rather then the need for maven
+1. **Prerequisites:**  
+   - Java 17 or later  
+   - Maven (for dependency management)  
+   - WPILib installed (for wplib trajectory support)  
 
+2. **Clone the repository:**  
+   ```bash
+   git clone https://github.com/LucasG2008/ChickenDash.git
+   cd ChickenDash
+   ```
+
+3. **Build the project using Maven**
+    ```bash
+    mvn clean install
+    ```
 ---
 
 ## 🛠️ Usage
 
-*Coming Soon:* A detailed guide on how to create, customize, and execute trajectories using ChickenPlanner. 
-
+*Coming Soon:* A detailed guide on how to create, customize, and execute trajectories using ChickenPlanner and a more easier user experience with no need for maven commands
+1. **Run the Application**
+    ```bash
+    mvn javafx:run
+    ```
 ---
 
 ## 🧑‍💻 Codebase Structure
@@ -52,7 +70,7 @@ For detailed guidelines, check out our [CONTRIBUTING.md](CONTRIBUTING.md).
 
 Encountered a problem? Have a suggestion? Let us know!  
 - Report issues via [GitHub Issues](https://github.com/YourRepo/ChickenPlanner/issues).  
-- Join our [Discord Community](https://discord.gg/xpWFPUNV) to chat with the team and other users.
+- Join our [Discord Community](https://discord.gg/Gg8XQRPKdx) to chat with the team and other users.
 
 ---
 
