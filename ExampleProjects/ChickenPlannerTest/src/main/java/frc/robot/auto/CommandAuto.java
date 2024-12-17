@@ -29,7 +29,7 @@ public class CommandAuto {
   }
 
   public static Command chickenPlannerTest() {
-    ChickenParser parser = new ChickenParser("src/main/deploy/ChickenPlanner/2PieceAuto.json");
+    ChickenParser parser = new ChickenParser("src/main/deploy/ChickenPlanner/SillyPath.json");
     List<RobotPath> paths = parser.getPaths();
     Vector2 startingPos = paths.get(0).getStartPos();
     SwervePosition.setPosition(startingPos);

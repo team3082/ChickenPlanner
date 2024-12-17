@@ -29,6 +29,18 @@ public class BezierSpline {
         }
     }
 
+    public BezierSpline(BezierSpline other) {
+        if (other == null) {
+            throw new IllegalArgumentException("Spline cannot be null.");
+        }
+    
+        curveList = new ArrayList<>();
+        for (CubicBezierCurve curve : other.curveList) {
+            curveList.add(new CubicBezierCurve(curve)); // Assuming CubicBezierCurve has a copy constructor
+        }
+    }
+    
+
     /**
      * Gets the cubic Bezier curve at a specific index.
      *

@@ -1,6 +1,11 @@
 package org.team3082.chicken_planner.AppState;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.team3082.chicken_planner.AutoPlanning.AutoRoutine.AutoRoutine;
+
+import javafx.scene.Node;
 
 /**
  * Represents the state of the application, including the current project path
@@ -11,6 +16,17 @@ public class AppState {
     private DrawingState drawingState; // The current drawing state
 
     private AutoRoutine currentRoutine; //The current routine
+    public int currentRoutineIndex;
+    private ArrayList<AutoRoutine> loadedRoutines;
+    private boolean routineSaved;
+
+    public boolean getRoutineSaved(){
+        return routineSaved;
+    }
+
+    public void setRoutineSaved(boolean saved){
+        routineSaved = saved;
+    }
 
     /**
      * Enum to represent the current drawing mode.
@@ -27,6 +43,8 @@ public class AppState {
     public AppState() {
         this.drawingState = DrawingState.CONTROL_POINT;
         this.currentRoutine = new AutoRoutine();
+        this.loadedRoutines = new ArrayList<>();
+        routineSaved = true;
     }
 
     /**
@@ -68,7 +86,7 @@ public class AppState {
 
     
     public void setCurrentAutoRoutine(AutoRoutine autoRoutine){
-        currentRoutine = autoRoutine;
+        currentRoutine = new AutoRoutine(autoRoutine);
     }   
 
 
@@ -79,6 +97,14 @@ public class AppState {
      */
     public void setDrawingState(DrawingState drawingState) {
         this.drawingState = drawingState;
+    }
+
+    public void setLoadedRoutines(ArrayList<AutoRoutine> autoRoutines) {
+        loadedRoutines = autoRoutines;
+    }
+
+    public ArrayList<AutoRoutine> getLoadedRoutines() {
+        return loadedRoutines;
     }
 }
 

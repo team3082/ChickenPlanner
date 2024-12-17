@@ -52,7 +52,7 @@ public class HiddenMenu {
      *
      * @return The created Button instance.
      */
-    private Button createMenuButton() {
+    protected Button createMenuButton() {
         Button menuButton = new Button(menuName);
         menuButton.getStyleClass().add("menuButtons");
         HBox.setMargin(menuButton, new Insets(0, 10, 0, 0));
@@ -65,7 +65,7 @@ public class HiddenMenu {
      *
      * @return The configured Stage instance.
      */
-    private Stage createMenuStage() {
+    protected Stage createMenuStage() {
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle(menuName);
@@ -79,7 +79,7 @@ public class HiddenMenu {
      *
      * @return The configured BorderPane instance.
      */
-    private BorderPane createBorderPane() {
+    protected BorderPane createBorderPane() {
         BorderPane pane = new BorderPane();
         pane.setStyle("-fx-background-color: #706fd3; -fx-border-color: #40407a; -fx-border-width: 2; -fx-border-radius: 5;");
         pane.setTop(createMenuBar());
@@ -96,7 +96,7 @@ public class HiddenMenu {
      *
      * @return The configured HBox instance.
      */
-    private HBox createMenuBar() {
+    protected HBox createMenuBar() {
         HBox menubar = new HBox();
         menubar.setAlignment(Pos.CENTER);
         menubar.setPrefSize(300, 35);
@@ -114,7 +114,7 @@ public class HiddenMenu {
      *
      * @return The configured HBox instance containing the close button.
      */
-    private HBox createCloseButton() {
+    protected HBox createCloseButton() {
         HBox hBox = new HBox();
         hBox.setPrefSize(300, 35);
         hBox.setAlignment(Pos.BOTTOM_RIGHT);
@@ -146,7 +146,7 @@ public class HiddenMenu {
      *
      * @return The BorderPane instance.
      */
-    public BorderPane getBorderPane() {
+    protected BorderPane getBorderPane() {
         return borderPane;
     }
 }

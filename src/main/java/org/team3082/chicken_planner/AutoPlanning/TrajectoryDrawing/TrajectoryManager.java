@@ -19,4 +19,8 @@ public class TrajectoryManager {
     public SplineDrawingManager getSplineDrawingManager() {
         return splineDrawingManager;
     }
+
+    public InputManager getInputManager(){
+        return inputManager;
+    }
 }

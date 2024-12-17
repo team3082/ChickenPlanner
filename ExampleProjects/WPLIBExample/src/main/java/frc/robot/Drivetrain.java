@@ -156,4 +156,15 @@ public class Drivetrain {
     updateOdometry();
     m_fieldSim.setRobotPose(m_odometry.getPoseMeters());
   }
+
+  public DifferentialDriveKinematics getKinematics() {
+    return m_kinematics;
+  }
+
+  public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+    return new DifferentialDriveWheelSpeeds(
+        m_leftEncoder.getRate(),  // Left wheel speed (rate from the encoder)
+        m_rightEncoder.getRate()  // Right wheel speed (rate from the encoder)
+    );
+  }
 }

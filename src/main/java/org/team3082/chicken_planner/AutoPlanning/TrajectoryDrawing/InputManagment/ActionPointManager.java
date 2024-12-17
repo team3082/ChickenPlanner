@@ -32,15 +32,19 @@ public class ActionPointManager {
         switch (event.getButton()) {
             case PRIMARY:
                 actionPointSelected = getActionPointIndex(mousePosition);
+                if(actionPointSelected != -1) application.getAppState().setRoutineSaved(false);
                 break;
             case SECONDARY:
                 int pointIndex = getActionPointIndex(mousePosition);
                 if(pointIndex != -1) return;
 
                 double t = currentRoutine.getSpline().findNearestT(mousePosition.pixelToField(canvas));
-                currentRoutine.getActionPoints().add(new ActionPoint(t));
-                splineDrawingManager.resetAndPopulateCanvas();
-                actionPointSelected = currentRoutine.getActionPoints().size()-1;
+                if(currentRoutine.getSpline().getPoint(t).fieldToPixel(canvas).distance(mousePosition)<canvas.getHeight()*0.01){
+                    currentRoutine.getActionPoints().add(new ActionPoint(t));
+                    splineDrawingManager.resetAndPopulateCanvas();
+                    actionPointSelected = currentRoutine.getActionPoints().size()-1;
+                }
+                actionPointSelected = getActionPointIndex(mousePosition);
                 break;
             case MIDDLE:
                 actionPointSelected =  getActionPointIndex(mousePosition);
