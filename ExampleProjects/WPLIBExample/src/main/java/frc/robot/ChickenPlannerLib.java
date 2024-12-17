@@ -84,7 +84,7 @@ public class ChickenPlannerLib {
         // Loop through the created trajectories and add RamseteCommand along with any action commands
         for (int i = 0; i < trajectories.size(); i++) {
             Trajectory trajectory = trajectories.get(i);
-
+            System.out.println(trajectory);
             // Create a RamseteCommand for the current trajectory
             FollowTrajectoryCommandRamsete ramseteCommand = new FollowTrajectoryCommandRamsete(
                 trajectory,

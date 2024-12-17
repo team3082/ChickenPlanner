@@ -24,7 +24,6 @@ public class FollowTrajectoryCommandRamsete extends Command {
   private BiConsumer<Double, Double> arcadeDrive;
   private boolean stopAtEnd = false;
 
-
   public FollowTrajectoryCommandRamsete(
     Trajectory trajectory,
     Supplier<Pose2d> poseSupplier,

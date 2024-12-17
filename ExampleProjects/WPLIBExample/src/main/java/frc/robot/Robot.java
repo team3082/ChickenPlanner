@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
@@ -63,12 +64,17 @@ public class Robot extends TimedRobot {
     trajectoryConfig.setKinematics(m_drive.getKinematics());
 
     command = ChickenPlannerLib.followChickenPathCommand(
-      "DefualtRoutine", 
+      "Test5",
       trajectoryConfig, 
       m_ramsete, 
       m_drive::getPose, 
       m_drive::resetOdometry,
-      (foward, rot) -> m_drive.drive(foward, rot) 
+      (foward, rot) -> m_drive.drive(foward, rot),
+      new ParallelCommandGroup(
+        new InstantCommand(()->System.out.println("Hello")),
+        new InstantCommand(()->System.out.println("World"))
+      ),
+      new InstantCommand(()->System.out.println("Point Two"))
     );
 
   }
