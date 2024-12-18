@@ -11,14 +11,26 @@
         <maven.compiler.source>23</maven.compiler.source>
         <maven.compiler.target>23</maven.compiler.target>
         <javafx.version>23.0.1</javafx.version>
+        <wpilib.version>2024.3.2</wpilib.version>
+        <platform.classifier>windowsx86-64</platform.classifier>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>wpilib-release</id>
+            <url>https://frcmaven.wpi.edu/release</url>
+        </repository>
+    </repositories>
+
     <dependencies>
+        <!-- Gson for JSON handling -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.8.9</version>
         </dependency>
+
+        <!-- JavaFX dependencies -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -34,15 +46,39 @@
             <artifactId>javafx-graphics</artifactId>
             <version>${javafx.version}</version>
         </dependency>
+
+        <!-- WPILib dependencies -->
         <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-media</artifactId>
-            <version>${javafx.version}</version>
+            <groupId>edu.wpi.first.wpilibj</groupId>
+            <artifactId>wpilibj-java</artifactId>
+            <version>${wpilib.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-web</artifactId>
-            <version>${javafx.version}</version>
+            <groupId>edu.wpi.first.ntcore</groupId>
+            <artifactId>ntcore-java</artifactId>
+            <version>${wpilib.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>edu.wpi.first.ntcore</groupId>
+            <artifactId>ntcore-jni</artifactId>
+            <version>${wpilib.version}</version>
+            <classifier>${platform.classifier}</classifier>
+        </dependency>
+        <dependency>
+            <groupId>edu.wpi.first.wpiutil</groupId>
+            <artifactId>wpiutil-java</artifactId>
+            <version>${wpilib.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>edu.wpi.first.wpiutil</groupId>
+            <artifactId>wpiutil-jni</artifactId>
+            <version>${wpilib.version}</version>
+            <classifier>${platform.classifier}</classifier>
+        </dependency>
+        <dependency>
+            <groupId>edu.wpi.first.wpimath</groupId>
+            <artifactId>wpimath-java</artifactId>
+            <version>${wpilib.version}</version>
         </dependency>
     </dependencies>
 

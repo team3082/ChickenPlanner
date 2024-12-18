@@ -36,7 +36,7 @@ import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 public class ChickenPlannerLib {
-    private static final int POINTS_PER_TRAJECTORY = 30;
+    private static final int POINTS_PER_TRAJECTORY = 100;
 
     public static SequentialCommandGroup followChickenPathCommand(
         String trajectoryName,
@@ -388,9 +388,4 @@ public class ChickenPlannerLib {
       }
   }
 
-public static SequentialCommandGroup getFollowChickenPathCommand(String string, TrajectoryConfig trajectoryConfig,
-        RamseteController m_ramsete, Drivetrain drivetrain, BiConsumer<Double, Double> biConsumer) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getFollowChickenPathCommand'");
-}
 }

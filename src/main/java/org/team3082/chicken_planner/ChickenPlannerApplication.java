@@ -7,6 +7,7 @@ import org.team3082.chicken_planner.UIElements.Field;
 import org.team3082.chicken_planner.UIElements.Menubar;
 import org.team3082.chicken_planner.UIElements.Sidebar.Sidebar;
 
+import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -75,7 +76,7 @@ public class ChickenPlannerApplication extends Application {
         // Display the splash screen
         setUpSplashScreen();
     }
-
+    
     /**
      * Configures the scene by applying stylesheets and setting the application icon.
      */
