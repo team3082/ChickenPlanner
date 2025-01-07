@@ -18,22 +18,8 @@ Help us make ChickenPlanner even better by reporting bugs, discussing new featur
 ## 📥 Installation
 
 ## Installation
-*Coming Soon:* An app file rather then the need for maven
-1. **Prerequisites:**  
-   - Java 17 or later  
-   - Maven (for dependency management)  
-   - WPILib installed (for wplib trajectory support)  
-
-2. **Clone the repository:**  
-   ```bash
-   git clone https://github.com/LucasG2008/ChickenDash.git
-   cd ChickenDash
-   ```
-
-3. **Build the project using Maven**
-    ```bash
-    mvn clean install
-    ```
+Download the App [here](Distrubtions/FRC ChickenPlanner.exe)
+    
 ---
 
 ## 🛠️ Usage
