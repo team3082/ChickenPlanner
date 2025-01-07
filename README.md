@@ -1,4 +1,4 @@
-Web Hook Test# ChickenPlanner: An Open Source FRC Trajectory Planner 🐔
+# ChickenPlanner: An Open Source FRC Trajectory Planner 🐔
 
 <img src="src/main/resources/AppIcon.png" alt="ChickenPlanner Logo" width="300">
 
