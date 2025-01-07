@@ -1,4 +1,4 @@
-# ChickenPlanner: An Open Source FRC Trajectory Planner 🐔
+Web Hook Test# ChickenPlanner: An Open Source FRC Trajectory Planner 🐔
 
 <img src="src/main/resources/AppIcon.png" alt="ChickenPlanner Logo" width="300">
 
@@ -18,7 +18,7 @@ Help us make ChickenPlanner even better by reporting bugs, discussing new featur
 ## 📥 Installation
 
 ## Installation
-Download the App [here](Distrubtions/FRC ChickenPlanner.exe)
+Download the most recent App release from the distrubtions folder
     
 ---
 
