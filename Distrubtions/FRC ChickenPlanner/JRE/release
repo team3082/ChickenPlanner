@@ -1,0 +1,2 @@
+JAVA_VERSION="23.0.1"
+MODULES="java.base java.datatransfer java.xml java.prefs java.desktop java.logging java.net.http java.scripting java.transaction.xa java.sql jdk.jfr jdk.jsobject jdk.unsupported jdk.xml.dom"

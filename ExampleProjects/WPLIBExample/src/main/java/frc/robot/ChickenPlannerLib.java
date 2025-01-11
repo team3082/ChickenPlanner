@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot;
 
 import java.io.File;
@@ -387,10 +383,4 @@ public class ChickenPlannerLib {
           return "(" + x + ", " + y + ")";
       }
   }
-
-public static SequentialCommandGroup getFollowChickenPathCommand(String string, TrajectoryConfig trajectoryConfig,
-        RamseteController m_ramsete, Drivetrain drivetrain, BiConsumer<Double, Double> biConsumer) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getFollowChickenPathCommand'");
-}
 }
