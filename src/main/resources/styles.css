@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+.root {
+    -seasalt: #F7F7F7;
+    -periwinkle: #C6BEFC;
+    -cornflower: #688CDB;
+    -resolution: #32327C;
+    -penn: #0C0C3B;
+    
+    -surface: #121019;
+    -secondary-surface: #1F1B2B;
+    -transparent-surface: #121019B3;
+    -text: #F7F7F7;
+    -secondary-text: #BDBDBD;
+
+    -error: #FF4A4A;
+    -accent: -cornflower;
+    -inactive: #625C75;
+    -overlay: #12101933;
+    -accent-surface: -accent;
+
+    -fx-background-color : -surface;
+    -fx-fill-width : true;
+    -fx-color : -text;
+    -fx-fill-width : true;
+    -fx-font-family: Inter;
+    -fx-focus-color : transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+#mainBorderPanel {
+    -fx-background-color: #706fd3;
+}
+
+#sidebar{
+    -fx-background-color: #474787;
+    -fx-border-radius: 3;
+}
+
+#Menubar{
+    -fx-background-color: #40407a;
+}
+
+.menuButtons{
+    -fx-background-color: #474787;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-text-fill: "#cfcfff";
+}
+
+.menuButtons:hover{
+    -fx-background-color: "#cfcfff";
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-text-fill: #474787;
+}
+
+#titleLabel{
+    -fx-font-weight: bold;
+    -fx-text-fill: "#cfcfff";
+    -fx-font-size: 18;
+
+    -fx-text-alignment: center;
+}
