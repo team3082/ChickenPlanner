@@ -9,21 +9,24 @@ import javafx.stage.StageStyle;
 public class App extends Application {
     private Stage stage;
     private LandingScene landingScene;
-
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    @Override
-    public void start(Stage stage) {
-        this.stage = stage;
+    
+    
+        public static void main(String[] args) {
+            launch(args);
+        }
+    
+        @Override
+        public void start(Stage stage) {
+            this.stage = stage;
+    
         landingScene = new LandingScene();
-        landingScene.getStylesheets().add(App.class.getResource())
+        landingScene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+
         stage.setScene(landingScene);
-        stage.setTitle("ChickenPlanner");
-        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setTitle("ChickenPlanner 2025");
         stage.show();
+        
+        
 
     }
 

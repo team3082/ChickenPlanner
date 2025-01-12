@@ -1,0 +1,64 @@
+@options
+@packages
+-classpath
+'C:/Users/emili/.m2/repository/com/google/code/gson/gson/2.8.9/gson-2.8.9.jar;C:/Users/emili/.m2/repository/com/github/javaparser/javaparser-core/3.25.10/javaparser-core-3.25.10.jar;C:/Users/emili/.m2/repository/org/openjfx/javafx-controls/23.0.1/javafx-controls-23.0.1.jar;C:/Users/emili/.m2/repository/org/openjfx/javafx-controls/23.0.1/javafx-controls-23.0.1-win.jar;C:/Users/emili/.m2/repository/org/openjfx/javafx-fxml/23.0.1/javafx-fxml-23.0.1.jar;C:/Users/emili/.m2/repository/org/openjfx/javafx-fxml/23.0.1/javafx-fxml-23.0.1-win.jar;C:/Users/emili/.m2/repository/org/openjfx/javafx-graphics/23.0.1/javafx-graphics-23.0.1.jar;C:/Users/emili/.m2/repository/org/openjfx/javafx-graphics/23.0.1/javafx-graphics-23.0.1-win.jar;C:/Users/emili/.m2/repository/org/openjfx/javafx-base/23.0.1/javafx-base-23.0.1.jar;C:/Users/emili/.m2/repository/org/openjfx/javafx-base/23.0.1/javafx-base-23.0.1-win.jar;C:/Users/emili/.m2/repository/org/openjfx/javafx-media/23.0.1/javafx-media-23.0.1.jar;C:/Users/emili/.m2/repository/org/openjfx/javafx-media/23.0.1/javafx-media-23.0.1-win.jar;C:/Users/emili/.m2/repository/org/openjfx/javafx-web/23.0.1/javafx-web-23.0.1.jar;C:/Users/emili/.m2/repository/org/openjfx/javafx-web/23.0.1/javafx-web-23.0.1-win.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'23'
+-sourcepath
+'C:/Users/emili/Documents/Robotics/ChickenPlanner/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2025. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/emili/Documents/Robotics/ChickenPlanner/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'chicken_planner OpenSourceRelease API'
+-use
+-version
+-windowtitle
+'chicken_planner OpenSourceRelease API'
+org.team3082.chicken_planner
+org.team3082.chicken_planner.FileManagment.CommandLoading
+org.team3082.chicken_planner.SplineDrawing.CurveUtilites
+org.team3082.chicken_planner.UIElements.CustomNodes
+org.team3082.chicken_planner.UIElements.EditorPage
+org.team3082.chicken_planner.UIElements.EditorPage.ModalPages
+org.team3082.chicken_planner.UIElements.EditorPage.Sidebar
+org.team3082.chicken_planner.UIElements
+C:\Users\emili\.m2\repository\com\google\code\gson\gson\2.8.9\gson-2.8.9.jar = 1729999324758
+C:\Users\emili\.m2\repository\com\github\javaparser\javaparser-core\3.25.10\javaparser-core-3.25.10.jar = 1736642957732
+C:\Users\emili\.m2\repository\org\openjfx\javafx-controls\23.0.1\javafx-controls-23.0.1.jar = 1729649478367
+C:\Users\emili\.m2\repository\org\openjfx\javafx-controls\23.0.1\javafx-controls-23.0.1-win.jar = 1729649478965
+C:\Users\emili\.m2\repository\org\openjfx\javafx-fxml\23.0.1\javafx-fxml-23.0.1.jar = 1729649478417
+C:\Users\emili\.m2\repository\org\openjfx\javafx-fxml\23.0.1\javafx-fxml-23.0.1-win.jar = 1729649478492
+C:\Users\emili\.m2\repository\org\openjfx\javafx-graphics\23.0.1\javafx-graphics-23.0.1.jar = 1729649478417
+C:\Users\emili\.m2\repository\org\openjfx\javafx-graphics\23.0.1\javafx-graphics-23.0.1-win.jar = 1729649479232
+C:\Users\emili\.m2\repository\org\openjfx\javafx-base\23.0.1\javafx-base-23.0.1.jar = 1729649478477
+C:\Users\emili\.m2\repository\org\openjfx\javafx-base\23.0.1\javafx-base-23.0.1-win.jar = 1729649478773
+C:\Users\emili\.m2\repository\org\openjfx\javafx-media\23.0.1\javafx-media-23.0.1.jar = 1729649478570
+C:\Users\emili\.m2\repository\org\openjfx\javafx-media\23.0.1\javafx-media-23.0.1-win.jar = 1729649479044
+C:\Users\emili\.m2\repository\org\openjfx\javafx-web\23.0.1\javafx-web-23.0.1.jar = 1729649478699
+C:\Users\emili\.m2\repository\org\openjfx\javafx-web\23.0.1\javafx-web-23.0.1-win.jar = 1729649513596
+C:\Users\emili\Documents\Robotics\ChickenPlanner\src\main\java = 1734590496802
+C:\Users\emili\Documents\Robotics\ChickenPlanner\target\site\apidocs\allclasses-index.html = 1736659949181
+C:\Users\emili\Documents\Robotics\ChickenPlanner\target\site\apidocs\allpackages-index.html = 1736659949189
+C:\Users\emili\Documents\Robotics\ChickenPlanner\target\site\apidocs\constant-values.html = 1736659948966
+C:\Users\emili\Documents\Robotics\ChickenPlanner\target\site\apidocs\element-list = 1736659948848
+C:\Users\emili\Documents\Robotics\ChickenPlanner\target\site\apidocs\help-doc.html = 1736659949234
+C:\Users\emili\Documents\Robotics\ChickenPlanner\target\site\apidocs\index-all.html = 1736659949222
+C:\Users\emili\Documents\Robotics\ChickenPlanner\target\site\apidocs\index.html = 1736659949117
+C:\Users\emili\Documents\Robotics\ChickenPlanner\target\site\apidocs\member-search-index.js = 1736659949200
+C:\Users\emili\Documents\Robotics\ChickenPlanner\target\site\apidocs\module-search-index.js = 1736659949192
+C:\Users\emili\Documents\Robotics\ChickenPlanner\target\site\apidocs\overview-summary.html = 1736659949229
+C:\Users\emili\Documents\Robotics\ChickenPlanner\target\site\apidocs\overview-tree.html = 1736659949110
+C:\Users\emili\Documents\Robotics\ChickenPlanner\target\site\apidocs\package-search-index.js = 1736659949196
+C:\Users\emili\Documents\Robotics\ChickenPlanner\target\site\apidocs\search.html = 1736659949225
+C:\Users\emili\Documents\Robotics\ChickenPlanner\target\site\apidocs\tag-search-index.js = 1736659949202
+C:\Users\emili\Documents\Robotics\ChickenPlanner\target\site\apidocs\type-search-index.js = 1736659949198
