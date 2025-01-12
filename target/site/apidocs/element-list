@@ -1,8 +1,0 @@
-org.team3082.chicken_planner
-org.team3082.chicken_planner.FileManagment.CommandLoading
-org.team3082.chicken_planner.SplineDrawing.CurveUtilites
-org.team3082.chicken_planner.UIElements
-org.team3082.chicken_planner.UIElements.CustomNodes
-org.team3082.chicken_planner.UIElements.EditorPage
-org.team3082.chicken_planner.UIElements.EditorPage.ModalPages
-org.team3082.chicken_planner.UIElements.EditorPage.Sidebar
