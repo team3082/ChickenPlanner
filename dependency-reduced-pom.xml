@@ -40,8 +40,18 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.5.0</version>
+      </plugin>
     </plugins>
   </build>
+  <repositories>
+    <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+    </repository>
+  </repositories>
   <properties>
     <javafx.version>23.0.1</javafx.version>
     <maven.compiler.target>23</maven.compiler.target>

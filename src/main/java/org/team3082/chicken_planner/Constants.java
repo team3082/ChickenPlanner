@@ -11,4 +11,5 @@ public class Constants {
         public static final int CURVE_SAMPLES = 300;
         public static final int TRAJECTORY_SAMPLES_PER_METER = 10;
     }
+    
 }

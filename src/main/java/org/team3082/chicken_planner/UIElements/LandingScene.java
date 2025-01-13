@@ -1,21 +1,20 @@
 package org.team3082.chicken_planner.UIElements;
 
+import java.io.File;
+
 import org.team3082.chicken_planner.Constants;
+import org.team3082.chicken_planner.Globals;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
-import java.io.File;
 
 /**
  * Represents the landing scene for the Chicken Planner application.
@@ -31,9 +30,11 @@ public class LandingScene extends Scene {
      */
     public LandingScene(Stage stage) {
         super(new VBox(), Constants.UI.WINDOW_WIDTH, Constants.UI.WINDOW_HEIGHT);
-        this.stage = stage;  // Keep a reference to the stage
+        this.stage = stage; // Keep a reference to the stage
 
         root = (VBox) getRoot();
+
+        // root.getStyleClass().addAll("root");
         root.setAlignment(Pos.CENTER_RIGHT);
 
         HBox hBox = createContentLayout();
@@ -66,7 +67,7 @@ public class LandingScene extends Scene {
      * @return an ImageView containing the logo image.
      */
     private ImageView createLogoImageView() {
-        Image chickenLogoImage = new Image(getClass().getResource("/LandingSceneLogo.png").toExternalForm());
+        Image chickenLogoImage = new Image(getClass().getResource("/themes/" + Globals.theme + "/chicken.png").toExternalForm());
         ImageView imageView = new ImageView(chickenLogoImage);
         imageView.setFitWidth(100);
         imageView.setPreserveRatio(true);
@@ -94,13 +95,12 @@ public class LandingScene extends Scene {
         Text recentProjectsText = createText("Recent Projects", "recentProjectsText");
 
         projectsTextLayout.getChildren().addAll(
-            titleText,
-            taglineText,
-            getStartedText,
-            openProjectText,
-            openDocumentationText,
-            recentProjectsText
-        );
+                titleText,
+                taglineText,
+                getStartedText,
+                openProjectText,
+                openDocumentationText,
+                recentProjectsText);
 
         // Event handling for the "Open Project" link
         openProjectText.setOnMouseClicked(event -> openDirectoryChooser());
@@ -111,8 +111,8 @@ public class LandingScene extends Scene {
     /**
      * Creates a Text object with the specified content, ID, and style class.
      *
-     * @param content the text content to display.
-     * @param id the ID to assign to the text object for identification.
+     * @param content    the text content to display.
+     * @param id         the ID to assign to the text object for identification.
      * @param styleClass the CSS style class to apply to the text object.
      * @return a Text object with the specified properties.
      */
@@ -140,7 +140,8 @@ public class LandingScene extends Scene {
             // Handle the selected directory
             System.out.println("Directory selected: " + selectedDirectory.getAbsolutePath());
         } else {
-            // Handle the case when no directory is selected (dialog is closed without selection)
+            // Handle the case when no directory is selected (dialog is closed without
+            // selection)
             System.out.println("No directory selected");
         }
     }

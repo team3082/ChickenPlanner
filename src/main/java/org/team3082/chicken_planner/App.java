@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class App extends Application {
+
     private Stage stage;
     private LandingScene landingScene;
     public static void main(String[] args) {
@@ -16,11 +17,13 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         this.stage = stage;
-    
+
         landingScene = new LandingScene(stage);
-        landingScene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+        String stylesheet = getClass().getResource("/themes/" + Globals.theme + "/styles.css").toExternalForm();
+        landingScene.getStylesheets().add(stylesheet);
 
         stage.setScene(landingScene);
+
         stage.setTitle("ChickenPlanner 2025");
         stage.show();
     }   

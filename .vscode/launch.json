@@ -5,9 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "org.team3082.chicken_planner.App",
+            "projectName": "chicken_planner",
+
+        },
+        {
             "type": "jdk",
             "request": "launch",
             "name": "Launch Java App"
-        }
+        },
     ]
 }
