@@ -25,6 +25,13 @@
             <version>3.25.10</version>
         </dependency>
 
+        <!-- UI util dependencies -->
+        <dependency>
+            <groupId>com.github.weisj</groupId>
+            <artifactId>jsvg</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+
         <!-- Java FX dependencies -->
         <dependency>
             <groupId>org.openjfx</groupId>
