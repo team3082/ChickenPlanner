@@ -1,3 +1,20 @@
 Text {
     -fx-fill: -fx-text;  
 }
+
+#titleText{
+    -fx-font-size: 40px;
+    -fx-font-weight: ;
+    -fx-fill: -fx-text;
+}
+
+#taglineText{
+    -fx-font-size: 17.5;
+    -fx-fill: -fx-text;
+}
+
+#getStartedText{
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-fill: -fx-text;
+}

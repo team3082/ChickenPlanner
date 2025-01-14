@@ -69,7 +69,7 @@ public class LandingScene extends Scene {
     private ImageView createLogoImageView() {
         Image chickenLogoImage = new Image(getClass().getResource("/themes/" + Globals.theme + "/chicken.png").toExternalForm());
         ImageView imageView = new ImageView(chickenLogoImage);
-        imageView.setFitWidth(100);
+        imageView.setFitWidth(250);
         imageView.setPreserveRatio(true);
         return imageView;
     }
