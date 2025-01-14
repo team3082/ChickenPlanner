@@ -1,6 +1,6 @@
 # ChickenPlanner: An Open Source FRC Trajectory Planner 🐔
 
-<img src="src/main/resources/AppIcon.png" alt="ChickenPlanner Logo" width="300">
+<img src="src/main/resources/AppIcon.ico" alt="ChickenPlanner Logo" width="300">
 
 **ChickenPlanner** is a powerful, user-friendly trajectory planner designed for FIRST Robotics Competition (FRC) teams. Built to make trajectory generation straightforward with bezier curves, and help plan autos.
 
