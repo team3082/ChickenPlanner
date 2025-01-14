@@ -1,25 +1,3 @@
 .root {
-    -fx-seasalt: #F7F7F7;
-    -fx-periwinkle: #C6BEFC;
-    -fx-cornflower: #688CDB;
-    -fx-resolution: #32327C;
-    -fx-penn: #0C0C3B;
-    
-    -fx-surface: #32327C;
-    -fx-secondary-surface: #807FFF;
-    -fx-transparent-surface: #121019B3;
-    -fx-text: #F7F7F7;
-    -fx-secondary-text: #E5E5E5;
-
-    -fx-error: #FF4A4A;
-    -fx-accent: #6D6DD2;
-    -fx-inactive: #807FFF;
-    -fx-overlay: #12101933;
-    -fx-accent-surface: #32327C;
-
     -fx-background-color: -fx-secondary-surface;
 }
-Text {
-    -fx-fill: -fx-text;  
-}
-

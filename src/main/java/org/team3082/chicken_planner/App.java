@@ -19,9 +19,9 @@ public class App extends Application {
         this.stage = stage;
 
         landingScene = new LandingScene(stage);
-        String stylesheet = getClass().getResource("/themes/" + Globals.theme + "/styles.css").toExternalForm();
-        landingScene.getStylesheets().add(stylesheet);
-
+        String globalStylesheet = getClass().getResource("/themes/styles.css").toExternalForm();
+        landingScene.getStylesheets().add(globalStylesheet);
+        
         stage.setScene(landingScene);
 
         stage.setTitle("ChickenPlanner 2025");
