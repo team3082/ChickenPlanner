@@ -19,8 +19,9 @@ public class App extends Application {
         this.stage = stage;
 
         landingScene = new LandingScene(stage);
-        String stylesheet = getClass().getResource("/themes/" + Globals.theme + "/styles.css").toExternalForm();
-        landingScene.getStylesheets().add(stylesheet);
+        landingScene.getStylesheets().add(getClass().getResource("/themes/" + Globals.theme + "/"+ Globals.theme +".css").toExternalForm());
+        landingScene.getStylesheets().add(getClass().getResource("/Styles/styles.css").toExternalForm());
+        
 
         stage.setScene(landingScene);
 
