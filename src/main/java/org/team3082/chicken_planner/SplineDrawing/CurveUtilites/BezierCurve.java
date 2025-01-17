@@ -186,11 +186,12 @@ public class BezierCurve {
     }
 
     /**
-     * Sets the first control point and recalculates the curve.
+     * Adjusts the second control point along with the first control point and recalculates the curve.
      *
      * @param controlPointOne The new first control point.
      */
     public void setControlPointOne(Vector2 controlPointOne) {
+        this.controlPointTwo = this.controlPointTwo.add(this.controlPointOne.subtract(controlPointOne));
         this.controlPointOne = controlPointOne;
         calculatePointsAndCurveLength(numberOfPoints);
     }
@@ -216,33 +217,32 @@ public class BezierCurve {
     }
 
     /**
-     * Sets the fourth control point and recalculates the curve.
+     * Adjusts the third control point along with the fourth control point and recalculates the curve.
      *
      * @param controlPointFour The new fourth control point.
      */
     public void setControlPointFour(Vector2 controlPointFour) {
+        this.controlPointThree = this.controlPointThree.add(this.controlPointFour.subtract(controlPointFour));
         this.controlPointFour = controlPointFour;
         calculatePointsAndCurveLength(numberOfPoints);
     }
 
     /**
-     * Adjusts the second control point along with the first control point and recalculates the curve.
+     * Sets the first control point and recalculates the curve.
      *
      * @param controlPointOne The new first control point.
      */
-    public void setPointTwoWithOne(Vector2 controlPointOne) {
-        this.controlPointTwo.add(this.controlPointOne.subtract(controlPointOne));
+    public void setPointOneOnly(Vector2 controlPointOne) {
         this.controlPointOne = controlPointOne;
         calculatePointsAndCurveLength(numberOfPoints);
     }
 
     /**
-     * Adjusts the third control point along with the fourth control point and recalculates the curve.
+     * Sets the fourth control point and recalculates the curve.
      *
      * @param controlPointFour The new fourth control point.
      */
-    public void setPointThreeWithFour(Vector2 controlPointFour) {
-        this.controlPointThree.add(this.controlPointFour.subtract(controlPointFour));
+    public void setPointFourOnly(Vector2 controlPointFour) {
         this.controlPointFour = controlPointfour;
         calculatePointsAndCurveLength(numberOfPoints);
     }
