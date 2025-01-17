@@ -1,6 +1,10 @@
 package org.team3082.chicken_planner;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Globals {
-    public static String theme = "dracula";
+    private static StringProperty themeProperty = new SimpleStringProperty("tokyo");
+    public static String theme = themeProperty.get();
     // theme can be dark. light, og, or dracula
 }

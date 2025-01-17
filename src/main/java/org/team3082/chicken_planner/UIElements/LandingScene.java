@@ -4,11 +4,11 @@ import java.io.File;
 
 import org.team3082.chicken_planner.Constants;
 import org.team3082.chicken_planner.Globals;
+import org.team3082.chicken_planner.UIElements.Utilities.Icons;
+import org.team3082.chicken_planner.UIElements.Utilities.Theme;
 
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -33,8 +33,9 @@ public class LandingScene extends Scene {
         this.stage = stage; // Keep a reference to the stage
 
         root = (VBox) getRoot();
+        Theme.load(Globals.theme, root);
 
-        // root.getStyleClass().addAll("root");
+        root.getStyleClass().addAll("root", Globals.theme);
         root.setAlignment(Pos.CENTER_RIGHT);
 
         HBox hBox = createContentLayout();
@@ -48,7 +49,7 @@ public class LandingScene extends Scene {
      * @return an HBox containing the content layout.
      */
     private HBox createContentLayout() {
-        HBox hBox = new HBox();
+        HBox hBox = new HBox(96);
         hBox.setAlignment(Pos.CENTER);
 
         ImageView logoImageView = createLogoImageView();
@@ -67,10 +68,9 @@ public class LandingScene extends Scene {
      * @return an ImageView containing the logo image.
      */
     private ImageView createLogoImageView() {
-        Image chickenLogoImage = new Image(getClass().getResource("/themes/" + Globals.theme + "/chicken.png").toExternalForm());
-        ImageView imageView = new ImageView(chickenLogoImage);
-        imageView.setFitWidth(250);
-        imageView.setPreserveRatio(true);
+        Icons logo = new Icons();
+        ImageView imageView = logo.get("chicken.svg", 256, "accent-surface");
+
         return imageView;
     }
 
@@ -81,29 +81,74 @@ public class LandingScene extends Scene {
      * @return a VBox containing the text options.
      */
     private VBox createProjectLayout() {
-        VBox projectsTextLayout = new VBox();
+        VBox projectsTextLayout = new VBox(24);
         projectsTextLayout.setAlignment(Pos.CENTER_LEFT);
 
         // Create and style the text nodes
-        Text titleText = createText("ChickenPlanner", "titleText");
-        Text taglineText = createText("Effortless Auto Planning", "taglineText");
-        Text getStartedText = createText("Get Started", "getStartedText");
-        Text openProjectText = createText("Open Project", "openProjectText");
-        VBox.setMargin(openProjectText, new Insets(0, 0, 0, 20));
-        Text openDocumentationText = createText("Open Documentation", "openDocumentationText");
-        VBox.setMargin(openDocumentationText, new Insets(0, 0, 0, 20));
-        Text recentProjectsText = createText("Recent Projects", "recentProjectsText");
+        VBox titleTextLayout = new VBox(4);
+        {
+            Text titleText = createText("ChickenPlanner", "titleText", "title");
+            Text taglineText = createText("Effortless auto planning", "taglineText", "subtitle");
+            titleTextLayout.getChildren().addAll(titleText, taglineText);
+        }
 
-        projectsTextLayout.getChildren().addAll(
-                titleText,
-                taglineText,
-                getStartedText,
-                openProjectText,
-                openDocumentationText,
-                recentProjectsText);
+        VBox getStartedLayout = new VBox(12);
+        {
+            Text getStartedText = createText("Get Started", "getStartedText", "h1");
+            VBox getStartedOptionsLayout = new VBox(8);
+            {
+                HBox newProjectLine = new HBox(6);
+                {
+                    newProjectLine.setAlignment(Pos.CENTER_LEFT);
+
+                    Text newProjectText = createText("New project", "newProjectText", "action");
+                    Icons icon = new Icons();
+                    ImageView newProjectIcon = icon.get("icons/file-plus-2.svg", 14, "accent-surface");
+                    newProjectLine.getChildren().addAll(newProjectIcon, newProjectText);
+                }
+
+                HBox openProjectLine = new HBox(6);
+                {
+                    openProjectLine.setAlignment(Pos.CENTER_LEFT);
+
+                    Text openProjectText = createText("Open existing project", "openProjectText", "action");
+                    Icons icon = new Icons();
+                    ImageView openProjectIcon = icon.get("icons/file-input.svg", 14, "accent-surface");
+                    openProjectLine.getChildren().addAll(openProjectIcon, openProjectText);
+                }
+
+                HBox openDocumentationLine = new HBox(6);
+                {
+                    openDocumentationLine.setAlignment(Pos.CENTER_LEFT);
+
+                    Text openDocumentationText = createText("View documentation", "openDocumentationText", "action");
+                    Icons icon = new Icons();
+                    ImageView openDocumentationIcon = icon.get("icons/book-open.svg", 14, "accent-surface");
+                    openDocumentationLine.getChildren().addAll(openDocumentationIcon, openDocumentationText);
+                }
+
+                getStartedOptionsLayout.getChildren().addAll(newProjectLine, openProjectLine, openDocumentationLine);
+            }
+            getStartedLayout.getChildren().addAll(getStartedText, getStartedOptionsLayout);
+
+        }
+
+        VBox recentProjectsLayout = new VBox(12);
+        {
+            Text recentProjectsText = createText("Recent Projects", "recentProjectsText", "h1");
+            VBox recentProjectsOptionsLayout = new VBox(8);
+            {
+                Text project1Text = createText("project 1", "project1Text", "action");
+                Text project2Text = createText("project 2", "project2Text", "action");
+                recentProjectsOptionsLayout.getChildren().addAll(project1Text, project2Text);
+            }
+            recentProjectsLayout.getChildren().addAll(recentProjectsText, recentProjectsOptionsLayout);
+        }
+
+        projectsTextLayout.getChildren().addAll(titleTextLayout, getStartedLayout, recentProjectsLayout);
 
         // Event handling for the "Open Project" link
-        openProjectText.setOnMouseClicked(event -> openDirectoryChooser());
+        getStartedLayout.lookup("#openProjectText").setOnMouseClicked(event -> openDirectoryChooser());
 
         return projectsTextLayout;
     }
@@ -111,14 +156,14 @@ public class LandingScene extends Scene {
     /**
      * Creates a Text object with the specified content, ID, and style class.
      *
-     * @param content    the text content to display.
-     * @param id         the ID to assign to the text object for identification.
-     * @param styleClass the CSS style class to apply to the text object.
+     * @param content the text content to display.
+     * @param id      the ID to assign to the text object for identification.
      * @return a Text object with the specified properties.
      */
-    private Text createText(String content, String id) {
+    private Text createText(String content, String id, String textClass) {
         Text text = new Text(content);
         text.setId(id);
+        text.getStyleClass().add(textClass);
         return text;
     }
 

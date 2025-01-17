@@ -60,6 +60,30 @@ public class Theme {
             entry("overlay", "#282A3633"),
             entry("accent-surface", "#FF79C6"));
 
+    static Map<String, String> github = Map.ofEntries(
+            entry("surface", "#0D1117"),
+            entry("secondary-surface", "#161B22"),
+            entry("transparent-surface", "#0D1117B3"),
+            entry("text", "#ECF2F8"),
+            entry("secondary-text", "#C6CDD5"),
+            entry("error", "#FF4A4A"),
+            entry("accent", "#77BDFB"),
+            entry("inactive", "#21262D"),
+            entry("overlay", "#0D111733"),
+            entry("accent-surface", "#77BDFB"));
+
+    static Map<String, String> tokyo = Map.ofEntries(
+            entry("surface", "#1a1b26"),
+            entry("secondary-surface", "#24283b"),
+            entry("transparent-surface", "#1a1b26B3"),
+            entry("text", "#a9b1d6"),
+            entry("secondary-text", "#9aa5ce"),
+            entry("error", "#f7768e"),
+            entry("accent", "#a754ff"),
+            entry("inactive", "#414868"),
+            entry("overlay", "#1a1b2633"),
+            entry("accent-surface", "#a754ff"));
+
     public static Map<String, String> current = light;
 
     public static void load(String theme, Pane root) {
@@ -74,6 +98,12 @@ public class Theme {
         }
         if (theme.equals("dracula")) {
             current = dracula;
+        }
+        if (theme.equals("github")) {
+            current = github;
+        }
+        if (theme.equals("tokyo")) {
+            current = tokyo;
         }
         current.forEach((k, v) -> {
             root.setStyle("-fx-" + k + " : " + v + ";");
