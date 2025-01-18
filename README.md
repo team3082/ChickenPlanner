@@ -46,7 +46,7 @@ For unstable builds navigate to the [Actions](https://github.com/team3082/Chicke
 ## 🛠️ Usage
 
 *Coming Soon:* A detailed guide on how to create, customize, and execute trajectories using ChickenPlanner and a more easier user experience with no need for maven commands
-1. **Run the Application**
+- **Run the Application from source**
     ```bash
     mvn javafx:run
     ```
