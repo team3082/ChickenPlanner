@@ -1,0 +1,68 @@
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Calculate short commit hash
+        run: |
+            calculatedSha=$(git rev-parse --short ${{ github.sha }})
+            echo "COMMIT_SHORT_SHA=$calculatedSha" >> $GITHUB_ENV
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '23.0.1'
+          distribution: 'temurin'
+          cache: maven
+      - name: Build with Maven
+        run:  mvn -B -Drevision=${{env.COMMIT_SHORT_SHA}} package --file pom.xml
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: FullBuild
+          path: target
+
+  package:
+    runs-on: ${{ matrix.os }}
+    needs: build
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Calculate short commit hash
+        run: |
+          calculatedSha=$(git rev-parse --short ${{ github.sha }})
+          echo "COMMIT_SHORT_SHA=$calculatedSha" >> $GITHUB_ENV
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: FullBuild
+          path: target
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '23.0.1'
+          distribution: 'temurin'
+      - name: Package with jpackage
+        run: |
+          jpackage \
+            --input target \
+            --name ChickenPlanner \
+            --main-jar chicken_planner-${{ github.sha }}.jar \
+            --main-class org.team3082.chicken_planner.ChickenPlannerApplication \
+            --type app-image
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ChickenPlanner-${{ matrix.os }}
+          path: out/ChickenPlanner
