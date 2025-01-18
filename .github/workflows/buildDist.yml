@@ -51,6 +51,8 @@ jobs:
         with:
           java-version: '23.0.1'
           distribution: 'temurin'
+      - name: debug print COMMIT_SHORT_SHA
+        run: echo "COMMIT_SHORT_SHA=${{ needs.build.outputs.COMMIT_SHORT_SHA }}"
       - name: Package with jpackage
         run: |
           jpackage \
