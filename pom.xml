@@ -5,7 +5,7 @@
 
     <groupId>org.team3082.chicken_planner</groupId>
     <artifactId>chicken_planner</artifactId>
-    <version>OpenSourceRelease</version>
+    <version>${revision}</version>
 
     <properties>
         <maven.compiler.source>23</maven.compiler.source>
