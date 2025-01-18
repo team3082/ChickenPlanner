@@ -54,16 +54,23 @@ jobs:
         with:
           java-version: '23.0.1'
           distribution: 'temurin'
-      - name: debug print COMMIT_SHORT_SHA
-        run: echo "COMMIT_SHORT_SHA=${{ needs.build.outputs.COMMIT_SHORT_SHA }}"
       - name: Package with jpackage
         run: |
-          jpackage \
-            --input target \
-            --name ChickenPlanner \
-            --main-jar chicken_planner-${{ needs.build.outputs.COMMIT_SHORT_SHA }}.jar \
-            --main-class org.team3082.chicken_planner.ChickenPlannerApplication \
-            --type app-image
+          if ($env:OS -eq 'Windows_NT') {
+            jpackage `
+              --input target `
+              --name ChickenPlanner `
+              --main-jar chicken_planner-${{ needs.build.outputs.COMMIT_SHORT_SHA }}.jar `
+              --main-class org.team3082.chicken_planner.ChickenPlannerApplication `
+              --type app-image
+          } else {
+            jpackage \
+              --input target \
+              --name ChickenPlanner \
+              --main-jar chicken_planner-${{ needs.build.outputs.COMMIT_SHORT_SHA }}.jar \
+              --main-class org.team3082.chicken_planner.ChickenPlannerApplication \
+              --type app-image
+          }
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
