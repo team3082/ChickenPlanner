@@ -13,9 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Calculate short commit hash
+        id: set_commit_sha
         run: |
-            calculatedSha=$(git rev-parse --short ${{ github.sha }})
-            echo "COMMIT_SHORT_SHA=$calculatedSha" >> $GITHUB_ENV
+          calculatedSha=$(git rev-parse --short ${{ github.sha }})
+          echo "COMMIT_SHORT_SHA=$calculatedSha" >> $GITHUB_ENV
+          echo "::set-output name=COMMIT_SHORT_SHA::$calculatedSha"
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
@@ -39,10 +41,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Calculate short commit hash
-        run: |
-          calculatedSha=$(git rev-parse --short ${{ github.sha }})
-          echo "COMMIT_SHORT_SHA=$calculatedSha" >> $GITHUB_ENV
       - name: Download build artifacts
         uses: actions/download-artifact@v3
         with:
@@ -58,7 +56,7 @@ jobs:
           jpackage \
             --input target \
             --name ChickenPlanner \
-            --main-jar chicken_planner-${{ env.COMMIT_SHORT_SHA }}.jar \
+            --main-jar chicken_planner-${{ needs.build.outputs.COMMIT_SHORT_SHA }}.jar \
             --main-class org.team3082.chicken_planner.ChickenPlannerApplication \
             --type app-image
       - name: Upload artifact
