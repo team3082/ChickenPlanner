@@ -10,6 +10,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    outputs:
+      COMMIT_SHORT_SHA: ${{ steps.set_commit_sha.outputs.COMMIT_SHORT_SHA }}
+
     steps:
       - uses: actions/checkout@v4
       - name: Calculate short commit hash
