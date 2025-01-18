@@ -18,9 +18,30 @@ Help us make ChickenPlanner even better by reporting bugs, discussing new featur
 ## 📥 Installation
 
 ## Installation
-Download the most recent App release from the distrubtions folder
-    
+
+### Releases
+To download the latest build navigate yourself to the [Releases](https://github.com/team3082/ChickenPlanner/releases) to download platform builds. [^1]
+
+### Unstable builds
+For unstable builds navigate to the [Actions](https://github.com/team3082/ChickenPlanner/actions) and download the JAR artifact from a commit of your choice.    [^1]
+
 ---
+
+## 🚧 Building
+
+1. **Clone the Repository**
+    ```bash
+    git clone git@github.com:team3082/ChickenPlanner.git && cd ChickenPlanner
+    ```
+2. **Build the Project**
+    ```bash
+    mvn -Drevision=<build version> package
+    ```
+   
+3. **Run the Application**
+    ```bash
+    java -jar target/ChickenPlanner-<build version>.jar
+    ```
 
 ## 🛠️ Usage
 
@@ -68,3 +89,4 @@ ChickenPlanner is licensed under the [MIT License](LICENSE). Feel free to use it
 
 Join the journey and help make ChickenPlanner the best tool it can be! 🐔
 
+[^1]: Jar files need to be run using a JRE with java 23.0.1 or higher using the command ``java -var <jar path>``
