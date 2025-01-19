@@ -1,0 +1,42 @@
+@font-face {
+    font-family: "Inter", sans-serif;
+    src: url("fonts/Inter_Regular.ttf");
+}
+
+@font-face {
+    font-family: "Inter SemiBold", sans-serif;
+    font-weight: bold;
+    src: url("fonts/Inter_SemiBold.ttf");
+}
+
+.root {
+    -fx-background-color: -fx-secondary-surface;
+}
+
+Text {
+    -fx-fill: -fx-text;
+    -fx-font-family: "Inter";
+    -fx-font-size: 14px;
+}
+
+.title {
+    -fx-font-size: 40px;
+    -fx-font-family: "Inter SemiBold";
+    -fx-fill: -fx-text;
+}
+
+.subtitle {
+    -fx-font-size: 24px;
+    -fx-fill: -fx-secondary-text;
+}
+
+.h1 {
+    -fx-font-size: 20px;
+    -fx-font-family: "Inter SemiBold";
+    -fx-fill: -fx-text;
+}
+
+.action {
+    -fx-fill: -fx-accent-surface;
+    -fx-cursor: hand;
+}
