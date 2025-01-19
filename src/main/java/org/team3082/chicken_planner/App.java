@@ -29,8 +29,8 @@ public class App extends Application {
         // Creates the window container
         VBox window = new VBox();
         window.setPrefSize(Constants.UI.WINDOW_WIDTH, Constants.UI.WINDOW_HEIGHT);
-        Theme.load(Globals.theme);
-        window.getStyleClass().add(Globals.theme);
+        Theme.load(Globals.theme, window);
+        
         // Inits the landing scene with a window bar
         Scene landingScene = WindowBarNode.load(window, stage, new LandingPage(stage).returnContent());
 

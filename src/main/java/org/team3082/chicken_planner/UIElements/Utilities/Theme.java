@@ -3,6 +3,10 @@ package org.team3082.chicken_planner.UIElements.Utilities;
 import java.util.Map;
 import static java.util.Map.entry;
 
+import org.team3082.chicken_planner.Globals;
+
+import javafx.scene.layout.VBox;
+
 public class Theme {
     static Map<String, String> dark = Map.ofEntries(
             entry("surface", "#121019"),
@@ -108,7 +112,11 @@ public class Theme {
      * 
      * @param theme The desired theme to load.
      */
-    public static void load(String theme) {
+    public static void load(String theme, VBox root) {
+        root.getStyleClass().remove(Globals.theme);
+        root.getStyleClass().add(theme);
+        
+        Globals.themeProperty.set(theme);
         if (theme.equals("dark")) {
             current = dark;
         }
