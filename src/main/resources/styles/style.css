@@ -1,0 +1,110 @@
+@font-face {
+    font-family: "Inter", sans-serif;
+    src: url("../fonts/Inter_Regular.ttf");
+}
+
+@font-face {
+    font-family: "Inter SemiBold", sans-serif;
+    src: url("../fonts/Inter_SemiBold.ttf");
+}
+
+@font-face {
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+    src: url("../fonts/Inter_Bold.ttf");
+}
+
+Text {
+    -fx-fill: -fx-text;
+    -fx-font-family: "Inter";
+    -fx-font-size: 14px;
+}
+
+.window {
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 4px;
+    -fx-background-color: #00000000;
+    -fx-border-style: -fx-inactive 2px solid;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 4, 0.5, 0.0, 0.0);
+}
+
+.windowIsMaximized {
+    -fx-padding: 0px;
+}
+
+.windowBar {
+    -fx-padding: 0 0 0 16px;
+
+    -fx-background-color: -fx-surface;
+    -fx-border-radius: 8px 8px 0px 0px;
+    -fx-background-radius: 8px 8px 0px 0px;
+}
+
+.windowClose {
+    -fx-background-color: -fx-surface;
+    -fx-border-radius: 0px 8px 0px 0px;
+    -fx-background-radius: 0px 8px 0px 0px;
+    -fx-text-fill: -fx-text;
+    -fx-transition: -fx-background-color 0.3s;
+}
+
+.windowMaximize {
+    -fx-background-color: -fx-surface;
+    -fx-text-fill: -fx-text;
+    -fx-transition: -fx-background-color 0.3s;
+}
+
+.windowMinimize {
+    -fx-background-color: -fx-surface;
+    -fx-text-fill: -fx-text;
+    -fx-transition: -fx-background-color 0.3s;
+}
+
+.windowClose:hover {
+    -fx-background-color: -fx-error;
+}
+
+.windowMaximize:hover {
+    -fx-background-color: -fx-inactive;
+}
+
+.windowMinimize:hover {
+    -fx-background-color: -fx-inactive;
+}
+
+.windowTitle {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-fill: -fx-text;
+
+}
+
+.content {
+    -fx-background-color: -fx-secondary-surface;
+    -fx-padding: 32px;
+    -fx-border-radius: 0px 0px 8px 8px;
+    -fx-background-radius: 0px 0px 8px 8px;
+}
+
+.title {
+    -fx-font-size: 40px;
+    -fx-font-family: "Inter SemiBold";
+    -fx-fill: -fx-text;
+}
+
+.subtitle {
+    -fx-font-size: 24px;
+    -fx-fill: -fx-secondary-text;
+}
+
+.h1 {
+    -fx-font-size: 20px;
+    -fx-font-family: "Inter SemiBold";
+    -fx-fill: -fx-text;
+}
+
+.action {
+    -fx-fill: -fx-accent-surface;
+    -fx-cursor: hand;
+}

@@ -2,7 +2,6 @@ package org.team3082.chicken_planner.UIElements.Utilities;
 
 import java.awt.Color;
 import java.awt.image.LookupTable;
-import java.util.Arrays;
 
 
 public class ColorMapper
@@ -36,7 +35,10 @@ extends LookupTable {
             dest = new int[src.length];
         }
 
-        int[] newColor = (Arrays.equals(src, from) ? to : src);
+        to[3] = src[3];
+
+        int[] newColor = ((src[0] == from[0] && src[1] == from[1] && src[2] == from[2] && src[3] != 0) ? to : src);
+
         System.arraycopy(newColor, 0, dest, 0, newColor.length);
 
         return dest;

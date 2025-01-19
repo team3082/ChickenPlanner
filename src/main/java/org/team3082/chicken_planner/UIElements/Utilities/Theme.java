@@ -1,8 +1,5 @@
 package org.team3082.chicken_planner.UIElements.Utilities;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javafx.scene.layout.Pane;
@@ -84,9 +81,33 @@ public class Theme {
             entry("overlay", "#1a1b2633"),
             entry("accent-surface", "#a754ff"));
 
-    public static Map<String, String> current = light;
+    static Map<String, String> catpuccinLatte = Map.ofEntries(
+            entry("surface", "#dce0e8"),
+            entry("secondary-surface", "#bcc0cc"),
+            entry("transparent-surface", "#dce0e8b3"),
+            entry("text", "#4c4f69"),
+            entry("secondary-text", "#5c5f77"),
+            entry("error", "#d20f39"),
+            entry("accent", "#dc8a78"),
+            entry("inactive", "#6c6f85"),
+            entry("overlay", "#dce0e833"),
+            entry("accent-surface", "#dc8a78"));
 
-    public static void load(String theme, Pane root) {
+    static Map<String, String> catpuccinMocha = Map.ofEntries(
+            entry("surface", "#11111b"),
+            entry("secondary-surface", "#181825"),
+            entry("transparent-surface", "#11111bB3"),
+            entry("text", "#cdd6f4"),
+            entry("secondary-text", "#bac2de"),
+            entry("error", "#f38ba8"),
+            entry("accent", "#f5e0dc"),
+            entry("inactive", "#a6adc8"),
+            entry("overlay", "#11111b33"),
+            entry("accent-surface", "#f5e0dc"));
+
+    public static Map<String, String> current;
+
+    public static void load(String theme) {
         if (theme.equals("dark")) {
             current = dark;
         }
@@ -105,9 +126,15 @@ public class Theme {
         if (theme.equals("tokyo")) {
             current = tokyo;
         }
-        current.forEach((k, v) -> {
+        if (theme.equals("catpuccinLatte")) {
+            current = catpuccinLatte;
+        }
+        if (theme.equals("catpuccinMocha")) {
+            current = catpuccinMocha;
+        }
+        /*current.forEach((k, v) -> {
             root.setStyle("-fx-" + k + " : " + v + ";");
-        });
+        });*/
     }
 
 }

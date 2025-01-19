@@ -3,11 +3,8 @@ package org.team3082.chicken_planner.UIElements.CustomNodes;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -19,6 +16,7 @@ public class WindowBarNode extends HBox {
     private double xOffset = 0;
     private double yOffset = 0;
 
+    @SuppressWarnings("OverridableMethodCallInConstructor")
     public WindowBarNode() {
         setOnMousePressed(event -> {
             xOffset = event.getSceneX();
@@ -36,13 +34,13 @@ public class WindowBarNode extends HBox {
         minimize = new Button("-");
 
         // Exit button action
-        exitButton.setOnAction((event) -> {
+        exitButton.setOnAction(_ -> {
             Stage stage = (Stage) getScene().getWindow();
             stage.close();
         });
 
         // Maximize button action
-        maxButton.setOnAction((event) -> {
+        maxButton.setOnAction(_ -> {
             Stage stage = (Stage) getScene().getWindow();
             if (stage.isMaximized()) {
                 stage.setMaximized(false); // Unmaximize
@@ -52,7 +50,7 @@ public class WindowBarNode extends HBox {
         });
 
         // Minimize button action
-        minimize.setOnAction((event) -> {
+        minimize.setOnAction(_ -> {
             Stage stage = (Stage) getScene().getWindow();
             stage.setIconified(true); // Minimize the window
         });
