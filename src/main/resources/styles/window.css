@@ -1,0 +1,93 @@
+.window {
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 4px;
+    -fx-background-color: #00000000;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 4, 0.5, 0.0, 0.0);
+}
+
+.windowIsMaximized {
+    -fx-padding: 0px;
+}
+
+.windowBar {
+    -fx-padding: 0 0 0 16px;
+
+    -fx-border-color: -fx-inactive;
+    -fx-border-width: 1px 1px 0px 1px;
+    -fx-border-style: solid;
+
+    -fx-background-color: -fx-surface;
+    -fx-border-radius: 8px 8px 0px 0px;
+    -fx-background-radius: 8px 8px 0px 0px;
+}
+
+.windowClose {
+    -fx-background-color: -fx-surface;
+    -fx-border-radius: 0px 8px 0px 0px;
+    -fx-background-radius: 0px 8px 0px 0px;
+    -fx-text-fill: -fx-text;
+    -fx-transition: -fx-background-color 0.3s;
+}
+
+.windowMaximize {
+    -fx-background-color: -fx-surface;
+    -fx-text-fill: -fx-text;
+    -fx-transition: -fx-background-color 0.3s;
+}
+
+.windowMinimize {
+    -fx-background-color: -fx-surface;
+    -fx-text-fill: -fx-text;
+    -fx-transition: -fx-background-color 0.3s;
+}
+
+.windowClose:hover {
+    -fx-background-color: -fx-error;
+}
+
+.windowMaximize:hover {
+    -fx-background-color: -fx-inactive;
+}
+
+.windowMinimize:hover {
+    -fx-background-color: -fx-inactive;
+}
+
+.windowTitle {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-fill: -fx-text;
+
+}
+
+.content {
+    -fx-background-color: -fx-secondary-surface;
+    -fx-padding: 32px;
+    -fx-border-radius: 0px 0px 8px 8px;
+    -fx-background-radius: 0px 0px 8px 8px;
+
+    -fx-border-color: -fx-inactive;
+    -fx-border-width: 0px 1px 1px 1px;
+    -fx-border-style: solid;
+}
+
+.default {
+    -fx-seasalt: #F7F7F7;
+    -fx-periwinkle: #C6BEFC;
+    -fx-cornflower: #688CDB;
+    -fx-resolution: #32327C;
+    -fx-penn: #0C0C3B;
+
+    -fx-surface: #F7F7F7;
+    -fx-secondary-surface: #E9E9E9;
+    -fx-transparent-surface: #F7F7F766;
+    -fx-text: #1C1B1F;
+    -fx-secondary-text: #3F3D45;
+
+    -fx-error: #FF4A4A;
+    -fx-accent: #32327C;
+    -fx-inactive: #9C96AE;
+    -fx-overlay: #F7F7F733;
+    -fx-accent-surface: #32327C;
+}

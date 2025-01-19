@@ -1,72 +1,112 @@
 package org.team3082.chicken_planner.UIElements.CustomNodes;
 
-import javafx.geometry.Insets;
+import org.team3082.chicken_planner.UIElements.Utilities.Icon;
+
+import com.catwithawand.borderlessscenefx.scene.BorderlessScene;
+
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
-public class WindowBarNode extends HBox {
-    Button exitButton;
-    Button maxButton;
-    Button minimize;
+public class WindowBarNode {
+    /**
+     * Loads a scene including the window bar and the contents of the scene.
+     * 
+     * @param root  The root of the overall scene - the "window frame".
+     * @param stage The current stage.
+     * @param page  The content to be displayed.
+     * @return
+     */
+    public static Scene load(VBox root, Stage stage, Parent page) {
+        root.setAlignment(Pos.TOP_CENTER);
+        root.getStyleClass().removeAll();
+        root.getStyleClass().addAll("window");
+        
 
-    private double xOffset = 0;
-    private double yOffset = 0;
+        // A close button
+        Button closeButton = new Button();
+        {
+            Icon close = new Icon();
+            ImageView closeIcon = close.get("icons/x.svg", 12, "text");
+            closeButton.setGraphic(closeIcon);
+            closeButton.setOnAction(_ -> stage.close());
+            closeButton.getStyleClass().add("windowClose");
+            closeButton.setPrefSize(48, 48);
+        }
 
-    @SuppressWarnings("OverridableMethodCallInConstructor")
-    public WindowBarNode() {
-        setOnMousePressed(event -> {
-            xOffset = event.getSceneX();
-            yOffset = event.getSceneY();
-        });
+        // A maximize button
+        Button maxButton = new Button();
+        {
+            Icon max = new Icon();
+            ImageView maxIcon = max.get("icons/maximize.svg", 12, "text");
+            maxButton.setGraphic(maxIcon);
+            maxButton.getStyleClass().add("windowMaximize");
+            maxButton.setPrefSize(48, 48);
+        }
 
-        setOnMouseDragged(event -> {
-            ((Stage) getScene().getWindow()).setX(event.getScreenX() - xOffset);
-            ((Stage) getScene().getWindow()).setY(event.getScreenY() - yOffset);
-        });
+        // A minimize button
+        Button minButton = new Button();
+        {
+            Icon min = new Icon();
+            ImageView minIcon = min.get("icons/minus.svg", 12, "text");
+            minButton.setGraphic(minIcon);
+            minButton.getStyleClass().add("windowMinimize");
+            minButton.setPrefSize(48, 48);
+        }
 
+        Text title = new Text("ChickenPlanner");
+        {
+            title.getStyleClass().add("windowTitle");
+        }
 
-        exitButton = new Button("X");
-        maxButton = new Button("[]");
-        minimize = new Button("-");
+        HBox controls = new HBox(minButton, maxButton, closeButton); // the window controls container
 
-        // Exit button action
-        exitButton.setOnAction(_ -> {
-            Stage stage = (Stage) getScene().getWindow();
-            stage.close();
-        });
+        Region spacer = new Region(); // To have the title float left and the controls float right
+        HBox.setHgrow(spacer, Priority.ALWAYS); // Make the spacer Region expand as much as possible
 
-        // Maximize button action
-        maxButton.setOnAction(_ -> {
-            Stage stage = (Stage) getScene().getWindow();
-            if (stage.isMaximized()) {
-                stage.setMaximized(false); // Unmaximize
+        // Our top bar
+        var topBar = new HBox(title, spacer, controls);
+        topBar.setMinHeight(48);
+        topBar.getStyleClass().add("windowBar");
+        topBar.setAlignment(Pos.CENTER_RIGHT);
+
+        // The content to be displayed in the window
+        VBox content = new VBox(page);
+        VBox.setVgrow(content, Priority.ALWAYS);
+        content.getStyleClass().addAll("content");
+        content.setAlignment(Pos.CENTER);
+
+        // Add children to scene
+        root.getChildren().addAll(topBar, content);
+
+        // Create the BorderlessScene scene
+        BorderlessScene scene = new BorderlessScene(stage, StageStyle.TRANSPARENT, root,
+                Color.TRANSPARENT);
+        maxButton.setOnAction(_ -> scene.maximizeStage());
+        minButton.setOnAction(_ -> scene.minimizeStage());
+
+        // Make the top bar draggable, so we can move the stage
+        scene.setMoveControl(topBar);
+
+        // check to see if the window is maximized; removes drop shadow if so.
+        scene.maximizedProperty().addListener((_, _, newValue) -> {
+            if (newValue) {
+                root.getStyleClass().add("windowIsMaximized");
             } else {
-                stage.setMaximized(true); // Maximize
+                root.getStyleClass().remove("windowIsMaximized");
             }
         });
 
-        // Minimize button action
-        minimize.setOnAction(_ -> {
-            Stage stage = (Stage) getScene().getWindow();
-            stage.setIconified(true); // Minimize the window
-        });
-
-        getChildren().addAll(addTitleText(), new Region(), minimize, maxButton, exitButton);
-
-        setId("NavigationBar");
-
-        setPrefHeight(30);
-        setAlignment(Pos.CENTER_LEFT);
-    }
-
-    public Text addTitleText() {
-        Text titleText = new Text("Chicken Planner");
-        HBox.setMargin(titleText, new Insets(0, 0, 0, 8));
-        titleText.setId("TitleText");
-        return titleText;
+        return scene;
     }
 }

@@ -1,0 +1,158 @@
+.dark {
+    -fx-seasalt: #F7F7F7;
+    -fx-periwinkle: #C6BEFC;
+    -fx-cornflower: #688CDB;
+    -fx-resolution: #32327C;
+    -fx-penn: #0C0C3B;
+
+    -fx-surface: #121019;
+    -fx-secondary-surface: #1F1B2B;
+    -fx-transparent-surface: #121019B3;
+    -fx-text: #F7F7F7;
+    -fx-secondary-text: #BDBDBD;
+
+    -fx-error: #FF4A4A;
+    -fx-accent: #688CDB;
+    -fx-inactive: #625C75;
+    -fx-overlay: #12101933;
+    -fx-accent-surface: #688CDB;
+}
+
+.light {
+    -fx-seasalt: #F7F7F7;
+    -fx-periwinkle: #C6BEFC;
+    -fx-cornflower: #688CDB;
+    -fx-resolution: #32327C;
+    -fx-penn: #0C0C3B;
+
+    -fx-surface: #F7F7F7;
+    -fx-secondary-surface: #E9E9E9;
+    -fx-transparent-surface: #F7F7F766;
+    -fx-text: #1C1B1F;
+    -fx-secondary-text: #3F3D45;
+
+    -fx-error: #FF4A4A;
+    -fx-accent: #32327C;
+    -fx-inactive: #9C96AE;
+    -fx-overlay: #F7F7F733;
+    -fx-accent-surface: #32327C;
+}
+
+.og {
+    -fx-seasalt: #F7F7F7;
+    -fx-periwinkle: #C6BEFC;
+    -fx-cornflower: #688CDB;
+    -fx-resolution: #32327C;
+    -fx-penn: #0C0C3B;
+
+    -fx-surface: #32327C;
+    -fx-secondary-surface: #807FFF;
+    -fx-transparent-surface: #121019B3;
+    -fx-text: #F7F7F7;
+    -fx-secondary-text: #E5E5E5;
+    -fx-error: #FF4A4A;
+    -fx-accent: #6D6DD2;
+    -fx-inactive: #807FFF;
+    -fx-overlay: #12101933;
+    -fx-accent-surface: #32327C;
+}
+
+.dracula {
+    -fx-seasalt: #F7F7F7;
+    -fx-periwinkle: #C6BEFC;
+    -fx-cornflower: #688CDB;
+    -fx-resolution: #32327C;
+    -fx-penn: #0C0C3B;
+
+    -fx-surface: #282A36;
+    -fx-secondary-surface: #44475A;
+    -fx-transparent-surface: #282A36B3;
+    -fx-text: #F8F8F2;
+    -fx-secondary-text: #CCC4C4;
+
+    -fx-error: #FF4A4A;
+    -fx-accent: #FF79C6;
+    -fx-inactive: #44475A;
+    -fx-overlay: #282A3633;
+    -fx-accent-surface: #FF79C6;
+}
+
+.github {
+    -fx-seasalt: #F7F7F7;
+    -fx-periwinkle: #C6BEFC;
+    -fx-cornflower: #688CDB;
+    -fx-resolution: #32327C;
+    -fx-penn: #0C0C3B;
+
+    -fx-surface: #0D1117;
+    -fx-secondary-surface: #161B22;
+    -fx-transparent-surface: #0D1117B3;
+    -fx-text: #ECF2F8;
+    -fx-secondary-text: #C6CDD5;
+
+    -fx-error: #FF4A4A;
+    -fx-accent: #77BDFB;
+    -fx-inactive: #21262D;
+    -fx-overlay: #0D111733;
+    -fx-accent-surface: #77BDFB;
+}
+
+.tokyo {
+    -fx-seasalt: #F7F7F7;
+    -fx-periwinkle: #C6BEFC;
+    -fx-cornflower: #688CDB;
+    -fx-resolution: #32327C;
+    -fx-penn: #0C0C3B;
+
+    -fx-surface: #1a1b26;
+    -fx-secondary-surface: #24283b;
+    -fx-transparent-surface: #1a1b26B3;
+    -fx-text: #a9b1d6;
+    -fx-secondary-text: #9aa5ce;
+
+    -fx-error: #f7768e;
+    -fx-accent: #7aa2f7;
+    -fx-inactive: #414868;
+    -fx-overlay: #1a1b2633;
+    -fx-accent-surface: #7aa2f7;
+}
+
+.catppuccinLatte {
+    -fx-seasalt: #F7F7F7;
+    -fx-periwinkle: #C6BEFC;
+    -fx-cornflower: #688CDB;
+    -fx-resolution: #32327C;
+    -fx-penn: #0C0C3B;
+
+    -fx-surface: #eff1f5;
+    -fx-secondary-surface: #e6e9ef;
+    -fx-transparent-surface: #eff1f5b3;
+    -fx-text: #4c4f69;
+    -fx-secondary-text: #5c5f77;
+
+    -fx-error: #d20f39;
+    -fx-accent: #dd7878;
+    -fx-inactive: #6c6f85;
+    -fx-overlay: #eff1f533;
+    -fx-accent-surface: #dd7878;
+}
+
+.catppuccinMocha {
+    -fx-seasalt: #F7F7F7;
+    -fx-periwinkle: #C6BEFC;
+    -fx-cornflower: #688CDB;
+    -fx-resolution: #32327C;
+    -fx-penn: #0C0C3B;
+
+    -fx-surface: #1e2030;
+    -fx-secondary-surface: #24273a;
+    -fx-transparent-surface: #1e2030b3;
+    -fx-text: #cdd6f4;
+    -fx-secondary-text: #bac2de;
+
+    -fx-error: #f38ba8;
+    -fx-accent: #f0c6c6;
+    -fx-inactive: #494d64;
+    -fx-overlay: #1e203033;
+    -fx-accent-surface: #f0c6c6;
+}

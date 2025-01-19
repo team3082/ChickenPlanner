@@ -1,9 +1,6 @@
 package org.team3082.chicken_planner.UIElements.Utilities;
 
 import java.util.Map;
-
-import javafx.scene.layout.Pane;
-
 import static java.util.Map.entry;
 
 public class Theme {
@@ -33,7 +30,6 @@ public class Theme {
             entry("accent-surface", "#32327C"));
 
     static Map<String, String> og = Map.ofEntries(
-
             entry("surface", "#32327C"),
             entry("secondary-surface", "#807FFF"),
             entry("transparent-surface", "#121019B3"),
@@ -76,37 +72,42 @@ public class Theme {
             entry("text", "#a9b1d6"),
             entry("secondary-text", "#9aa5ce"),
             entry("error", "#f7768e"),
-            entry("accent", "#a754ff"),
+            entry("accent", "#7aa2f7"),
             entry("inactive", "#414868"),
             entry("overlay", "#1a1b2633"),
-            entry("accent-surface", "#a754ff"));
+            entry("accent-surface", "#7aa2f7"));
 
-    static Map<String, String> catpuccinLatte = Map.ofEntries(
-            entry("surface", "#dce0e8"),
-            entry("secondary-surface", "#bcc0cc"),
-            entry("transparent-surface", "#dce0e8b3"),
+    static Map<String, String> catppuccinLatte = Map.ofEntries(
+            entry("surface", "#eff1f5"),
+            entry("secondary-surface", "#e6e9ef"),
+            entry("transparent-surface", "#eff1f5b3"),
             entry("text", "#4c4f69"),
             entry("secondary-text", "#5c5f77"),
             entry("error", "#d20f39"),
-            entry("accent", "#dc8a78"),
+            entry("accent", "#dd7878"),
             entry("inactive", "#6c6f85"),
-            entry("overlay", "#dce0e833"),
-            entry("accent-surface", "#dc8a78"));
+            entry("overlay", "#eff1f533"),
+            entry("accent-surface", "#dd7878"));
 
-    static Map<String, String> catpuccinMocha = Map.ofEntries(
-            entry("surface", "#11111b"),
-            entry("secondary-surface", "#181825"),
-            entry("transparent-surface", "#11111bB3"),
+    static Map<String, String> catppuccinMocha = Map.ofEntries(
+            entry("surface", "#1e2030"),
+            entry("secondary-surface", "#24273a"),
+            entry("transparent-surface", "#1e2030b3"),
             entry("text", "#cdd6f4"),
             entry("secondary-text", "#bac2de"),
             entry("error", "#f38ba8"),
-            entry("accent", "#f5e0dc"),
-            entry("inactive", "#a6adc8"),
-            entry("overlay", "#11111b33"),
-            entry("accent-surface", "#f5e0dc"));
+            entry("accent", "#f0c6c6"),
+            entry("inactive", "#494d64"),
+            entry("overlay", "#1e203033"),
+            entry("accent-surface", "#f0c6c6"));
 
-    public static Map<String, String> current;
+    public static Map<String, String> current = dark;
 
+    /**
+     * Loads the desired theme.
+     * 
+     * @param theme The desired theme to load.
+     */
     public static void load(String theme) {
         if (theme.equals("dark")) {
             current = dark;
@@ -126,11 +127,11 @@ public class Theme {
         if (theme.equals("tokyo")) {
             current = tokyo;
         }
-        if (theme.equals("catpuccinLatte")) {
-            current = catpuccinLatte;
+        if (theme.equals("catppuccinLatte")) {
+            current = catppuccinLatte;
         }
-        if (theme.equals("catpuccinMocha")) {
-            current = catpuccinMocha;
+        if (theme.equals("catppuccinMocha")) {
+            current = catppuccinMocha;
         }
         /*current.forEach((k, v) -> {
             root.setStyle("-fx-" + k + " : " + v + ";");

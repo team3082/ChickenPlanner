@@ -2,16 +2,10 @@ package org.team3082.chicken_planner.UIElements;
 
 import java.io.File;
 
-import org.team3082.chicken_planner.Constants;
-import static org.team3082.chicken_planner.Constants.UI.WINDOW_WIDTH;
-import org.team3082.chicken_planner.Globals;
 import org.team3082.chicken_planner.UIElements.Utilities.Icon;
-import org.team3082.chicken_planner.UIElements.Utilities.Theme;
 
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -36,12 +30,16 @@ public class LandingPage extends Parent {
         this.stage = stage; // Keep a reference to the stage
 
         root = new VBox();
-        Theme.load(Globals.theme);
-
+        
         HBox hBox = createContentLayout();
         root.getChildren().add(hBox);
     }
 
+    /**
+     * Returns the root node of this scene.
+     * 
+     * @return The root node of the scene.
+     */
     public VBox returnContent() {
         return root;
     }

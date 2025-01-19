@@ -10,6 +10,12 @@ extends LookupTable {
     private final int[] from;
     private final int[] to;
 
+    /**
+     * Creates a ColorMapper object that allows for recoloring a BufferedImage.
+     * 
+     * @param from The color to change from.
+     * @param to The color to change to.
+     */
     public ColorMapper(Color from,
                        Color to) {
         super(0, 4);
