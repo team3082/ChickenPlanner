@@ -62,9 +62,9 @@ jobs:
             --name ChickenPlanner \
             --main-jar chicken_planner-${{ needs.build.outputs.COMMIT_SHORT_SHA }}.jar \
             --main-class org.team3082.chicken_planner.ChickenPlannerApplication \
-            --type deb
-            --linux-package-name "Chicken Planner"
-            --linux-shortcut
+            --type deb \
+            --linux-package-name "Chicken Planner" \
+            --linux-shortcut \
             -d out
       - name: Package with jpackage (Windows)
         if: runner.os == 'Windows'
@@ -74,21 +74,21 @@ jobs:
             --name ChickenPlanner `
             --main-jar chicken_planner-${{ needs.build.outputs.COMMIT_SHORT_SHA }}.jar `
             --main-class org.team3082.chicken_planner.ChickenPlannerApplication `
-            --type msi
-            --win-dir-chooser
-            --win-help-url https://github.com/team3082/ChickenPlanner/issues
-            --win-per-user-install
-            --win-shortcut-prompt
+            --type msi `
+            --win-dir-chooser `
+            --win-help-url https://github.com/team3082/ChickenPlanner/issues `
+            --win-per-user-install `
+            --win-shortcut-prompt `
             -d out
       - name: Package with jpackage (Mac)
         if: runner.os == 'MacOS'
         run: |
-          jpackage `
-            --input target `
-            --name ChickenPlanner `
-            --main-jar chicken_planner-${{ needs.build.outputs.COMMIT_SHORT_SHA }}.jar `
-            --main-class org.team3082.chicken_planner.ChickenPlannerApplication `
-            --type dmg
+          jpackage \
+            --input target \
+            --name ChickenPlanner \
+            --main-jar chicken_planner-${{ needs.build.outputs.COMMIT_SHORT_SHA }}.jar \
+            --main-class org.team3082.chicken_planner.ChickenPlannerApplication \
+            --type dmg \
             -d out
       - name: Upload artifact
         uses: actions/upload-artifact@v3
