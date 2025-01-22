@@ -63,7 +63,6 @@ jobs:
             --main-jar chicken_planner-${{ needs.build.outputs.COMMIT_SHORT_SHA }}.jar \
             --main-class org.team3082.chicken_planner.ChickenPlannerApplication \
             --type deb \
-            --linux-package-name "Chicken Planner" \
             --linux-shortcut \
             -d out
       - name: Package with jpackage (Windows)
