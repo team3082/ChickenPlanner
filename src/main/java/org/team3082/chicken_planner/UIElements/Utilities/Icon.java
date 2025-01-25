@@ -17,8 +17,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelBuffer;
 import javafx.scene.image.PixelFormat;
 import javafx.scene.image.WritableImage;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 
-public class Icon {
+public class Icon extends StackPane {
     /**
      * Gets an svg icon as an ImageView quickly.
      * 
@@ -27,7 +30,7 @@ public class Icon {
      * @param color The desired color of the svg.
      * @return An ImageView containing the icon.
      */
-    public ImageView get(String path, int width, String color) {
+    public ImageView get(String path, int width, Rectangle colorChecker) {
         // Loads the actual SVG document from resources.
         SVGLoader loader = new SVGLoader();
         var svgUrl = getClass().getResource("/" + path);
@@ -47,6 +50,7 @@ public class Icon {
         // Replaces color to themed-color
 
         java.awt.Color from = java.awt.Color.decode("#000000");
+        Paint paint = colorChecker.getFill();
         java.awt.Color to = java.awt.Color.decode(Theme.current.get(color));
         BufferedImageOp lookup = new LookupOp(new ColorMapper(from, to), null);
         BufferedImage convertedImage = lookup.filter(image, null);

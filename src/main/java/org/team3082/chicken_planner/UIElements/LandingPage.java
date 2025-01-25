@@ -3,12 +3,14 @@ package org.team3082.chicken_planner.UIElements;
 import java.io.File;
 
 import org.team3082.chicken_planner.UIElements.Utilities.Icon;
+import org.team3082.chicken_planner.Globals;
 
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
@@ -17,9 +19,9 @@ import javafx.stage.Stage;
  * Represents the landing scene for the Chicken Planner application.
  * Displays a logo and various project links for user interaction.
  */
-public class LandingPage extends Parent {
-    private final VBox root;
+public class LandingPage extends VBox {
     private final Stage stage;
+    private final Rectangle accentSurfaceColorChecker;
 
     /**
      * Constructs the LandingScene with specified dimensions from Constants.
@@ -28,20 +30,14 @@ public class LandingPage extends Parent {
     public LandingPage(Stage stage) {
         super();
         this.stage = stage; // Keep a reference to the stage
-
-        root = new VBox();
+        
+        accentSurfaceColorChecker = new Rectangle(0, 0, 0, 0);
+        accentSurfaceColorChecker.getStyleClass().add("accent-surface-checker");
+        accentSurfaceColorChecker.setManaged(false);
+        accentSurfaceColorChecker.setVisible(false);
         
         HBox hBox = createContentLayout();
-        root.getChildren().add(hBox);
-    }
-
-    /**
-     * Returns the root node of this scene.
-     * 
-     * @return The root node of the scene.
-     */
-    public VBox returnContent() {
-        return root;
+        getChildren().add(hBox);
     }
 
     /**
@@ -165,23 +161,30 @@ public class LandingPage extends Parent {
      * Opens a DirectoryChooser dialog when "Open Project" is clicked.
      */
     private void openDirectoryChooser() {
-        DirectoryChooser directoryChooser = new DirectoryChooser();
-        directoryChooser.setTitle("Open Project Directory");
 
-        // Optional: Set an initial directory if needed
-        File initialDirectory = new File(System.getProperty("user.home"));
-        directoryChooser.setInitialDirectory(initialDirectory);
-
-        // Show the directory chooser and capture the selected directory
-        File selectedDirectory = directoryChooser.showDialog(stage);
-
-        if (selectedDirectory != null) {
-            // Handle the selected directory
-            System.out.println("Directory selected: " + selectedDirectory.getAbsolutePath());
+        if(Globals.themeProperty.getValue().equals("tokyo")){
+            Globals.themeProperty.set("catppuccinLa0tte");
         } else {
-            // Handle the case when no directory is selected (dialog is closed without
-            // selection)
-            System.out.println("No directory selected");
+            Globals.themeProperty.set("tokyo");
         }
+
+    //     DirectoryChooser directoryChooser = new DirectoryChooser();
+    //     directoryChooser.setTitle("Open Project Directory");
+
+    //     // Optional: Set an initial directory if needed
+    //     File initialDirectory = new File(System.getProperty("user.home"));
+    //     directoryChooser.setInitialDirectory(initialDirectory);
+
+    //     // Show the directory chooser and capture the selected directory
+    //     File selectedDirectory = directoryChooser.showDialog(stage);
+
+    //     if (selectedDirectory != null) {
+    //         // Handle the selected directory
+    //         System.out.println("Directory selected: " + selectedDirectory.getAbsolutePath());
+    //     } else {
+    //         // Handle the case when no directory is selected (dialog is closed without
+    //         // selection)
+    //         System.out.println("No directory selected");
+    //     }
     }
 }

@@ -1,0 +1,19 @@
+.root {
+    -fx-seasalt: #F7F7F7;
+    -fx-periwinkle: #C6BEFC;
+    -fx-cornflower: #688CDB;
+    -fx-resolution: #32327C;
+    -fx-penn: #0C0C3B;
+
+    -fx-surface: #0D1117;
+    -fx-secondary-surface: #161B22;
+    -fx-transparent-surface: #0D1117B3;
+    -fx-text: #ECF2F8;
+    -fx-secondary-text: #C6CDD5;
+
+    -fx-error: #FF4A4A;
+    -fx-accent: #77BDFB;
+    -fx-inactive: #21262D;
+    -fx-overlay: #0D111733;
+    -fx-accent-surface: #77BDFB;
+}
