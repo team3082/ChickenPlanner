@@ -1,7 +1,5 @@
 package org.team3082.chicken_planner.UIElements.CustomNodes;
 
-import org.team3082.chicken_planner.UIElements.Utilities.Icon;
-
 import com.catwithawand.borderlessscenefx.scene.BorderlessScene;
 
 import javafx.geometry.Pos;
@@ -36,8 +34,7 @@ public class WindowBarNode {
         // A close button
         Button closeButton = new Button();
         {
-            Icon close = new Icon();
-            ImageView closeIcon = close.get("icons/x.svg", 12, "text");
+            Icon closeIcon = new Icon("icons/x.svg", 12, "-fx-accent-surface");
             closeButton.setGraphic(closeIcon);
             closeButton.setOnAction(_ -> stage.close());
             closeButton.getStyleClass().add("windowClose");
@@ -47,8 +44,7 @@ public class WindowBarNode {
         // A maximize button
         Button maxButton = new Button();
         {
-            Icon max = new Icon();
-            ImageView maxIcon = max.get("icons/maximize.svg", 12, "text");
+            Icon maxIcon = new Icon("icons/maximize.svg", 12, "-fx-accent-surface");
             maxButton.setGraphic(maxIcon);
             maxButton.getStyleClass().add("windowMaximize");
             maxButton.setPrefSize(48, 48);
@@ -57,8 +53,7 @@ public class WindowBarNode {
         // A minimize button
         Button minButton = new Button();
         {
-            Icon min = new Icon();
-            ImageView minIcon = min.get("icons/minus.svg", 12, "text");
+            Icon minIcon = new Icon("icons/minus.svg", 12, "-fx-accent-surface");
             minButton.setGraphic(minIcon);
             minButton.getStyleClass().add("windowMinimize");
             minButton.setPrefSize(48, 48);

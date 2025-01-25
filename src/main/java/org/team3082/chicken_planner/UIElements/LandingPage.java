@@ -2,8 +2,8 @@ package org.team3082.chicken_planner.UIElements;
 
 import java.io.File;
 
-import org.team3082.chicken_planner.UIElements.Utilities.Icon;
 import org.team3082.chicken_planner.Globals;
+import org.team3082.chicken_planner.UIElements.CustomNodes.Icon;
 
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -50,9 +50,8 @@ public class LandingPage extends VBox {
         HBox hBox = new HBox(96);
         hBox.setAlignment(Pos.CENTER);
 
-        Icon logo = new Icon();
-        ImageView logoImageView = logo.get("assets/chicken.svg", 256, "accent-surface");
-        hBox.getChildren().add(logoImageView);
+        Icon logo = new Icon("assets/chicken.svg", 256, "-fx-accent-surface");
+        hBox.getChildren().add(logo);
 
         VBox projectsTextLayout = createProjectLayout();
         hBox.getChildren().add(projectsTextLayout);
@@ -90,8 +89,7 @@ public class LandingPage extends VBox {
                     newProjectLine.setAlignment(Pos.CENTER_LEFT);
 
                     Text newProjectText = createText("New project", "newProjectText", "action");
-                    Icon icon = new Icon();
-                    ImageView newProjectIcon = icon.get("icons/file-plus-2.svg", 14, "accent-surface");
+                    Icon newProjectIcon = new Icon("icons/file-plus-2.svg", 14, "-fx-accent-surface");
                     newProjectLine.getChildren().addAll(newProjectIcon, newProjectText);
                 }
 
@@ -100,8 +98,7 @@ public class LandingPage extends VBox {
                     openProjectLine.setAlignment(Pos.CENTER_LEFT);
 
                     Text openProjectText = createText("Open existing project", "openProjectText", "action");
-                    Icon icon = new Icon();
-                    ImageView openProjectIcon = icon.get("icons/file-input.svg", 14, "accent-surface");
+                    Icon openProjectIcon = new Icon("icons/file-input.svg", 14, "-fx-accent-surface");
                     openProjectLine.getChildren().addAll(openProjectIcon, openProjectText);
                 }
 
@@ -110,8 +107,7 @@ public class LandingPage extends VBox {
                     openDocumentationLine.setAlignment(Pos.CENTER_LEFT);
 
                     Text openDocumentationText = createText("View documentation", "openDocumentationText", "action");
-                    Icon icon = new Icon();
-                    ImageView openDocumentationIcon = icon.get("icons/book-open.svg", 14, "accent-surface");
+                    Icon openDocumentationIcon = new Icon("icons/book-open.svg", 14, "-fx-accent-surface");
                     openDocumentationLine.getChildren().addAll(openDocumentationIcon, openDocumentationText);
                 }
 
@@ -163,7 +159,7 @@ public class LandingPage extends VBox {
     private void openDirectoryChooser() {
 
         if(Globals.themeProperty.getValue().equals("tokyo")){
-            Globals.themeProperty.set("catppuccinLa0tte");
+            Globals.themeProperty.set("catppuccinLatte");
         } else {
             Globals.themeProperty.set("tokyo");
         }
