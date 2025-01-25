@@ -54,41 +54,8 @@ jobs:
         with:
           java-version: '23.0.1'
           distribution: 'temurin'
-      - name: Package with jpackage (Linux)
-        if: runner.os == 'Linux'
-        run: |
-          jpackage \
-            --input target \
-            --name ChickenPlanner \
-            --main-jar chicken_planner-${{ needs.build.outputs.COMMIT_SHORT_SHA }}.jar \
-            --main-class org.team3082.chicken_planner.ChickenPlannerApplication \
-            --type deb \
-            --linux-shortcut \
-            -d out
-      - name: Package with jpackage (Windows)
-        if: runner.os == 'Windows'
-        run: |
-          jpackage `
-            --input target `
-            --name ChickenPlanner `
-            --main-jar chicken_planner-${{ needs.build.outputs.COMMIT_SHORT_SHA }}.jar `
-            --main-class org.team3082.chicken_planner.ChickenPlannerApplication `
-            --type msi `
-            --win-dir-chooser `
-            --win-help-url https://github.com/team3082/ChickenPlanner/issues `
-            --win-per-user-install `
-            --win-shortcut-prompt `
-            -d out
-      - name: Package with jpackage (Mac)
-        if: runner.os == 'MacOS'
-        run: |
-          jpackage \
-            --input target \
-            --name ChickenPlanner \
-            --main-jar chicken_planner-${{ needs.build.outputs.COMMIT_SHORT_SHA }}.jar \
-            --main-class org.team3082.chicken_planner.ChickenPlannerApplication \
-            --type dmg \
-            -d out
+      - name: Package with Maven
+        run: mvn -B -Drevision=${{ needs.build.outputs.COMMIT_SHORT_SHA }} jpackage:jpackage --file pom.xml
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
