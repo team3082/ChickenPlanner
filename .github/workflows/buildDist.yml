@@ -23,11 +23,10 @@ jobs:
           repo: 'wix3'
           tag: 'wix3141rtm'
       - name: Extract Wix Toolset
-        uses: DuckSoft/extract-7z-action@v1.0
         if: matrix.os == 'windows-latest'
-        with:
-          pathSource: wix311-binaries.zip
-          pathTarget: ./target/wix
+        run: |
+          mkdir $env:USERPROFILE\target\wix
+          tar -xf wix311-binaries.zip -C $env:USERPROFILE\target\wix
       - name: Add Wix Toolset to path
         run: echo "$HOME/target/wix" >> $GITHUB_PATH
         if: matrix.os == 'windows-latest'
