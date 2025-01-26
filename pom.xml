@@ -21,6 +21,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <revision>1.0-SNAPSHOT</revision>
+        <!--Systemic version. Mirror version above but must not include text -->
+        <sysver>1.0</sysver>
     </properties>
     <profiles>
         <profile>
@@ -46,17 +48,16 @@
                                     <toolhome>${env.JAVA_HOME}</toolhome>
                                     <dest>./target/jpackage</dest>
                                     <name>ChickenPlanner</name>
-                                    <appversion>${project.version}</appversion>
+                                    <appversion>${sysver}</appversion>
                                     <description>A powerful, user-friendly trajectory planner designed for FRC teams</description>
                                     <vendor>Team 3082</vendor>
-                                    <icon>${project.basedir}/src/main/resources/AppIcon.png</icon>
+                                    <icon>${project.basedir}/src/main/resources/IconFile.ico</icon>
                                     <input>${project.build.directory}</input>
                                     <mainjar>${project.build.finalName}.jar</mainjar>
                                     <mainclass>org.team3082.chicken_planner.Main</mainclass>
                                     <licensefile>${project.basedir}/LICENSE</licensefile>
                                     <windirchooser>true</windirchooser>
                                     <winmenu>true</winmenu>
-                                    <winmenugroup>Team3082/ChickenPlanner</winmenugroup>
                                     <winperuserinstall>true</winperuserinstall>
                                     <winshortcut>true</winshortcut>
                                 </configuration>
