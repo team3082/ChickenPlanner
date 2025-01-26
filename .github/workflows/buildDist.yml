@@ -18,7 +18,7 @@ jobs:
         uses: i3h/download-release-asset@v1.3.3
         if: matrix.os == 'windows-latest'
         with:
-          file: 'wix311-binaries.zip'
+          file: 'wix314-binaries.zip'
           owner: 'wixtoolset'
           repo: 'wix3'
           tag: 'wix3141rtm'
@@ -26,7 +26,7 @@ jobs:
         if: matrix.os == 'windows-latest'
         run: |
           mkdir $env:USERPROFILE\target\wix
-          tar -xf wix311-binaries.zip -C $env:USERPROFILE\target\wix
+          Expand-Archive -Path wix314-binaries.zip -DestinationPath $env:USERPROFILE\target\wix
       - name: Add Wix Toolset to path
         run: echo "$HOME/target/wix" >> $GITHUB_PATH
         if: matrix.os == 'windows-latest'
