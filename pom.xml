@@ -7,6 +7,13 @@
     <artifactId>chicken_planner</artifactId>
     <version>${revision}</version>
 
+    <pluginRepositories>
+        <pluginRepository>
+            <id>local-repo</id>
+            <url>file://${project.basedir}\libs</url>
+        </pluginRepository>
+    </pluginRepositories>
+
     <properties>
         <maven.compiler.source>23</maven.compiler.source>
         <maven.compiler.target>23</maven.compiler.target>
@@ -107,8 +114,6 @@
                             <groupId>com.github.akman</groupId>
                             <artifactId>jpackage-maven-plugin</artifactId>
                             <version>0.1.6-SNAPSHOT</version>
-                            <scope>system</scope>
-                            <systemPath>${project.basedir}/libs/jpackage-maven-plugin-0.1.6-SNAPSHOT.jar</systemPath>
                         </dependency>
                     </dependencies>
                 </plugin>
