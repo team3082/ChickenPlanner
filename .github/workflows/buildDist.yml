@@ -32,12 +32,10 @@ jobs:
         if: matrix.os == 'windows-latest'
       - uses: actions/checkout@v4
       - name: Calculate short commit hash
-        id: set_commit_sha
         if: matrix.os == 'windows-latest'
         run: |
           git rev-parse --short ${{ github.sha }} | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
       - name: Calculate short commit hash (unix)
-        id: set_commit_sha
         if: matrix.os != 'windows-latest'
         run: |
           calculatedSha=$(git rev-parse --short ${{ github.sha }})
