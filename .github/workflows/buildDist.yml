@@ -1,4 +1,4 @@
-name: Java CI with Maven
+name: Build and Package
 
 on:
   push:
@@ -7,20 +7,36 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    outputs:
-      COMMIT_SHORT_SHA: ${{ steps.set_commit_sha.outputs.COMMIT_SHORT_SHA }}
+  build-and-package:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
+      - name: Download Wix Toolset
+        uses: i3h/download-release-asset@v1.3.3
+        if: matrix.os == 'windows-latest'
+        with:
+          file: 'wix311-binaries.zip'
+          owner: 'wixtoolset'
+          repo: 'wix3'
+          tag: 'wix3141rtm'
+      - name: Extract Wix Toolset
+        uses: DuckSoft/extract-7z-action@v1.0
+        if: matrix.os == 'windows-latest'
+        with:
+          pathSource: wix311-binaries.zip
+          pathTarget: ./target/wix
+      - name: Add Wix Toolset to path
+        run: echo "$HOME/target/wix" >> $GITHUB_PATH
+        if: matrix.os == 'windows-latest'
       - uses: actions/checkout@v4
       - name: Calculate short commit hash
         id: set_commit_sha
         run: |
           calculatedSha=$(git rev-parse --short ${{ github.sha }})
           echo "COMMIT_SHORT_SHA=$calculatedSha" >> $GITHUB_ENV
-          echo "::set-output name=COMMIT_SHORT_SHA::$calculatedSha"
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
@@ -28,36 +44,11 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build with Maven
-        run: mvn -B -Drevision=${{env.COMMIT_SHORT_SHA}} package --file pom.xml
+        run: mvn -B -Drevision=${{ env.COMMIT_SHORT_SHA }} package --file pom.xml
+      - name: Package with Maven
+        run: mvn -B -Drevision=${{ env.COMMIT_SHORT_SHA }} verify --file pom.xml
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: FullBuild
-          path: target
-
-  package:
-    runs-on: ${{ matrix.os }}
-    needs: build
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-
-    steps:
-      - uses: actions/checkout@v4
-      - name: Download build artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: FullBuild
-          path: target
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: '23.0.1'
-          distribution: 'temurin'
-      - name: Package with Maven
-        run: mvn -B -Drevision=${{ needs.build.outputs.COMMIT_SHORT_SHA }} jpackage:jpackage --file pom.xml
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
           name: ChickenPlanner-${{ matrix.os }}
-          path: out
+          path: target
