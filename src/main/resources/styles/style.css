@@ -41,3 +41,7 @@ Text {
     -fx-fill: -fx-accent-surface;
     -fx-cursor: hand;
 }
+
+.accent-surface-color {
+
+}

@@ -34,7 +34,7 @@ public class WindowBarNode {
         // A close button
         Button closeButton = new Button();
         {
-            Icon closeIcon = new Icon("icons/x.svg", 12, "-fx-accent-surface");
+            Icon closeIcon = new Icon("icons/x.svg", 12, "-fx-text");
             closeButton.setGraphic(closeIcon);
             closeButton.setOnAction(_ -> stage.close());
             closeButton.getStyleClass().add("windowClose");
@@ -44,7 +44,7 @@ public class WindowBarNode {
         // A maximize button
         Button maxButton = new Button();
         {
-            Icon maxIcon = new Icon("icons/maximize.svg", 12, "-fx-accent-surface");
+            Icon maxIcon = new Icon("icons/maximize.svg", 12, "-fx-text");
             maxButton.setGraphic(maxIcon);
             maxButton.getStyleClass().add("windowMaximize");
             maxButton.setPrefSize(48, 48);
@@ -53,7 +53,7 @@ public class WindowBarNode {
         // A minimize button
         Button minButton = new Button();
         {
-            Icon minIcon = new Icon("icons/minus.svg", 12, "-fx-accent-surface");
+            Icon minIcon = new Icon("icons/minus.svg", 12, "-fx-text");
             minButton.setGraphic(minIcon);
             minButton.getStyleClass().add("windowMinimize");
             minButton.setPrefSize(48, 48);

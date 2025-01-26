@@ -27,7 +27,8 @@ import javafx.scene.shape.Rectangle;
 public class Icon extends StackPane {
     private final ImageView imageView;
     private final Rectangle colorChecker;
-    private final BufferedImage orginalImage;
+    private BufferedImage orginalImage;
+    private SVGDocument svgDocument;
 
     public Icon(String path, int size, String colorVariable){
         imageView = new ImageView();
@@ -36,26 +37,28 @@ public class Icon extends StackPane {
         orginalImage = getOrginalImage(path);
         
         colorChecker.fillProperty().addListener((observable, oldValue, newValue) -> {
+            orginalImage = getOrginalImage(path);
             imageView.setImage(getColorImage());
         });
 
-        imageView.setImage(getImage(orginalImage));
+        imageView.setImage(getColorImage());
         imageView.setFitWidth(size);
-        imageView.setFitHeight(size);
+        imageView.setSmooth(true);
+        imageView.setPreserveRatio(true);
         getChildren().add(imageView);
     }
 
     public BufferedImage getOrginalImage(String path){
         SVGLoader loader = new SVGLoader();
         URL svgUrl = getClass().getResource("/" + path);
-        SVGDocument svgDocument = loader.load(svgUrl);
+        svgDocument = loader.load(svgUrl);
         FloatSize size = svgDocument == null ? new FloatSize(0, 0) : svgDocument.size();
         return new BufferedImage((int) size.width, (int) size.height, BufferedImage.TYPE_INT_ARGB);
     }
 
     public Rectangle getColorChecker(String colorVariable){
         Rectangle rectangle = new Rectangle(0, 0, 0, 0);
-        rectangle.setStyle("-fx-background-color: " + colorVariable + ";"); 
+        rectangle.setStyle("-fx-fill: " + colorVariable + ";"); 
         rectangle.setManaged(false);
         rectangle.setVisible(false);
         getChildren().add(rectangle);
@@ -66,6 +69,7 @@ public class Icon extends StackPane {
         Graphics2D g = orginalImage.createGraphics();
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+        svgDocument.render(null, g);
         g.dispose();
 
         // Replaces color to themed-color
