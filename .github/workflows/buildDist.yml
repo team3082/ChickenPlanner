@@ -34,8 +34,12 @@ jobs:
       - name: Calculate short commit hash
         id: set_commit_sha
         run: |
-          calculatedSha=$(git rev-parse --short ${{ github.sha }})
-          echo "COMMIT_SHORT_SHA=$calculatedSha" >> $GITHUB_ENV
+          if [ $RUNNER_OS == 'Windows' ]; then
+            git rev-parse --short ${{ github.sha }} | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          else
+            calculatedSha=$(git rev-parse --short ${{ github.sha }})
+            echo "COMMIT_SHORT_SHA=$calculatedSha" >> $GITHUB_ENV
+          fi
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
