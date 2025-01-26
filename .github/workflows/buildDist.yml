@@ -36,7 +36,7 @@ jobs:
         if: matrix.os == 'windows-latest'
         run: |
           git rev-parse --short ${{ github.sha }} | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
-      - name: Calculate short commit hash
+      - name: Calculate short commit hash (unix)
         id: set_commit_sha
         if: matrix.os != 'windows-latest'
         run: |
