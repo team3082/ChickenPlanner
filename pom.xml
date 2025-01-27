@@ -10,7 +10,7 @@
     <pluginRepositories>
         <pluginRepository>
             <id>local-repo</id>
-            <url>file://${project.basedir}\libs</url>
+            <url>file://${project.basedir}/libs</url>
         </pluginRepository>
     </pluginRepositories>
 
@@ -20,9 +20,8 @@
         <javafx.version>23.0.1</javafx.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <revision>1.0-SNAPSHOT</revision>
-        <!--Systemic version. Mirror version above but must not include text -->
-        <sysver>1.0</sysver>
+        <!--Systemic version REQUIRED for packing to not fail -->
+        <revision>1.0.1</revision>
     </properties>
     <profiles>
         <profile>
