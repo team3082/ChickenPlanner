@@ -25,6 +25,9 @@ To download the latest build navigate yourself to the [Releases](https://github.
 ### Unstable builds
 For unstable builds navigate to the [Actions](https://github.com/team3082/ChickenPlanner/actions) and download the JAR artifact from a commit of your choice.    [^1]
 
+#### Main branch builds
+Commits to the main branch will be packaged as well as built per OS. The installer for the platforms will be in the jpackage folder in the downloaded zip
+
 ---
 
 ## 🚧 Building
