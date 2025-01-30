@@ -1,0 +1,48 @@
+name: Build and Package
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-package:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - name: Download Wix Toolset
+        uses: i3h/download-release-asset@v1.3.3
+        if: matrix.os == 'windows-latest'
+        with:
+          file: 'wix314-binaries.zip'
+          owner: 'wixtoolset'
+          repo: 'wix3'
+          tag: 'wix3141rtm'
+      - name: Extract Wix Toolset
+        if: matrix.os == 'windows-latest'
+        run: |
+          mkdir $env:USERPROFILE\target\wix
+          Expand-Archive -Path wix314-binaries.zip -DestinationPath $env:USERPROFILE\target\wix
+      - name: Add Wix Toolset to path
+        run: echo "$HOME/target/wix" >> $GITHUB_PATH
+        if: matrix.os == 'windows-latest'
+      - uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '23.0.1'
+          distribution: 'temurin'
+          cache: maven
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
+      - name: Package with Maven
+        run: mvn -B verify --file pom.xml
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ChickenPlanner-${{ matrix.os }}
+          path: target

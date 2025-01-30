@@ -5,13 +5,68 @@
 
     <groupId>org.team3082.chicken_planner</groupId>
     <artifactId>chicken_planner</artifactId>
-    <version>OpenSourceRelease</version>
+    <version>${revision}</version>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>local-repo</id>
+            <url>file://${project.basedir}/libs</url>
+        </pluginRepository>
+    </pluginRepositories>
 
     <properties>
         <maven.compiler.source>23</maven.compiler.source>
         <maven.compiler.target>23</maven.compiler.target>
         <javafx.version>23.0.1</javafx.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!--Systemic version REQUIRED for packing to not fail -->
+        <revision>1.0.1</revision>
     </properties>
+    <profiles>
+        <profile>
+            <id>windows</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                </os>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.github.akman</groupId>
+                        <artifactId>jpackage-maven-plugin</artifactId>
+                        <version>0.1.6-SNAPSHOT</version>
+                        <executions>
+                            <execution>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>jpackage</goal>
+                                </goals>
+                                <configuration>
+                                    <toolhome>${env.JAVA_HOME}</toolhome>
+                                    <dest>./target/jpackage</dest>
+                                    <name>ChickenPlanner</name>
+                                    <appversion>${sysver}</appversion>
+                                    <description>A powerful, user-friendly trajectory planner designed for FRC teams</description>
+                                    <vendor>Team 3082</vendor>
+                                    <icon>${project.basedir}/src/main/resources/IconFile.ico</icon>
+                                    <input>${project.build.directory}</input>
+                                    <mainjar>${project.build.finalName}.jar</mainjar>
+                                    <mainclass>org.team3082.chicken_planner.Main</mainclass>
+                                    <licensefile>${project.basedir}/LICENSE</licensefile>
+                                    <windirchooser>true</windirchooser>
+                                    <winmenu>true</winmenu>
+                                    <winperuserinstall>true</winperuserinstall>
+                                    <winshortcut>true</winshortcut>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <dependencies>
         <dependency>
@@ -47,6 +102,24 @@
     </dependencies>
 
     <build>
+        <!-- Import jpackage plugin. This can be removed once 0.1.6 is reloased -->
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.github.akman</groupId>
+                    <artifactId>jpackage-maven-plugin</artifactId>
+                    <version>0.1.6-SNAPSHOT</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.github.akman</groupId>
+                            <artifactId>jpackage-maven-plugin</artifactId>
+                            <version>0.1.6-SNAPSHOT</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
         <plugins>
             <!-- JavaFX Maven Plugin -->
             <plugin>
@@ -84,6 +157,32 @@
                     </execution>
                 </executions>
                 </plugin>
+            <plugin>
+                <groupId>com.github.akman</groupId>
+                <artifactId>jpackage-maven-plugin</artifactId>
+                <version>0.1.6-SNAPSHOT</version>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jpackage</goal>
+                        </goals>
+                        <configuration>
+                            <toolhome>${env.JAVA_HOME}</toolhome>
+                            <dest>./target/jpackage</dest>
+                            <name>ChickenPlanner</name>
+                            <appversion>${project.version}</appversion>
+                            <description>A powerful, user-friendly trajectory planner designed for FRC teams</description>
+                            <vendor>Team 3082</vendor>
+                            <icon>${project.basedir}/src/main/resources/AppIcon.png</icon>
+                            <input>${project.build.directory}</input>
+                            <mainjar>${project.build.finalName}.jar</mainjar>
+                            <mainclass>org.team3082.chicken_planner.Main</mainclass>
+                            <licensefile>${project.basedir}/LICENSE</licensefile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>
