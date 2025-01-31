@@ -1,18 +1,12 @@
 package org.team3082.chicken_planner.UIElements;
 
-import java.io.File;
-
 import org.team3082.chicken_planner.Globals;
 import org.team3082.chicken_planner.UIElements.CustomNodes.Icon;
 
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 /**
@@ -21,7 +15,6 @@ import javafx.stage.Stage;
  */
 public class LandingPage extends VBox {
     private final Stage stage;
-    private final Rectangle accentSurfaceColorChecker;
 
     /**
      * Constructs the LandingScene with specified dimensions from Constants.
@@ -30,11 +23,6 @@ public class LandingPage extends VBox {
     public LandingPage(Stage stage) {
         super();
         this.stage = stage; // Keep a reference to the stage
-        
-        accentSurfaceColorChecker = new Rectangle(0, 0, 0, 0);
-        accentSurfaceColorChecker.getStyleClass().add("accent-surface-checker");
-        accentSurfaceColorChecker.setManaged(false);
-        accentSurfaceColorChecker.setVisible(false);
         
         HBox hBox = createContentLayout();
         getChildren().add(hBox);

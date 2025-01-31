@@ -1,47 +1,108 @@
 @font-face {
-    font-family: "Inter", sans-serif;
-    src: url("../fonts/Inter_Regular.ttf");
+  font-family: "Inter", sans-serif;
+  src: url("../fonts/Inter_Regular.ttf");
 }
 
 @font-face {
-    font-family: "Inter SemiBold", sans-serif;
-    src: url("../fonts/Inter_SemiBold.ttf");
+  font-family: "Inter SemiBold", sans-serif;
+  src: url("../fonts/Inter_SemiBold.ttf");
 }
 
 @font-face {
-    font-family: "Inter", sans-serif;
-    font-weight: bold;
-    src: url("../fonts/Inter_Bold.ttf");
+  font-family: "Inter", sans-serif;
+  font-weight: bold;
+  src: url("../fonts/Inter_Bold.ttf");
 }
 
 Text {
-    -fx-fill: -fx-text;
-    -fx-font-family: "Inter";
-    -fx-font-size: 14px;
+  -fx-fill: -fx-text;
+  -fx-font-family: "Inter";
+  -fx-font-size: 14px;
 }
 
 .title {
-    -fx-font-size: 40px;
-    -fx-font-family: "Inter SemiBold";
-    -fx-fill: -fx-text;
+  -fx-font-size: 40px;
+  -fx-font-family: "Inter SemiBold";
+  -fx-fill: -fx-text;
 }
 
 .subtitle {
-    -fx-font-size: 24px;
-    -fx-fill: -fx-secondary-text;
+  -fx-font-size: 24px;
+  -fx-fill: -fx-secondary-text;
 }
 
 .h1 {
-    -fx-font-size: 20px;
-    -fx-font-family: "Inter SemiBold";
-    -fx-fill: -fx-text;
+  -fx-font-size: 20px;
+  -fx-font-family: "Inter SemiBold";
+  -fx-fill: -fx-text;
+}
+
+.h2 {
+  -fx-font-size: 20px;
+  -fx-font-family: "Inter SemiBold";
+  -fx-fill: -fx-text;
 }
 
 .action {
-    -fx-fill: -fx-accent-surface;
-    -fx-cursor: hand;
+  -fx-fill: -fx-accent-surface;
+  -fx-cursor: hand;
 }
 
 .accent-surface-color {
+}
 
+.sidebar {
+}
+
+.tab {
+  -fx-background-color: -fx-surface;
+  -fx-border-radius: 4px;
+  -fx-background-radius: 4px;
+  -fx-text-fill: -fx-text;
+  -fx-font-family: "Inter SemiBold";
+}
+
+.tab-selected {
+  -fx-background-color: -fx-accent;
+  -fx-border-radius: 4px;
+  -fx-background-radius: 4px;
+  -fx-text-fill: -fx-text;
+  -fx-font-family: "Inter SemiBold";
+}
+
+.sidebarContents {
+  -fx-background-color: -fx-surface;
+  -fx-border-radius: 4px;
+  -fx-background-radius: 4px;
+  -fx-padding: 24px;
+}
+
+.optionHeader {
+  -fx-font-size: 18px;
+  -fx-fill: -fx-secondary-text;
+}
+
+.optionButton {
+  -fx-pref-height: 32px;
+  -fx-background-color: -fx-secondary-surface;
+  -fx-border-radius: 4px;
+  -fx-background-radius: 4px;
+  -fx-text-fill: -fx-text;
+  -fx-font-size: 12px;
+  -fx-padding: 8px;
+}
+
+.optionField {
+  -fx-pref-height: 16px;
+  -fx-background-color: -fx-secondary-surface;
+  -fx-border-radius: 4px;
+  -fx-background-radius: 4px;
+  -fx-text-fill: -fx-text;
+  -fx-font-size: 12px;
+  -fx-padding: 8px;
+}
+
+.optionFieldText {
+  -fx-font-size: 16px;
+  -fx-fill: -fx-accent;
 }

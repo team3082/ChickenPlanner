@@ -6,7 +6,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -25,7 +24,7 @@ public class WindowBarNode {
      * @param page  The content to be displayed.
      * @return
      */
-    public static Scene load(VBox root, Stage stage, Parent page) {
+    public Scene load(VBox root, Stage stage, Parent page) {
         root.setAlignment(Pos.TOP_CENTER);
         root.getStyleClass().removeAll();
         root.getStyleClass().addAll("window");

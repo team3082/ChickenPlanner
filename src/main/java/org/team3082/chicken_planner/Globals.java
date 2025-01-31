@@ -4,5 +4,5 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Globals {
-    public static StringProperty themeProperty = new SimpleStringProperty("light");
+    public static StringProperty themeProperty = new SimpleStringProperty("dark");
 }
