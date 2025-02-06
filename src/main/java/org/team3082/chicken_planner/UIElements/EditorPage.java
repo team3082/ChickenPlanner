@@ -3,7 +3,11 @@ package org.team3082.chicken_planner.UIElements;
 import org.team3082.chicken_planner.UIElements.CustomNodes.Editor.Sidebar;
 
 import javafx.geometry.Pos;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -24,8 +28,20 @@ public class EditorPage extends VBox {
         layout.setAlignment(Pos.TOP_LEFT);
         Sidebar sidebar = new Sidebar();
         layout.getChildren().add(sidebar);
+        StackPane field = new StackPane();
 
-        return layout;
+        Image fieldImage = new Image(getClass().getResource("/assets/reefscape_field.png").toExternalForm());
+        ImageView fieldImageView = new ImageView();
+
+        fieldImageView.setImage(fieldImage);
+        fieldImageView.setFitWidth(100);
+        fieldImageView.setPreserveRatio(true);
+        fieldImageView.setSmooth(true);
+        fieldImageView.setCache(true);
+
+        field.getChildren().add(fieldImageView);
+        layout.getChildren().add(field);
+ 
+       return layout;
     }
-
 }

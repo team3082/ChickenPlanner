@@ -54,6 +54,10 @@ Text {
 .sidebar {
 }
 
+Image {
+  -fx-background-color: #ff1b2d;
+}
+
 .tab {
   -fx-background-color: -fx-surface;
   -fx-border-radius: 4px;
