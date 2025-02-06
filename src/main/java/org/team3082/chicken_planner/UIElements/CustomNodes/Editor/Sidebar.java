@@ -1,3 +1,4 @@
+
 package org.team3082.chicken_planner.UIElements.CustomNodes.Editor;
 
 import org.team3082.chicken_planner.UIElements.CustomNodes.Icon;
@@ -8,8 +9,10 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+
 
 public class Sidebar extends VBox {
 
@@ -31,9 +34,29 @@ public class Sidebar extends VBox {
         VBox.setVgrow(contents, Priority.ALWAYS);
         contents.getStyleClass().add("sidebarContents");
         loadSidebarPage("edit", "move");
+
+        Region spacer = new Region();
+        VBox.setVgrow(spacer, Priority.ALWAYS);
+        contents.getChildren().add(spacer);
+
+        HBox controls = makeControls();
+        contents.getChildren().add(controls);
+
         layout.getChildren().addAll(tabs, contents);
 
         getChildren().add(layout);
+    }
+        
+    private HBox makeControls() {
+        HBox controls = new HBox(24);
+        controls.setAlignment(Pos.CENTER_RIGHT);
+        controls.setPrefHeight(64);
+        controls.setPrefWidth(292);
+
+        Icon settings = new Icon("icons/settings.svg", 14, "-fx-text");
+        controls.getChildren().add(settings);
+
+        return controls;
     }
 
     private HBox makeTabs() {

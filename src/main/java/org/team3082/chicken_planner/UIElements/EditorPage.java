@@ -6,7 +6,10 @@ import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+<<<<<<< Updated upstream
 import javafx.scene.layout.Priority;
+=======
+>>>>>>> Stashed changes
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -29,6 +32,7 @@ public class EditorPage extends VBox {
         Sidebar sidebar = new Sidebar();
         layout.getChildren().add(sidebar);
         StackPane field = new StackPane();
+<<<<<<< Updated upstream
 
         Image fieldImage = new Image(getClass().getResource("/assets/reefscape_field.png").toExternalForm());
         ImageView fieldImageView = new ImageView();
@@ -39,6 +43,11 @@ public class EditorPage extends VBox {
         fieldImageView.setSmooth(true);
         fieldImageView.setCache(true);
 
+=======
+        Image fieldImage = new Image(getClass().getResource("/assets/reefscape-field.png").toExternalForm());
+        ImageView fieldImageView = new ImageView(fieldImage);
+
+>>>>>>> Stashed changes
         field.getChildren().add(fieldImageView);
         layout.getChildren().add(field);
  
