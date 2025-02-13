@@ -26,10 +26,7 @@ public class WindowBarNode {
      * @param page  The content to be displayed.
      * @return
      */
-    public static Scene load(Stage stage, Parent page) {
-        VBox root = new VBox();
-        root.setPrefSize(Constants.UI.WINDOW_WIDTH, Constants.UI.WINDOW_HEIGHT);
-
+    public static Scene load(VBox root, Stage stage, Parent page) {
         root.setAlignment(Pos.TOP_CENTER);
         root.getStyleClass().removeAll();
         root.getStyleClass().addAll("window");

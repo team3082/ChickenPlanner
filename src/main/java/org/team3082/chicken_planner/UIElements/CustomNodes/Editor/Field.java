@@ -1,9 +1,10 @@
 package org.team3082.chicken_planner.UIElements.CustomNodes.Editor;
 
+import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -13,11 +14,11 @@ public class Field extends StackPane {
     private static Canvas robotCanvas;
 
 
-    public Field(BorderPane parent, VBox sidebar) {
+    public Field(HBox parent, VBox sidebar) {
         // Load the field image
         Image fieldImage = new Image(getClass().getResource("/assets/reefscape_field.png").toExternalForm());
         ImageView imageView = new ImageView();
-
+        setAlignment(Pos.CENTER);
         // Set the image to the ImageView
         imageView.setImage(fieldImage);
         imageView.setPreserveRatio(true);

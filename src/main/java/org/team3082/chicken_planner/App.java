@@ -4,10 +4,10 @@ import java.io.IOException;
 
 import org.team3082.chicken_planner.UIElements.CustomNodes.WindowBarNode;
 import org.team3082.chicken_planner.UIElements.EditorPage;
-import org.team3082.chicken_planner.UIElements.LandingPage;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class App extends Application {
@@ -18,7 +18,7 @@ public class App extends Application {
 
     private static App app;
 
-    public static App getAppInstance(){
+    public static App getAppInstance() {
         return app;
     }
 
@@ -32,12 +32,17 @@ public class App extends Application {
         // Creates the JavaFX stage
         this.stage = stage;
 
-        // Creates the window container
-        
+        stage.setMinWidth(Constants.UI.MIN_WINDOW_WIDTH);
+        stage.setMinHeight(Constants.UI.MIN_WINDOW_HEIGHT);
 
-        // Inits the landing scene with a window bar
-        landingScene = WindowBarNode.load(stage, new LandingPage(stage));
-        editorScene = WindowBarNode.load(stage, new EditorPage(stage));
+        // Creates the window container
+        VBox window = new VBox();
+        window.setPrefSize(Constants.UI.WINDOW_WIDTH, Constants.UI.WINDOW_HEIGHT);
+
+        // WindowBarNode landingNode = new WindowBarNode();
+        WindowBarNode editorNode = new WindowBarNode();
+        // landingScene = landingNode.load(window, stage, new LandingPage(stage));
+        editorScene = editorNode.load(window, stage, new EditorPage(stage));
 
         // Adds styles to scene
         Globals.themeProperty.addListener((_, _, _) -> {

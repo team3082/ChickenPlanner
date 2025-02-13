@@ -1,19 +1,20 @@
 @font-face {
-  font-family: "Inter", sans-serif;
+  font-family: "Inter";
   src: url("../fonts/Inter_Regular.ttf");
 }
 
 @font-face {
-  font-family: "Inter SemiBold", sans-serif;
+  font-family: "Inter SemiBold";
   src: url("../fonts/Inter_SemiBold.ttf");
 }
 
 @font-face {
-  font-family: "Inter", sans-serif;
+  font-family: "Inter";
   font-weight: bold;
   src: url("../fonts/Inter_Bold.ttf");
 }
 
+/* Global Text Styles */
 Text {
   -fx-fill: -fx-text;
   -fx-font-family: "Inter";
@@ -31,12 +32,7 @@ Text {
   -fx-fill: -fx-secondary-text;
 }
 
-.h1 {
-  -fx-font-size: 20px;
-  -fx-font-family: "Inter SemiBold";
-  -fx-fill: -fx-text;
-}
-
+.h1,
 .h2 {
   -fx-font-size: 20px;
   -fx-font-family: "Inter SemiBold";
@@ -48,42 +44,38 @@ Text {
   -fx-cursor: hand;
 }
 
-.accent-surface-color {
-}
-
-.sidebar {
-}
-
-Image {
-  -fx-background-color: #ff1b2d;
+/* Tab Styles */
+.tab,
+.tab-selected {
+  -fx-border-radius: 4px;
+  -fx-background-radius: 4px;
+  -fx-font-family: "Inter SemiBold";
 }
 
 .tab {
   -fx-background-color: -fx-surface;
-  -fx-border-radius: 4px;
-  -fx-background-radius: 4px;
   -fx-text-fill: -fx-text;
-  -fx-font-family: "Inter SemiBold";
 }
 
 .tab-selected {
   -fx-background-color: -fx-accent;
-  -fx-border-radius: 4px;
-  -fx-background-radius: 4px;
-  -fx-text-fill: -fx-text;
-  -fx-font-family: "Inter SemiBold";
+  -fx-text-fill: #ff1b2d;
 }
 
-.sidebarContents {
-  -fx-background-color: -fx-surface;
-  -fx-border-radius: 4px;
-  -fx-background-radius: 4px;
-  -fx-padding: 24px;
+/* Miscellaneous */
+Image {
+  -fx-background-color: #ff1b2d;
 }
 
 .optionHeader {
   -fx-font-size: 18px;
   -fx-fill: -fx-secondary-text;
+}
+
+.sidebarScroll {
+  -fx-background-insets: 0;
+  -fx-padding: 0;
+  -fx-background-color: transparent;
 }
 
 .optionButton {
@@ -109,4 +101,11 @@ Image {
 .optionFieldText {
   -fx-font-size: 16px;
   -fx-fill: -fx-accent;
+}
+
+.sidebarContents {
+  -fx-background-color: -fx-surface;
+  -fx-border-radius: 4px;
+  -fx-background-radius: 4px;
+  -fx-padding: 24px;
 }

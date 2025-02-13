@@ -10,6 +10,7 @@
     -fx-transparent-surface: #eff1f5b3;
     -fx-text: #4c4f69;
     -fx-secondary-text: #5c5f77;
+    -fx-selected-text: #4c4f69;
 
     -fx-error: #d20f39;
     -fx-accent: #dd7878;

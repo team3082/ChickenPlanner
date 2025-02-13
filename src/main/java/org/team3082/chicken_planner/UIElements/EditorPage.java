@@ -3,16 +3,18 @@ package org.team3082.chicken_planner.UIElements;
 import org.team3082.chicken_planner.UIElements.CustomNodes.Editor.Field;
 import org.team3082.chicken_planner.UIElements.CustomNodes.Editor.Sidebar;
 
-import javafx.scene.layout.BorderPane;
+import javafx.geometry.Pos;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class EditorPage extends BorderPane {
+public class EditorPage extends HBox {
 
     private final Stage stage;
 
     public EditorPage(Stage stage) {
-        super();
+        super(32);
         createContentLayout();
         this.stage = stage; // Keep a reference to the stage
     }
@@ -24,9 +26,10 @@ public class EditorPage extends BorderPane {
         sidebarContainer.getChildren().add(sidebar);  // Add the sidebar to the container
         
         Field field = new Field(this, sidebarContainer);  // Pass the sidebar container to Field
-        
+
+        setAlignment(Pos.CENTER_LEFT);
         // Set the sidebar and field in the layout
-        setLeft(sidebarContainer);  // Set sidebar to the left
-        setCenter(field);  // Set field to the center
+        getChildren().addAll(sidebarContainer, field);  // Set sidebar to the left
+        HBox.setHgrow(field, Priority.ALWAYS);
     }
 }

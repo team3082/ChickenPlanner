@@ -7,6 +7,7 @@ import static org.team3082.chicken_planner.UIElements.Utilities.TextUtil.createT
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -28,10 +29,17 @@ public class Sidebar extends VBox {
         layout.getStyleClass().add("sidebar");
 
         tabs = makeTabs();
+        ScrollPane scrollContainer = new ScrollPane();
+        scrollContainer.setFitToHeight(true);
+        scrollContainer.getStyleClass().clear();
+        scrollContainer.getStyleClass().add("sidebarScroll");
+        scrollContainer.setFitToWidth(true);
+        scrollContainer.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        VBox.setVgrow(scrollContainer, Priority.ALWAYS);
 
         contents = new VBox(24);
-        contents.setPrefWidth(292);
         VBox.setVgrow(contents, Priority.ALWAYS);
+        contents.setPrefWidth(292);
         contents.getStyleClass().add("sidebarContents");
         loadSidebarPage("edit", "move");
 
@@ -42,7 +50,8 @@ public class Sidebar extends VBox {
         HBox controls = makeControls();
         contents.getChildren().add(controls);
 
-        layout.getChildren().addAll(tabs, contents);
+        scrollContainer.setContent(contents);
+        layout.getChildren().addAll(tabs, scrollContainer);
 
         getChildren().add(layout);
     }
@@ -61,6 +70,8 @@ public class Sidebar extends VBox {
 
     private HBox makeTabs() {
         HBox tabs = new HBox(16);
+        tabs.setPrefHeight(40);
+        tabs.setMinHeight(40);
 
         Button editButton = new Button();
         {
@@ -95,9 +106,9 @@ public class Sidebar extends VBox {
         Node botTab = tabs.lookup("#botTab");
 
         if (tab.equals("edit")) {
-            editTab.getStyleClass().remove(0);
+            editTab.getStyleClass().clear();
             editTab.getStyleClass().add("tab-selected");
-            botTab.getStyleClass().remove(0);
+            botTab.getStyleClass().clear();
             botTab.getStyleClass().add("tab");
 
             VBox editingCategory = new SidebarCategory("Editing");
