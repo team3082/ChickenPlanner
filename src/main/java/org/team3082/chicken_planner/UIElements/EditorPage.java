@@ -1,46 +1,32 @@
 package org.team3082.chicken_planner.UIElements;
 
+import org.team3082.chicken_planner.UIElements.CustomNodes.Editor.Field;
 import org.team3082.chicken_planner.UIElements.CustomNodes.Editor.Sidebar;
 
-import javafx.geometry.Pos;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class EditorPage extends VBox {
+public class EditorPage extends BorderPane {
 
     private final Stage stage;
 
     public EditorPage(Stage stage) {
         super();
+        createContentLayout();
         this.stage = stage; // Keep a reference to the stage
-
-        HBox hBox = createContentLayout();
-        getChildren().add(hBox);
     }
 
-    private HBox createContentLayout() {
-        HBox layout = new HBox(32);
-        layout.setAlignment(Pos.TOP_LEFT);
+    private void createContentLayout() {
+        // Create the sidebar and field
         Sidebar sidebar = new Sidebar();
-        layout.getChildren().add(sidebar);
-        StackPane field = new StackPane();
-
-        Image fieldImage = new Image(getClass().getResource("/assets/reefscape_field.png").toExternalForm());
-        ImageView fieldImageView = new ImageView();
-
-        fieldImageView.setImage(fieldImage);
-        fieldImageView.setFitWidth(100);
-        fieldImageView.setPreserveRatio(true);
-        fieldImageView.setSmooth(true);
-        fieldImageView.setCache(true);
-
-        field.getChildren().add(fieldImageView);
-        layout.getChildren().add(field);
- 
-       return layout;
+        VBox sidebarContainer = new VBox();  // Create a container for the sidebar
+        sidebarContainer.getChildren().add(sidebar);  // Add the sidebar to the container
+        
+        Field field = new Field(this, sidebarContainer);  // Pass the sidebar container to Field
+        
+        // Set the sidebar and field in the layout
+        setLeft(sidebarContainer);  // Set sidebar to the left
+        setCenter(field);  // Set field to the center
     }
 }

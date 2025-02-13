@@ -1,12 +1,13 @@
 org\team3082\chicken_planner\App.class
 org\team3082\chicken_planner\Main.class
-org\team3082\chicken_planner\SplineDrawing\CurveUtilites\WPLIBUtils.class
 org\team3082\chicken_planner\UIElements\CustomNodes\Icon.class
 org\team3082\chicken_planner\Constants$UI.class
 org\team3082\chicken_planner\UIElements\CustomNodes\WindowBarNode.class
 org\team3082\chicken_planner\Constants$Math.class
+org\team3082\chicken_planner\Constants$UI$Editor.class
 org\team3082\chicken_planner\FileManagment\CommandLoading\CommandParser.class
 org\team3082\chicken_planner\FileManagment\CommandLoading\ParameterInfo.class
 org\team3082\chicken_planner\Constants.class
 org\team3082\chicken_planner\FileManagment\CommandLoading\CommandConstructorInfo.class
+org\team3082\chicken_planner\UIElements\CustomNodes\Editor\Field.class
 org\team3082\chicken_planner\Globals.class

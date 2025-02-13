@@ -153,30 +153,7 @@ public class ChickenPlannerLib {
     return actionPointsT;
   }
 
-  private static List<CubicBezierCurve> getBezierCurves(String trajectoryPath) throws IOException{
-    ObjectMapper mapper = new ObjectMapper();
-    JsonNode root = mapper.readTree(new File(trajectoryPath));
-    
-    JsonNode controlPoints = root.get("controlPoints");
 
-    int numCurves = (controlPoints.size() - 1) / 3;
-    List<CubicBezierCurve> bezierCurves = new ArrayList<>();
-    for (int i = 0; i < numCurves; i++) {
-        JsonNode a = controlPoints.get((i * 3));
-        JsonNode b = controlPoints.get((i * 3) + 1);
-        JsonNode c = controlPoints.get((i * 3) + 2);
-        JsonNode d = controlPoints.get((i * 3) + 3);
-
-        bezierCurves.add(new CubicBezierCurve (
-            new Vector2(a.get("x").asDouble(), a.get("y").asDouble()),
-            new Vector2(b.get("x").asDouble(), b.get("y").asDouble()),
-            new Vector2(c.get("x").asDouble(), c.get("y").asDouble()),
-            new Vector2(d.get("x").asDouble(), d.get("y").asDouble())
-        ));
-    }
-
-    return bezierCurves;
-  }
 
   /**
    * Represents a cubic Bezier curve defined by four control points.

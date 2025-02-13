@@ -4,9 +4,11 @@ public class Constants {
     public static class UI {
         public static final int WINDOW_WIDTH = 800;
         public static final int WINDOW_HEIGHT = 600;
-        
-        public static final int MIN_WINDOW_WIDTH = 740;
-        public static final int MIN_WINDOW_HEIGHT = 480;
+
+        public static class Editor {
+            public static final int SIDE_BAR_WIDTH = 200;
+            
+        }
     }
 
     public static class Math {

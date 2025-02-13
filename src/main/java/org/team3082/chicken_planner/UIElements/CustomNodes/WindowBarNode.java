@@ -1,5 +1,7 @@
 package org.team3082.chicken_planner.UIElements.CustomNodes;
 
+import org.team3082.chicken_planner.Constants;
+
 import com.catwithawand.borderlessscenefx.scene.BorderlessScene;
 
 import javafx.geometry.Pos;
@@ -24,7 +26,10 @@ public class WindowBarNode {
      * @param page  The content to be displayed.
      * @return
      */
-    public Scene load(VBox root, Stage stage, Parent page) {
+    public static Scene load(Stage stage, Parent page) {
+        VBox root = new VBox();
+        root.setPrefSize(Constants.UI.WINDOW_WIDTH, Constants.UI.WINDOW_HEIGHT);
+
         root.setAlignment(Pos.TOP_CENTER);
         root.getStyleClass().removeAll();
         root.getStyleClass().addAll("window");
