@@ -4,9 +4,11 @@ import java.io.IOException;
 
 import org.team3082.chicken_planner.UIElements.CustomNodes.WindowBarNode;
 import org.team3082.chicken_planner.UIElements.EditorPage;
+import org.team3082.chicken_planner.UIElements.LandingPage;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -29,44 +31,29 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         app = this;
-        // Creates the JavaFX stage
         this.stage = stage;
 
         stage.setMinWidth(Constants.UI.MIN_WINDOW_WIDTH);
         stage.setMinHeight(Constants.UI.MIN_WINDOW_HEIGHT);
+        stage.getIcons().add(new Image(App.class.getResource("/assets/AppIcon.ico").toExternalForm()));
 
-        // Creates the window container
         VBox window = new VBox();
-        window.setPrefSize(Constants.UI.WINDOW_WIDTH, Constants.UI.WINDOW_HEIGHT);
+        
+        landingScene = WindowBarNode.load(new VBox(), stage, new LandingPage(stage));
+        editorScene = WindowBarNode.load(new VBox(), stage, new EditorPage(stage));
 
-        // WindowBarNode landingNode = new WindowBarNode();
-        WindowBarNode editorNode = new WindowBarNode();
-        // landingScene = landingNode.load(window, stage, new LandingPage(stage));
-        editorScene = editorNode.load(window, stage, new EditorPage(stage));
-
-        // Adds styles to scene
-        Globals.themeProperty.addListener((_, _, _) -> {
-            reloadStyles();
-        });
+        Globals.themeProperty.addListener((_, _, _) -> reloadStyles());
         reloadStyles();
 
-        // Opens stage to scene
-        stage.setScene(editorScene);
+        stage.setScene(landingScene);
         stage.setTitle("ChickenPlanner 2025");
         stage.show();
     }
 
-    /*
-     * Reloads the styles for a specified scene.
-     * z
-     * 
-     * @param scene The scene to reload styles for
-     */
     private void reloadStyles() {
-        // while (landingScene.getStylesheets().size() > 1) {
-        //     landingScene.getStylesheets().remove(1);
-        // }
-
+        while (landingScene.getStylesheets().size() > 1) {
+            landingScene.getStylesheets().remove(1);
+        }
         while (editorScene.getStylesheets().size() > 1) {
             editorScene.getStylesheets().remove(1);
         }
@@ -76,7 +63,17 @@ public class App extends Application {
         String globalStylesheet = getClass().getResource("/styles/style.css").toExternalForm();
         String windowStylesheet = getClass().getResource("/styles/window.css").toExternalForm();
 
-        // landingScene.getStylesheets().addAll(themeStylesheet, globalStylesheet, windowStylesheet);
+        landingScene.getStylesheets().addAll(themeStylesheet, globalStylesheet, windowStylesheet);
         editorScene.getStylesheets().addAll(themeStylesheet, globalStylesheet, windowStylesheet);
+    }
+
+ 
+
+    public void switchToLandingScene() {
+        stage.setScene(landingScene);
+    }
+
+    public void switchToEditorScene() {
+        stage.setScene(editorScene);
     }
 }

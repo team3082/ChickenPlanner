@@ -1,12 +1,15 @@
 package org.team3082.chicken_planner.UIElements;
 
-import org.team3082.chicken_planner.Globals;
+import java.io.File;
+
+import org.team3082.chicken_planner.App;
 import org.team3082.chicken_planner.UIElements.CustomNodes.Icon;
 
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 /**
@@ -145,30 +148,31 @@ public class LandingPage extends VBox {
      * Opens a DirectoryChooser dialog when "Open Project" is clicked.
      */
     private void openDirectoryChooser() {
+        
+        // if(Globals.themeProperty.getValue().equals("tokyo")){
+        //     Globals.themeProperty.set("catppuccinLatte");
+        // } else {
+        //     Globals.themeProperty.set("tokyo");
+        // }
 
-        if(Globals.themeProperty.getValue().equals("tokyo")){
-            Globals.themeProperty.set("catppuccinLatte");
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle("Open Project Directory");
+
+        // Optional: Set an initial directory if needed
+        File initialDirectory = new File(System.getProperty("user.home"));
+        directoryChooser.setInitialDirectory(initialDirectory);
+
+        // Show the directory chooser and capture the selected directory
+        File selectedDirectory = directoryChooser.showDialog(stage);
+
+        if (selectedDirectory != null) {
+            // Handle the selected directory
+            System.out.println("Directory selected: " + selectedDirectory.getAbsolutePath());
+            App.getAppInstance().switchToEditorScene();
         } else {
-            Globals.themeProperty.set("tokyo");
+            // Handle the case when no directory is selected (dialog is closed without
+            // selection)
+            System.out.println("No directory selected");
         }
-
-    //     DirectoryChooser directoryChooser = new DirectoryChooser();
-    //     directoryChooser.setTitle("Open Project Directory");
-
-    //     // Optional: Set an initial directory if needed
-    //     File initialDirectory = new File(System.getProperty("user.home"));
-    //     directoryChooser.setInitialDirectory(initialDirectory);
-
-    //     // Show the directory chooser and capture the selected directory
-    //     File selectedDirectory = directoryChooser.showDialog(stage);
-
-    //     if (selectedDirectory != null) {
-    //         // Handle the selected directory
-    //         System.out.println("Directory selected: " + selectedDirectory.getAbsolutePath());
-    //     } else {
-    //         // Handle the case when no directory is selected (dialog is closed without
-    //         // selection)
-    //         System.out.println("No directory selected");
-    //     }
     }
 }

@@ -105,28 +105,28 @@ public class Sidebar extends VBox {
         Node editTab = tabs.lookup("#editTab");
         Node botTab = tabs.lookup("#botTab");
 
-        if (tab.equals("edit")) {
-            editTab.getStyleClass().clear();
-            editTab.getStyleClass().add("tab-selected");
-            botTab.getStyleClass().clear();
-            botTab.getStyleClass().add("tab");
+        // if (tab.equals("edit")) {
+        //     editTab.getStyleClass().clear();
+        //     editTab.getStyleClass().add("tab-selected");
+        //     botTab.getStyleClass().clear();
+        //     botTab.getStyleClass().add("tab");
 
-            VBox editingCategory = new SidebarCategory("Editing");
-            {
-                SidebarOption editModeOption = new SidebarOption("Mode", "button", "editModeOption", "move", "action");
+        //     // VBox editingCategory = new SidebarCategory("Editing");
+        //     // {
+        //     //     SidebarOption editModeOption = new SidebarOption("Mode", "button", "editModeOption", "move", "action");
 
-                editingCategory.getChildren().addAll(editModeOption);
-            }
+        //     //     editingCategory.getChildren().addAll(editModeOption);
+        //     // }
 
-            VBox nodeCategory = new SidebarCategory("Selected node");
-            {
-                SidebarOption positionOption = new SidebarOption("Position", "field", "positionOption", "t");
-                SidebarOption robotOption = new SidebarOption("Robot", "field", "robotOption", "dir", "vel");
-                SidebarOption actionOption = new SidebarOption("", "icons", "actionOption", "icons/bot.svg", "icons/file-input.svg");
-                nodeCategory.getChildren().addAll(positionOption, robotOption, actionOption);
-            }
-            contents.getChildren().addAll(editingCategory, nodeCategory);
-        }
+        //     // VBox nodeCategory = new SidebarCategory("Selected node");
+        //     // {
+        //     //     SidebarOption positionOption = new SidebarOption("Position", "field", "positionOption", "t");
+        //     //     SidebarOption robotOption = new SidebarOption("Robot", "field", "robotOption", "dir", "vel");
+        //     //     SidebarOption actionOption = new SidebarOption("", "icons", "actionOption", "icons/bot.svg", "icons/file-input.svg");
+        //     //     nodeCategory.getChildren().addAll(positionOption, robotOption, actionOption);
+        //     // }
+        //     // contents.getChildren().addAll(editingCategory, nodeCategory);
+        // }
     }
 
 }

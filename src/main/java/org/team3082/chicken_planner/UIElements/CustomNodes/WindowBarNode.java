@@ -87,7 +87,7 @@ public class WindowBarNode {
 
         // Create the BorderlessScene scene
         BorderlessScene scene = new BorderlessScene(stage, StageStyle.TRANSPARENT, root,
-                Color.TRANSPARENT);
+            Constants.UI.WINDOW_WIDTH,  Constants.UI.WINDOW_HEIGHT, Color.TRANSPARENT);
         maxButton.setOnAction(_ -> scene.maximizeStage());
         minButton.setOnAction(_ -> scene.minimizeStage());
 
