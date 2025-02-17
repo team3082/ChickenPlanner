@@ -1,4 +1,4 @@
-package org.team3082.chicken_planner.UIElements.CustomNodes;
+package org.team3082.chicken_planner.UI.Components;
 
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -9,7 +9,7 @@ import java.awt.image.LookupOp;
 import java.net.URL;
 import java.nio.IntBuffer;
 
-import org.team3082.chicken_planner.UIElements.Utilities.ColorMapper;
+import org.team3082.chicken_planner.UI.Utilites.ColorMapper;
 
 import com.github.weisj.jsvg.SVGDocument;
 import com.github.weisj.jsvg.geometry.size.FloatSize;

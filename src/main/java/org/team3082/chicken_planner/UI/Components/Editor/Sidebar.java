@@ -1,8 +1,7 @@
+package org.team3082.chicken_planner.UI.Components.Editor;
 
-package org.team3082.chicken_planner.UIElements.CustomNodes.Editor;
-
-import org.team3082.chicken_planner.UIElements.CustomNodes.Icon;
-import static org.team3082.chicken_planner.UIElements.Utilities.TextUtil.createText;
+import org.team3082.chicken_planner.UI.Components.Icon;
+import org.team3082.chicken_planner.UI.Utilities.TextUtilities;
 
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -16,7 +15,6 @@ import javafx.scene.text.Text;
 
 
 public class Sidebar extends VBox {
-
     private HBox tabs;
     private VBox contents;
 
@@ -76,7 +74,7 @@ public class Sidebar extends VBox {
         Button editButton = new Button();
         {
             Icon icon = new Icon("icons/pen-line.svg", 14, "-fx-text");
-            Text text = createText("Edit", "editTabText", "tabText");
+            Text text = TextUtilities.createText("Edit", "editTabText", "tabText");
             HBox buttonLayout = new HBox(8, icon, text);
             buttonLayout.setAlignment(Pos.CENTER);
             editButton.setGraphic(buttonLayout);
@@ -88,7 +86,7 @@ public class Sidebar extends VBox {
         Button botButton = new Button();
         {
             Icon icon = new Icon("icons/bot.svg", 14, "-fx-text");
-            Text text = createText("Robot", "botTabText", "selectedTabText");
+            Text text = TextUtilities.createText("Robot", "botTabText", "selectedTabText");
             HBox buttonLayout = new HBox(8, icon, text);
             buttonLayout.setAlignment(Pos.CENTER);
             botButton.setGraphic(buttonLayout);
@@ -105,28 +103,6 @@ public class Sidebar extends VBox {
         Node editTab = tabs.lookup("#editTab");
         Node botTab = tabs.lookup("#botTab");
 
-        // if (tab.equals("edit")) {
-        //     editTab.getStyleClass().clear();
-        //     editTab.getStyleClass().add("tab-selected");
-        //     botTab.getStyleClass().clear();
-        //     botTab.getStyleClass().add("tab");
-
-        //     // VBox editingCategory = new SidebarCategory("Editing");
-        //     // {
-        //     //     SidebarOption editModeOption = new SidebarOption("Mode", "button", "editModeOption", "move", "action");
-
-        //     //     editingCategory.getChildren().addAll(editModeOption);
-        //     // }
-
-        //     // VBox nodeCategory = new SidebarCategory("Selected node");
-        //     // {
-        //     //     SidebarOption positionOption = new SidebarOption("Position", "field", "positionOption", "t");
-        //     //     SidebarOption robotOption = new SidebarOption("Robot", "field", "robotOption", "dir", "vel");
-        //     //     SidebarOption actionOption = new SidebarOption("", "icons", "actionOption", "icons/bot.svg", "icons/file-input.svg");
-        //     //     nodeCategory.getChildren().addAll(positionOption, robotOption, actionOption);
-        //     // }
-        //     // contents.getChildren().addAll(editingCategory, nodeCategory);
-        // }
     }
 
 }

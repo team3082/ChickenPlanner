@@ -1,5 +1,3 @@
-package org.team3082.chicken_planner.State;
+package org.team3082.chicken_planner.State.Events;
 
-public interface Event{
-
-}
+public interface Event {}

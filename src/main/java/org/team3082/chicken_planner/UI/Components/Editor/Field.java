@@ -1,5 +1,4 @@
-package org.team3082.chicken_planner.UIElements.CustomNodes.Editor;
-
+package org.team3082.chicken_planner.UI.Components.Editor;
 
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;

@@ -1,7 +1,7 @@
-package org.team3082.chicken_planner.UIElements;
+package org.team3082.chicken_planner.UI.Main;
 
-import org.team3082.chicken_planner.UIElements.CustomNodes.Editor.Field;
-import org.team3082.chicken_planner.UIElements.CustomNodes.Editor.Sidebar;
+import org.team3082.chicken_planner.UI.Components.Editor.Field;
+import org.team3082.chicken_planner.UI.Components.Editor.Sidebar;
 
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;

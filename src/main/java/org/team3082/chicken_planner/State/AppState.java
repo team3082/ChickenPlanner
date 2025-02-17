@@ -6,18 +6,18 @@ public class AppState {
     private static AppState instance;
     
     private Project currentProject;
-    private PathManager pathManager;
-    private AutoShellManager autoShellManager;
 
-    private AppState() { } // Private constructor for Singleton pattern
-
+    private AppState() { 
+    } 
+    
     public static AppState getInstance() {
-        ; }
+        if (instance == null){
+            instance = new AppState();
+        }
 
-    public void loadProject(Project project) {
-        this.currentProject = project;
-        EventBus.fireEvent(new ProjectLoadedEvent(project));
+        return instance;
     }
+
 
     public Project getCurrentProject() { return currentProject; }
 }

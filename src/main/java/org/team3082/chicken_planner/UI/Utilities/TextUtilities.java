@@ -1,9 +1,8 @@
-package org.team3082.chicken_planner.UIElements.Utilities;
+package org.team3082.chicken_planner.UI.Utilities;
 
 import javafx.scene.text.Text;
 
-public class TextUtil {
-
+public class TextUtilities {
     /**
      * Creates a Text object with the specified content, ID, and style class.
      *
