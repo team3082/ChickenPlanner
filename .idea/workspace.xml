@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a132b346-7c40-4b86-99a8-7f46e61323db" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/all_java_files.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependency-reduced-pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/team3082/chicken_planner/App.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/team3082/chicken_planner/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/team3082/chicken_planner/UIElements/LandingPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/team3082/chicken_planner/UIElements/LandingPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/chicken_planner-OpenSourceRelease.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/assets/AppIcon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/assets/chicken.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/assets/reefscape_field.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/assets/reefscape_field_expanded.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fonts/Inter_Bold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fonts/Inter_Regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/fonts/Inter_SemiBold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/icons/book-open.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/icons/bot.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/icons/circle-help.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/icons/file-input.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/icons/file-plus-2.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/icons/maximize.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/icons/minus.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/icons/pen-line.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/icons/save.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/icons/settings.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/icons/x.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/team3082/chicken_planner/App.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/team3082/chicken_planner/Constants$Math.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/team3082/chicken_planner/Constants$UI$Editor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/team3082/chicken_planner/Constants$UI.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/team3082/chicken_planner/Constants.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/team3082/chicken_planner/FileManagment/CommandLoading/CommandConstructorInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/team3082/chicken_planner/FileManagment/CommandLoading/CommandParser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/team3082/chicken_planner/FileManagment/CommandLoading/ParameterInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/team3082/chicken_planner/Globals.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/team3082/chicken_planner/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/team3082/chicken_planner/UIElements/CustomNodes/ChickenPlannerScene.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/team3082/chicken_planner/UIElements/CustomNodes/Editor/Field.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/team3082/chicken_planner/UIElements/CustomNodes/Editor/Sidebar.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/team3082/chicken_planner/UIElements/CustomNodes/Editor/SidebarCategory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/team3082/chicken_planner/UIElements/CustomNodes/Editor/SidebarOption.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/team3082/chicken_planner/UIElements/CustomNodes/Icon.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/team3082/chicken_planner/UIElements/CustomNodes/WindowBarNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/team3082/chicken_planner/UIElements/EditorPage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/team3082/chicken_planner/UIElements/LandingPage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/team3082/chicken_planner/UIElements/Utilities/ColorMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/team3082/chicken_planner/UIElements/Utilities/TextUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/styles/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/styles/themes.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/styles/themes/catppuccinLatte.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/styles/themes/catppuccinMocha.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/styles/themes/dark.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/styles/themes/dracula.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/styles/themes/github.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/styles/themes/light.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/styles/themes/og.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/styles/themes/tokyo.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/styles/window.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/original-chicken_planner-OpenSourceRelease.jar" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2t98SkuXyO6NUTwg63b7jBsQNix" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ProperRefactor&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/emili/Documents/Robotics/ChickenPlanner&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="ChickenPlanner" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="ChickenPlanner" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="ChickenPlanner" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <module name="ChickenPlanner" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a132b346-7c40-4b86-99a8-7f46e61323db" name="Changes" comment="" />
+      <created>1739752933120</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1739752933120</updated>
+    </task>
+    <servers />
+  </component>
+</project>
