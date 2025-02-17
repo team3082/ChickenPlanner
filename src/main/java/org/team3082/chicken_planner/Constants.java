@@ -23,4 +23,8 @@ public class Constants {
         public static final int CURVE_SAMPLES = 300;
         public static final int TRAJECTORY_SAMPLES_PER_METER = 10;
     }
+
+    public static class Debug {
+        public static final boolean LOG_EVENTS = true;
+    }
 }

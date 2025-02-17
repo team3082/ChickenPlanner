@@ -1,8 +1,11 @@
 package org.team3082.chicken_planner.UI.Main;
 
+import org.team3082.chicken_planner.State.EventBus;
+import org.team3082.chicken_planner.State.Events.PageSwitchEvent;
 import org.team3082.chicken_planner.UI.Components.Icon;
 
 import javafx.geometry.Pos;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -88,6 +91,10 @@ public class LandingPage extends VBox {
                     Icon openProjectIcon = new Icon("icons/file-input.svg", 14, "-fx-accent-surface");
                     openProjectLine.getChildren().addAll(openProjectIcon, openProjectText);
                 }
+
+                openProjectLine.setOnMouseClicked((MouseEvent event) -> {
+                    EventBus.fireEvent(new PageSwitchEvent(Page.EDITOR_PAGE));
+                });
 
                 HBox openDocumentationLine = new HBox(6);
                 {

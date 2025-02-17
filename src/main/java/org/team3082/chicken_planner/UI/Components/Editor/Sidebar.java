@@ -1,12 +1,16 @@
 package org.team3082.chicken_planner.UI.Components.Editor;
 
+import org.team3082.chicken_planner.State.EventBus;
+import org.team3082.chicken_planner.State.Events.PageSwitchEvent;
 import org.team3082.chicken_planner.UI.Components.Icon;
+import org.team3082.chicken_planner.UI.Main.Page;
 import org.team3082.chicken_planner.UI.Utilities.TextUtilities;
 
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -94,6 +98,11 @@ public class Sidebar extends VBox {
             botButton.setId("botTab");
             botButton.setPrefSize(138, 40);
         }
+
+        botButton.setOnMouseClicked((MouseEvent event) -> {
+            EventBus.fireEvent(new PageSwitchEvent(Page.LANDING_PAGE));
+            System.err.println("LADNING PAGE SWAP A WOO");
+        });
 
         tabs.getChildren().addAll(editButton, botButton);
         return tabs;

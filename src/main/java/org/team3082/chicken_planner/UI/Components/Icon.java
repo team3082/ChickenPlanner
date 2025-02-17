@@ -9,7 +9,7 @@ import java.awt.image.LookupOp;
 import java.net.URL;
 import java.nio.IntBuffer;
 
-import org.team3082.chicken_planner.UI.Utilites.ColorMapper;
+import org.team3082.chicken_planner.UI.Utilities.ColorMapper;
 
 import com.github.weisj.jsvg.SVGDocument;
 import com.github.weisj.jsvg.geometry.size.FloatSize;

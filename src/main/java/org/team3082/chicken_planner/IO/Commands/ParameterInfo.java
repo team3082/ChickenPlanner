@@ -1,4 +1,4 @@
-package org.team3082.chicken_planner.FileManagment.CommandLoading;
+package org.team3082.chicken_planner.IO.Commands;
 
 public class ParameterInfo {
     private final String name;

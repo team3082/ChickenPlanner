@@ -48,7 +48,6 @@ public class Field extends StackPane {
     }
 
     public void test() {
-        System.err.println("Hello");
         GraphicsContext context = splineCanvas.getGraphicsContext2D();
         
         // Clear previous drawings if necessary
