@@ -20,8 +20,7 @@ public class EventBus {
     
     public static void fireEvent(Event event) {
         if(Constants.Debug.LOG_EVENTS) eventLog.add(event);
-        eventLog.forEach((Event eventTwo) -> System.out.println(eventTwo.getClass().getSimpleName()));
-
+        System.out.println(event.getClass().getSimpleName());
         for (Consumer<Event> listener : new ArrayList<>(listeners)) {
             listener.accept(event);
         }
