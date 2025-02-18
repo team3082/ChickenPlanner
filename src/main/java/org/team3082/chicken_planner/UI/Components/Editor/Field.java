@@ -1,6 +1,7 @@
 package org.team3082.chicken_planner.UI.Components.Editor;
 
 import org.team3082.chicken_planner.State.EventBus;
+import org.team3082.chicken_planner.State.Events.CircleTestEvent;
 import org.team3082.chicken_planner.State.Events.DrawCircle;
 
 import javafx.geometry.Pos;
@@ -54,7 +55,7 @@ public class Field extends StackPane {
         splineCanvas.setOnMouseDragged((MouseEvent event) -> {
             // Fire a CircleTestEvent with the mouse's x and y coordinates
             
-            EventBus.fireEvent(new CircleTestEvent(event.getX(), event.getY()))/;
+            EventBus.fireEvent(new CircleTestEvent(event.getX(), event.getY()));
         });
 
         EventBus.register(event -> {
