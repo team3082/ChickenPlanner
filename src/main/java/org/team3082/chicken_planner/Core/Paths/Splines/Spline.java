@@ -1,8 +1,12 @@
 package org.team3082.chicken_planner.Core.Paths.Splines;
 
-import javafx.scene.effect.Light.Point;
+import org.team3082.chicken_planner.Utils.Point;
 
 public interface Spline {
     int getNumberOfControlPoints();
+    double getLength();
+
     void updateControlPoint(int index, Point newPoint);
+
+    Point[] getCachedPoints();
 }
