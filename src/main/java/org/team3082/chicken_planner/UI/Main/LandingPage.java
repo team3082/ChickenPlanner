@@ -1,14 +1,22 @@
 package org.team3082.chicken_planner.UI.Main;
 
+import java.io.File;
+import java.util.ArrayList;
+
+import org.team3082.chicken_planner.Settings;
 import org.team3082.chicken_planner.State.EventBus;
-import org.team3082.chicken_planner.State.Events.PageSwitchEvent;
+import org.team3082.chicken_planner.State.Events.Event;
+import org.team3082.chicken_planner.State.Events.ProjectLoadRequest;
+import org.team3082.chicken_planner.State.Events.ProjectLoadedEvent;
 import org.team3082.chicken_planner.UI.Components.Icon;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 /**
@@ -74,26 +82,30 @@ public class LandingPage extends VBox {
             Text getStartedText = createText("Get Started", "getStartedText", "h1");
             VBox getStartedOptionsLayout = new VBox(8);
             {
-                HBox newProjectLine = new HBox(6);
-                {
-                    newProjectLine.setAlignment(Pos.CENTER_LEFT);
-
-                    Text newProjectText = createText("New project", "newProjectText", "action");
-                    Icon newProjectIcon = new Icon("icons/file-plus-2.svg", 14, "-fx-accent-surface");
-                    newProjectLine.getChildren().addAll(newProjectIcon, newProjectText);
-                }
-
                 HBox openProjectLine = new HBox(6);
                 {
                     openProjectLine.setAlignment(Pos.CENTER_LEFT);
 
-                    Text openProjectText = createText("Open existing project", "openProjectText", "action");
+                    Text openProjectText = createText("Open project", "openProjectText", "action");
                     Icon openProjectIcon = new Icon("icons/file-input.svg", 14, "-fx-accent-surface");
                     openProjectLine.getChildren().addAll(openProjectIcon, openProjectText);
                 }
 
                 openProjectLine.setOnMouseClicked((MouseEvent event) -> {
-                    EventBus.fireEvent(new PageSwitchEvent(Page.EDITOR_PAGE));
+                    // Create a directory chooser dialog
+                    DirectoryChooser directoryChooser = new DirectoryChooser();
+                    directoryChooser.setTitle("Select Project Directory");
+        
+                    // Set the initial directory (optional)
+                    directoryChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        
+                    // Show the directory chooser dialog and wait for the user to select a directory
+                    File selectedDirectory = directoryChooser.showDialog(stage);
+        
+                    // If the user selected a directory, fire the ProjectLoadRequest event
+                    if (selectedDirectory != null) {
+                        EventBus.fireEvent(new ProjectLoadRequest(selectedDirectory));
+                    }
                 });
 
                 HBox openDocumentationLine = new HBox(6);
@@ -105,7 +117,7 @@ public class LandingPage extends VBox {
                     openDocumentationLine.getChildren().addAll(openDocumentationIcon, openDocumentationText);
                 }
 
-                getStartedOptionsLayout.getChildren().addAll(newProjectLine, openProjectLine, openDocumentationLine);
+                getStartedOptionsLayout.getChildren().addAll(openProjectLine, openDocumentationLine);
             }
             getStartedLayout.getChildren().addAll(getStartedText, getStartedOptionsLayout);
 
@@ -117,11 +129,56 @@ public class LandingPage extends VBox {
             Text recentProjectsText = createText("Recent Projects", "recentProjectsText", "h1");
             VBox recentProjectsOptionsLayout = new VBox(8);
             {
-                Text project1Text = createText("project 1", "project1Text", "action");
-                Text project2Text = createText("project 2", "project2Text", "action");
-                recentProjectsOptionsLayout.getChildren().addAll(project1Text, project2Text);
+                ArrayList<String> pastProjects = Settings.getInstance().getPastProjects();
+                int maxLength = 5;
+
+                for(String pastProject : pastProjects){
+                    File file = new File(pastProject);
+                    if(!file.exists()){
+                        continue;
+                    }
+                    Text projectText = createText(file.getName(), "project1Text", "action");
+                    recentProjectsOptionsLayout.getChildren().add(projectText);
+                    
+                    maxLength--;
+                    if(maxLength < 1){
+                        break;
+                    }
+                }
             }
             recentProjectsLayout.getChildren().addAll(recentProjectsText, recentProjectsOptionsLayout);
+
+            EventBus.register((Event event) -> {
+                switch (event) {
+                    case ProjectLoadedEvent projectLoadedEvent -> {
+                        recentProjectsOptionsLayout.getChildren().clear();
+                        ArrayList<String> pastProjects = Settings.getInstance().getPastProjects();
+                        int maxLength = 5;
+
+                        for(String pastProject : pastProjects){
+                            File file = new File(pastProject);
+                            if(!file.exists()){
+                                continue;
+                            }
+                            Text projectText = createText(file.getName(), "project1Text", "action");
+                            HBox projectTextLine = new HBox(projectText);
+                            projectTextLine.setPadding(new Insets(5, 5, 5, 5));
+                            projectTextLine.setOnMouseClicked((MouseEvent mouseEvent) -> {
+                                EventBus.fireEvent(new ProjectLoadRequest(file));
+                            });
+
+                            recentProjectsOptionsLayout.getChildren().add(projectTextLine);
+                            
+                            maxLength--;
+                            if(maxLength < 1){
+                                break;
+                            }
+                        }   
+                    }
+                    default -> {}
+                    
+                }
+            });
         }
 
         // Adds each layout to the main right-aligned layout

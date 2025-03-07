@@ -1,6 +1,7 @@
 package org.team3082.chicken_planner.UI.Components;
 
 import org.team3082.chicken_planner.Constants;
+import org.team3082.chicken_planner.Settings;
 
 import com.catwithawand.borderlessscenefx.scene.BorderlessScene;
 
@@ -18,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class WindowBar {
+
     /**
      * Loads a scene including the window bar and the contents of the scene.
      * 
@@ -37,7 +39,10 @@ public class WindowBar {
         {
             Icon closeIcon = new Icon("icons/x.svg", 12, "-fx-text");
             closeButton.setGraphic(closeIcon);
-            closeButton.setOnAction(_ -> stage.close());
+            closeButton.setOnAction(_ -> {
+                Settings.getInstance().saveToFile();
+                stage.close();
+             });
             closeButton.getStyleClass().add("windowClose");
             closeButton.setPrefSize(48, 48);
         }
@@ -89,13 +94,13 @@ public class WindowBar {
         BorderlessScene scene = new BorderlessScene(stage, StageStyle.TRANSPARENT, root,
             Constants.UI.WINDOW_WIDTH,  Constants.UI.WINDOW_HEIGHT, Color.TRANSPARENT);
         maxButton.setOnAction(_ -> scene.maximizeStage());
-        minButton.setOnAction(_ -> scene.minimizeStage());
+        minButton.setOnAction(_ -> stage.setIconified(!stage.isIconified()));
 
         // Make the top bar draggable, so we can move the stage
         scene.setMoveControl(topBar);
 
         // check to see if the window is maximized; removes drop shadow if so.
-        scene.maximizedProperty().addListener((_, _, newValue) -> {
+        stage.iconifiedProperty().addListener((_, _, newValue) -> {
             if (newValue) {
                 root.getStyleClass().add("windowIsMaximized");
             } else {

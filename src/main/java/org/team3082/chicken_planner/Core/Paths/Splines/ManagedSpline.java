@@ -32,4 +32,9 @@ public class ManagedSpline<T extends Spline> {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getManipulator'");
     }
+
+    public void boundToRightSpline(Spline spline2) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'boundToRightSpline'");
+    }
 }

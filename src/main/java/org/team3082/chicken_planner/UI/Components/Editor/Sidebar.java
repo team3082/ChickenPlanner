@@ -6,8 +6,8 @@ import org.team3082.chicken_planner.UI.Components.Icon;
 import org.team3082.chicken_planner.UI.Main.Page;
 import org.team3082.chicken_planner.UI.Utilities.TextUtilities;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
@@ -21,6 +21,9 @@ import javafx.scene.text.Text;
 public class Sidebar extends VBox {
     private HBox tabs;
     private VBox contents;
+
+    SimpleIntegerProperty pointView = new SimpleIntegerProperty(0);
+    
 
     public Sidebar() {
         super();
@@ -43,33 +46,21 @@ public class Sidebar extends VBox {
         VBox.setVgrow(contents, Priority.ALWAYS);
         contents.setPrefWidth(292);
         contents.getStyleClass().add("sidebarContents");
-        loadSidebarPage("edit", "move");
+        
+        contents.getChildren().add(new ControlPointSelector());
 
         Region spacer = new Region();
         VBox.setVgrow(spacer, Priority.ALWAYS);
         contents.getChildren().add(spacer);
 
-        HBox controls = makeControls();
-        contents.getChildren().add(controls);
-
         scrollContainer.setContent(contents);
         layout.getChildren().addAll(tabs, scrollContainer);
+
+        
 
         getChildren().add(layout);
     }
         
-    private HBox makeControls() {
-        HBox controls = new HBox(24);
-        controls.setAlignment(Pos.CENTER_RIGHT);
-        controls.setPrefHeight(64);
-        controls.setPrefWidth(292);
-
-        Icon settings = new Icon("icons/settings.svg", 14, "-fx-text");
-        controls.getChildren().add(settings);
-
-        return controls;
-    }
-
     private HBox makeTabs() {
         HBox tabs = new HBox(16);
         tabs.setPrefHeight(40);
@@ -101,17 +92,12 @@ public class Sidebar extends VBox {
 
         botButton.setOnMouseClicked((MouseEvent event) -> {
             EventBus.fireEvent(new PageSwitchEvent(Page.LANDING_PAGE));
-            System.err.println("LADNING PAGE SWAP A WOO");
         });
 
         tabs.getChildren().addAll(editButton, botButton);
         return tabs;
     }
 
-    private void loadSidebarPage(String tab, String mode) {
-        Node editTab = tabs.lookup("#editTab");
-        Node botTab = tabs.lookup("#botTab");
 
-    }
 
 }

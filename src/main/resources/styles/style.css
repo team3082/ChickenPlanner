@@ -69,6 +69,7 @@ Image {
 
 .optionHeader {
   -fx-font-size: 18px;
+  
   -fx-fill: -fx-secondary-text;
 }
 

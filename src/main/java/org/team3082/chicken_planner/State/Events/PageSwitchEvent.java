@@ -7,7 +7,6 @@ public class PageSwitchEvent implements Event {
 
     public PageSwitchEvent(Page targetPage) {
         this.targetPage = targetPage;
-        System.err.println(targetPage);
     }
 
     public Page getTargetPage() {

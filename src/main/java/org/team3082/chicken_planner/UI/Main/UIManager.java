@@ -3,6 +3,7 @@ package org.team3082.chicken_planner.UI.Main;
 import org.team3082.chicken_planner.Globals;
 import org.team3082.chicken_planner.State.EventBus;
 import org.team3082.chicken_planner.State.Events.PageSwitchEvent;
+import org.team3082.chicken_planner.State.Events.ProjectLoadedEvent;
 import org.team3082.chicken_planner.UI.Components.WindowBar;
 
 import javafx.scene.Scene;
@@ -21,6 +22,10 @@ public class UIManager {
         editorScene = WindowBar.load(new VBox(), primaryStage, new EditorPage(primaryStage));
         reloadStyles();
 
+        Globals.themeProperty.addListener((_, _, _)->{
+            reloadStyles();
+        });
+
         primaryStage.setScene(landingScene);
         primaryStage.setTitle("ChickenPlanner 2025");
         primaryStage.show();
@@ -28,6 +33,7 @@ public class UIManager {
         EventBus.register(event -> {
             switch (event) {
                 case PageSwitchEvent pageSwitchEvent -> switchScene(pageSwitchEvent.getTargetPage());
+                case ProjectLoadedEvent loadedEvent -> switchScene(Page.EDITOR_PAGE);
                 default -> {}
             }
         });
@@ -50,13 +56,15 @@ public class UIManager {
         editorScene.getStylesheets().addAll(themeStylesheet, globalStylesheet, windowStylesheet);
     }
 
-    public void switchScene(Page page){
+    private void switchScene(Page page){
         switch (page){
             case LANDING_PAGE:
                 primaryStage.setScene(landingScene);
                 break;
             case EDITOR_PAGE:
                 primaryStage.setScene(editorScene);
+                break;
+            default:
                 break;
         }
     }

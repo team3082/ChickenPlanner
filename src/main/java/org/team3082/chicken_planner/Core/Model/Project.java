@@ -4,5 +4,9 @@ import java.util.ArrayList;
 
 public class Project {
     private ArrayList<AutoRoutine> routines = new ArrayList<>();
-    private ArrayList<AutoShell> autoShells = new ArrayList<>();
+    private int currentRoutine;
+    public ArrayList<AutoRoutine> getRoutines() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getRoutines'");
+    }
 }

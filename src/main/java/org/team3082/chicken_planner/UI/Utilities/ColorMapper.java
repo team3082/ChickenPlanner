@@ -60,7 +60,7 @@ public class ColorMapper extends LookupTable {
             // Create a new array if the destination is null
             dest = new int[src.length];
         }
-
+        
         // Preserve the alpha value from the source pixel
         to[3] = src[3];
 

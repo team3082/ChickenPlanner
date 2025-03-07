@@ -56,11 +56,7 @@ public class Field extends StackPane {
             // Fire a CircleTestEvent with the mouse's x and y coordinates
             
             EventBus.fireEvent(new CircleTestEvent(event.getX(), event.getY()));
-<<<<<<< Updated upstream
-        });
-=======
         });   
->>>>>>> Stashed changes
 
         EventBus.register(event -> {
             switch (event) {
