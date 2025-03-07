@@ -1,9 +1,8 @@
 package org.team3082.chicken_planner.UIElements.Sidebar;
 
+import org.team3082.chicken_planner.AppState.AppState;
 import org.team3082.chicken_planner.ChickenPlannerApplication;
 import org.team3082.chicken_planner.Constants;
-import org.team3082.chicken_planner.AppState.AppState;
-import org.w3c.dom.events.MouseEvent;
 
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
@@ -52,8 +51,6 @@ public class Sidebar {
         configureToolClickHandlers(penTool, eventTool);
 
         toolbar.getChildren().addAll(penTool, createSpacer(10), eventTool);
-
-        // Highlight the pen tool as the default selected tool
         updateToolSelection(penTool, eventTool);
 
         root.getChildren().add(toolbar);

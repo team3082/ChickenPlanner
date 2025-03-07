@@ -26,19 +26,19 @@ public class Constants {
     public static final Color FINAL_CONTROL_POINT_COLOR = new Color(198.0/256.0, 190.0/256.0, 252.0/256.0, 1);
     
 
-    //Real dimensions in meters of the Field
-    public static final double FIELD_WIDTH = 16.542;
-    public static final double FIELD_HEIGHT = 8.211;
+    //Real dimensions of the Field
+    public static final double FIELD_HEIGHT = 323.25;
+    public static final double FIELD_WIDTH = 651.25;
 
     //Field scaling constants  
-    public static final Vector2 ORIGIN_POINT = new Vector2(103.33333333333331, 532.6666666666666);
-    public static final Vector2 END_POINT = new Vector2(992.0, 92.0);
+    public static final Vector2 ORIGIN_POINT = new Vector2(146.66, 491.33);
+    public static final Vector2 END_POINT = new Vector2(952.0, 121.3);
 
     public static final double X_SCALE_FACTOR = (END_POINT.getX() - ORIGIN_POINT.getX()) / Constants.FIELD_WIDTH;
     public static final double Y_SCALE_FACTOR = (END_POINT.getY() - ORIGIN_POINT.getY()) / Constants.FIELD_HEIGHT;
     
     public static final double REFERENCE_CANVAS_WIDTH = 1100.0;
-    public static final double REFERENCE_CANVAS_HEIGHT = 625.3002401921536;
+    public static final double REFERENCE_CANVAS_HEIGHT = 612.7853881278538;
 
     //Action points
     public static final double ACTION_POINT_SCALE = 0.016/1.2;

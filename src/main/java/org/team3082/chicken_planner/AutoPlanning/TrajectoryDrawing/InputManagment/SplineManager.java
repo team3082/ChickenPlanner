@@ -2,10 +2,10 @@ package org.team3082.chicken_planner.AutoPlanning.TrajectoryDrawing.InputManagme
 
 import java.util.ArrayList;
 
-import org.team3082.chicken_planner.ChickenPlannerApplication;
-import org.team3082.chicken_planner.Constants;
 import org.team3082.chicken_planner.AutoPlanning.AutoRoutine.ActionPoint;
 import org.team3082.chicken_planner.AutoPlanning.TrajectoryDrawing.DrawingManagers.SplineDrawingManager;
+import org.team3082.chicken_planner.ChickenPlannerApplication;
+import org.team3082.chicken_planner.Constants;
 import org.team3082.chicken_planner.MathUtils.BezierSpline;
 import org.team3082.chicken_planner.MathUtils.CubicBezierCurve;
 import org.team3082.chicken_planner.MathUtils.Vector2;
@@ -61,13 +61,13 @@ public class SplineManager {
      * @param curveIndex The index of the curve affected by the control point.
      */
     private void handleSharedControlPoint(BezierSpline spline, int curveIndex) {
-        if (pointSelectedIndex == 0) {
-            clampFirstControlPoint(spline, curveIndex);
-        } else if (pointSelectedIndex == spline.getCurveCount() * 3) {
-            clampLastControlPoint(spline, curveIndex);
-        } else {
-            clampIntermediateSharedControlPoint(spline, curveIndex);
-        }
+        // if (pointSelectedIndex == 0) {
+        //     clampFirstControlPoint(spline, curveIndex);
+        // } else if (pointSelectedIndex == spline.getCurveCount() * 3) {
+        //     clampLastControlPoint(spline, curveIndex);
+        // } else {
+        //     clampIntermediateSharedControlPoint(spline, curveIndex);
+        // }
     }
     
     /**
@@ -185,6 +185,7 @@ public class SplineManager {
      */
     public void onMousePressed(MouseEvent event) {
         Vector2 mousePosition = new Vector2(event.getX(), event.getY());
+        System.out.println(mousePosition);
         switch (event.getButton()){
             case PRIMARY:
                 handlePrimaryClick(mousePosition);

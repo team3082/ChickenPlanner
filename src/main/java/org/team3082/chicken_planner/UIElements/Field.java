@@ -2,12 +2,8 @@ package org.team3082.chicken_planner.UIElements;
 
 import org.team3082.chicken_planner.ChickenPlannerApplication;
 import org.team3082.chicken_planner.Constants;
-import org.team3082.chicken_planner.MathUtils.BezierSpline;
-import org.team3082.chicken_planner.MathUtils.CubicBezierCurve;
-import org.team3082.chicken_planner.MathUtils.ExampleCurves;
 import org.team3082.chicken_planner.MathUtils.Vector2;
 
-import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -50,7 +46,7 @@ public class Field {
     private void initImageView() {
         //Inits the image view of the field
         imageView = new ImageView();
-        Image image = new Image(Field.class.getResource("/crescendo-field-space.jpg").toExternalForm());
+        Image image = new Image(Field.class.getResource("/reefscape_field_expanded.png").toExternalForm());
         imageView.setImage(image);
         imageView.setPreserveRatio(true);
 

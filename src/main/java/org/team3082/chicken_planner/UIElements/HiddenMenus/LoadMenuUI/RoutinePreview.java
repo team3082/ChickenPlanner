@@ -1,19 +1,16 @@
 package org.team3082.chicken_planner.UIElements.HiddenMenus.LoadMenuUI;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
-import org.team3082.chicken_planner.ChickenPlannerApplication;
-import org.team3082.chicken_planner.Constants;
 import org.team3082.chicken_planner.AutoPlanning.AutoRoutine.ActionPoint;
 import org.team3082.chicken_planner.AutoPlanning.AutoRoutine.AutoRoutine;
+import org.team3082.chicken_planner.ChickenPlannerApplication;
+import org.team3082.chicken_planner.Constants;
 import org.team3082.chicken_planner.MathUtils.BezierSpline;
 import org.team3082.chicken_planner.MathUtils.CubicBezierCurve;
 import org.team3082.chicken_planner.MathUtils.CurvePoint;
 import org.team3082.chicken_planner.MathUtils.Vector2;
 
-import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -21,13 +18,12 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -77,7 +73,7 @@ public class RoutinePreview extends VBox {
 
         // Drawing the spline and action points on canvas
         drawSpline(autoRoutine.getSpline(), canvas);
-        drawActionPoints(autoRoutine.getSpline(), autoRoutine.getActionPoints());
+        // drawActionPoints(autoRoutine.getSpline(), autoRoutine.getActionPoints());
         
         // Set the image and canvas in a StackPanet
         centerPane = new StackPane(imageView, canvas);
@@ -162,7 +158,7 @@ public class RoutinePreview extends VBox {
      */
     private ImageView createImageView(double width) {
         ImageView imageView = new ImageView();
-        Image image = new Image(RoutinePreview.class.getResource("/crescendo-field-space.jpg").toExternalForm());
+        Image image = new Image(RoutinePreview.class.getResource("/reefscape_field_expanded.png").toExternalForm());
         imageView.setImage(image);
         imageView.setPreserveRatio(true);
         imageView.setFitWidth(width);

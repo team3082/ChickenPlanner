@@ -2,9 +2,9 @@ package org.team3082.chicken_planner.AutoPlanning.TrajectoryDrawing.DrawingManag
 
 import java.util.ArrayList;
 
+import org.team3082.chicken_planner.AutoPlanning.AutoRoutine.ActionPoint;
 import org.team3082.chicken_planner.ChickenPlannerApplication;
 import org.team3082.chicken_planner.Constants;
-import org.team3082.chicken_planner.AutoPlanning.AutoRoutine.ActionPoint;
 import org.team3082.chicken_planner.MathUtils.BezierSpline;
 import org.team3082.chicken_planner.MathUtils.CubicBezierCurve;
 import org.team3082.chicken_planner.MathUtils.CurvePoint;
@@ -50,6 +50,8 @@ public class SplineDrawingManager {
     private void drawSpline(BezierSpline spline) {
         double canvasWidth = canvas.getWidth();
         double canvasHeight = canvas.getHeight();
+
+        System.out.println("Canvas:"+new Vector2(canvasWidth, canvasHeight));
         double width = canvasHeight * Constants.LINE_WIDTH;
 
         gc.setLineWidth(width);
@@ -66,7 +68,7 @@ public class SplineDrawingManager {
 
             for (CurvePoint point : curve.getPoints()) {
                 Vector2 movePoint = point.getPosition().fieldToPixel(canvasWidth, canvasHeight);
-                boolean outsideBounds = point.getPosition().clamp(16.542, 8.211).equals(point.getPosition());
+                boolean outsideBounds = point.getPosition().clamp(Constants.FIELD_WIDTH, Constants.FIELD_HEIGHT).equals(point.getPosition());
                 if(!outsideBounds){
                     if(!isOutsideBounds){
                         gc.lineTo(movePoint.getX(), movePoint.getY());
