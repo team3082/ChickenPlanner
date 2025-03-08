@@ -13,10 +13,10 @@ public class ExampleCurves {
         return new BezierSpline(
             // First cubic Bezier curve
             new CubicBezierCurve(
-                new Vector2(1.3374793698424616, 5.522308119011599), 
-                new Vector2(3.3374793698424567, 7.522308119011596), 
-                new Vector2(5.7835783945986545, 7.598220877458395), 
-                new Vector2(7.783578394598649, 5.598220877458397)  
+                new Vector2(356.35695275701363,  250.42272923816984),
+                new Vector2(405.9550521104958, 165.9768734967435), 
+                new Vector2(447.46650483025803, 315.06748777126177), 
+                new Vector2(513.2378974511801, 213.7324608815501)  
             )
         );
     }

@@ -1,11 +1,8 @@
 package org.team3082.chicken_planner.AppState;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.team3082.chicken_planner.AutoPlanning.AutoRoutine.AutoRoutine;
-
-import javafx.scene.Node;
 
 /**
  * Represents the state of the application, including the current project path

@@ -3,26 +3,24 @@ package org.team3082.chicken_planner.UIElements.HiddenMenus.LoadMenuUI;
 import java.io.File;
 import java.util.ArrayList;
 
-import org.team3082.chicken_planner.ChickenPlannerApplication;
 import org.team3082.chicken_planner.AutoPlanning.AutoRoutine.AutoRoutine;
+import org.team3082.chicken_planner.ChickenPlannerApplication;
 import org.team3082.chicken_planner.FileManagment.ProjectLoader;
-import org.team3082.chicken_planner.UIElements.Menubar;
 import org.team3082.chicken_planner.UIElements.HiddenMenus.HiddenMenu;
+import org.team3082.chicken_planner.UIElements.Menubar;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
 import javafx.stage.StageStyle;
-import javafx.scene.control.Label;
-import javafx.scene.control.ButtonBar;
 
 public class LoadMenu extends HiddenMenu {
     
@@ -101,10 +99,32 @@ public class LoadMenu extends HiddenMenu {
         AutoRoutine newAuto = new AutoRoutine();
         RoutinePreview routinePreview = new RoutinePreview(newAuto, 400, 0, application);
         routinePreview.setOnClick(e -> {
+            AutoRoutine createdAuto = new AutoRoutine();
+                String possibleName = "";
+                int num = 1;
+                while(true){
+                    possibleName = "Untitled "+num;
+                    boolean flag = false;
+                    for (AutoRoutine autoRoutine : autoRoutines) {
+                        if(autoRoutine.getRoutineName().equals(possibleName)){
+                            flag = true;
+                        }
+                    }
+
+                    if(flag){
+                        num+=1;
+                    } else {
+                        break;
+                    }
+                }
+            
+                createdAuto.setRoutineName(possibleName);
             if (!application.getAppState().getRoutineSaved()) {
-                promptUserToSaveChanges(newAuto);
+                
+                promptUserToSaveChanges(createdAuto);
             } else {
-                setCurrentAutoRoutine(newAuto);
+                
+                setCurrentAutoRoutine(createdAuto);
             }
             menuStage.close();
         });
