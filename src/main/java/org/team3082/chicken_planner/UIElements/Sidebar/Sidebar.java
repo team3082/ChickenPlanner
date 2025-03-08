@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
 public class Sidebar {
     private final ChickenPlannerApplication application;
     private VBox root;
+    private VBox actionBox;
 
     /**
      * Constructor to initialize the Sidebar.
@@ -27,6 +28,8 @@ public class Sidebar {
         this.application = application;
         setUpRoot();
         setUpToolbar();
+
+        actionBox = new ActionPointSelection();
     }
 
     /**

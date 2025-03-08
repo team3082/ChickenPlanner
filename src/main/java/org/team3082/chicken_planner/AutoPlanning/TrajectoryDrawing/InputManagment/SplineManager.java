@@ -10,9 +10,7 @@ import org.team3082.chicken_planner.MathUtils.BezierSpline;
 import org.team3082.chicken_planner.MathUtils.CubicBezierCurve;
 import org.team3082.chicken_planner.MathUtils.Vector2;
 
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -27,8 +25,6 @@ public class SplineManager {
 
     private int pointSelectedIndex = -1; // Index of the currently selected point in the spline
 
-    private boolean shiftKey = true;
-
     /**
      * Constructor to initialize the SplineManager.
      * 
@@ -40,18 +36,7 @@ public class SplineManager {
         this.drawingManager = drawingManager;
         this.canvas = application.getField().getSplineCanvas();
 
-        Scene scene = application.getScene();
-        scene.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.SHIFT) {
-                shiftKey = true;
-            }
-        });
-        
-        scene.setOnKeyReleased(event -> {
-            if (event.getCode() == KeyCode.SHIFT) {
-                shiftKey = false;
-            }
-        });
+
     }
 
     /**
@@ -78,7 +63,7 @@ public class SplineManager {
      * @param curveIndex The index of the curve affected by the control point.
      */
     private void handleSharedControlPoint(BezierSpline spline, int curveIndex) {
-        if(shiftKey) return;
+        if(true) return;
         if (pointSelectedIndex == 0) {
             clampFirstControlPoint(spline, curveIndex);
         } else if (pointSelectedIndex == spline.getCurveCount() * 3) {
@@ -95,8 +80,7 @@ public class SplineManager {
      * @param curveIndex The index of the curve affected by the control point.
      */
     private void handleNonSharedControlPoint(BezierSpline spline, int curveIndex) {
-        System.out.println(shiftKey);
-        if(shiftKey) return;
+        if(true) return;
         if (pointSelectedIndex % 3 == 1) {
             // First handle (before clamping)
             clampFirstHandle(spline, curveIndex);
