@@ -1,7 +1,7 @@
 package org.team3082.chicken_planner.AutoPlanning.TrajectoryDrawing.InputManagment;
 
-import org.team3082.chicken_planner.ChickenPlannerApplication;
 import org.team3082.chicken_planner.AutoPlanning.TrajectoryDrawing.TrajectoryManager;
+import org.team3082.chicken_planner.ChickenPlannerApplication;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.MouseEvent;
@@ -36,6 +36,10 @@ public class InputManager {
         canvas.setOnMousePressed(this::OnMousePressed); // Handle mouse press events
         canvas.setOnMouseDragged(this::OnMouseDragged); // Handle mouse drag events
         canvas.setOnMouseReleased(event -> OnMouseReleased()); // Handle mouse release events
+    }
+
+    public ActionPointManager getActionPointManager(){
+        return actionPointManager;
     }
 
     /**
@@ -80,5 +84,9 @@ public class InputManager {
     public void OnMouseReleased(){
         splineManager.onMouseReleased(); // Notify spline manager of mouse release
         actionPointManager.onMouseReleased(); // Notify action point manager of mouse release
+    }
+
+    public ActionPointManager getActionManager() {
+        return actionPointManager;
     }
 }

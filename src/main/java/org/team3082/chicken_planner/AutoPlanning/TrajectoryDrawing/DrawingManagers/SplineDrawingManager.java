@@ -197,7 +197,8 @@ public class SplineDrawingManager {
     private void drawActionPoints(BezierSpline spline, ArrayList<ActionPoint> actionPoints) {
         for(int index = 0; index<actionPoints.size(); index++){
             Vector2 pixelVector = spline.getPoint(actionPoints.get(index).getT()).fieldToPixel(canvas.getWidth(), canvas.getHeight());
-            drawCircle(Constants.ACTION_POINT_SCALE, pixelVector, Constants.ACTION_POINT_COLOR);
+            Color color = application.getTrajectoryManager().getInputManager().getActionManager().actionPointSelected == index ? new Color(1, 0, .3, .9) : Constants.ACTION_POINT_COLOR;
+            drawCircle(Constants.ACTION_POINT_SCALE, pixelVector, color);
         }
     }
 

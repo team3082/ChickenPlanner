@@ -17,7 +17,6 @@ import javafx.scene.layout.VBox;
 public class Sidebar {
     private final ChickenPlannerApplication application;
     private VBox root;
-    private VBox actionBox;
 
     /**
      * Constructor to initialize the Sidebar.
@@ -29,7 +28,7 @@ public class Sidebar {
         setUpRoot();
         setUpToolbar();
 
-        actionBox = new ActionPointSelection();
+        // actionBox = new ActionPointSelection(application);
     }
 
     /**
@@ -118,7 +117,7 @@ public class Sidebar {
         });
 
         application.getScene().setOnKeyPressed(event -> {
-            if (event.getCode().toString().equals("Q")) {
+            if (event.getCode().toString().equals("P")) {
                 application.getAppState().setDrawingState(AppState.DrawingState.CONTROL_POINT);
                 updateToolSelection(penTool, eventTool);
             }

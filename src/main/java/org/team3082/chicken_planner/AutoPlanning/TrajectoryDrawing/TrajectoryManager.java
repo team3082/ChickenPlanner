@@ -1,9 +1,9 @@
 package org.team3082.chicken_planner.AutoPlanning.TrajectoryDrawing;
 
-import org.team3082.chicken_planner.ChickenPlannerApplication;
 import org.team3082.chicken_planner.AutoPlanning.TrajectoryDrawing.DrawingManagers.RobotDrawingManager;
 import org.team3082.chicken_planner.AutoPlanning.TrajectoryDrawing.DrawingManagers.SplineDrawingManager;
 import org.team3082.chicken_planner.AutoPlanning.TrajectoryDrawing.InputManagment.InputManager;
+import org.team3082.chicken_planner.ChickenPlannerApplication;
 
 public class TrajectoryManager {
     private SplineDrawingManager splineDrawingManager;

@@ -131,7 +131,7 @@ public class BezierSpline {
      * @throws IllegalArgumentException if t is outside the range [0, 1].
      */
     public Vector2 getPoint(double t) {
-        if (t < 0 || t > curveList.size()) {
+        if (t < 0 || t >= curveList.size()) {
             throw new IllegalArgumentException("Parameter t must be between 0 and 1.");
         }
 

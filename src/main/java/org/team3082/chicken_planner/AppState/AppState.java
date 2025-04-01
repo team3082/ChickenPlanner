@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.team3082.chicken_planner.AutoPlanning.AutoRoutine.AutoRoutine;
 
+import javafx.beans.property.SimpleDoubleProperty;
+
 /**
  * Represents the state of the application, including the current project path
  * and the drawing mode (control point or action point).
@@ -16,6 +18,8 @@ public class AppState {
     public int currentRoutineIndex;
     private ArrayList<AutoRoutine> loadedRoutines;
     private boolean routineSaved;
+
+    public SimpleDoubleProperty autoT = new SimpleDoubleProperty();
 
     public boolean getRoutineSaved(){
         return routineSaved;
